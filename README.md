@@ -13,14 +13,13 @@ This is source of [arondight.github.io][ID_SITE].
 ```shell
 git clone https://github.com/Arondight/arondight.github.io.git
 cd arondight.github.io
-git checkout source
 ./init.sh
 ```
 
 # DEPENDENCIES
 
 1. git
-* npm
+* npm (also support [cnpm](https://github.com/cnpm/cnpm))
 
 # COPYRIGHT
 

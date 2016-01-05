@@ -2,12 +2,13 @@
 menu:
   主页: /
   所有文章: /archives
-  随笔: /tags/随笔
+  日常: /tags/日常
+  技术: /tags/技术
 
 # SubNav
 subnav:
   github: "https://github.com/Arondight"
-  #weibo: "#"
+  weibo: "http://weibo.com/iSpeller"
   #zhihu: "#"
   #douban: "#"
   #facebook: "#"
@@ -50,7 +51,11 @@ tagcloud: true
 #friends: false
 #开启——
 friends:
+  8992309: http://abbycin.tk
   Shy泠的博客: https://shyling.com
+  Yanhao's Blog: http://www.yanhao.site
+  玻璃齿轮: http://blog.winkidney.com
+  蔓舞寻樱的博客: https://alleysakura.com
 
 #是否开启“关于我”。
 #不开启——
