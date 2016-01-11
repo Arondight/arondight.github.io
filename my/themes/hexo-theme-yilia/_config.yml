@@ -32,7 +32,7 @@ animate: true
 open_in_new: false
 
 # Miscellaneous
-google_analytics: ''
+google_analytics: 'UA-72246506-1'
 favicon: /img/avatar.jpg
 
 #你的头像url
@@ -63,5 +63,5 @@ friends:
 #不开启——
 #aboutme: false
 #开启——
-aboutme: 平凡的庸者，无梦的旅人。
+aboutme: 平凡的愚者，无梦的旅人。
 
