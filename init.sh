@@ -37,7 +37,8 @@ fi
 env $NPM_CMD install --save \
                       hexo-deployer-git \
                       hexo-generator-feed \
-                      hexo-generator-sitemap
+                      hexo-generator-sitemap  \
+                      hexo-generator-baidu-sitemap
 
 if [[ -r $BUILD_SH ]]
 then
