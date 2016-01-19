@@ -24,6 +24,12 @@ else
   exit 1
 fi
 
+if ! type hexo >/dev/null 2>&1
+then
+  echo "failed: hexo is needed but not found. quit."
+  exit 1
+fi
+
 if [[ -r $GITMODULES && -d ${C_DIR}/.git ]]
 then
   env git submodule update --init --recursive

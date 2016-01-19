@@ -8,7 +8,9 @@ This is source of [arondight.github.io][ID_SITE].
 
 [ID_SITE]: http://arondight.github.io "Visit It!"
 
-# BUILD
+# USAGE
+
+## INIT
 
 ```shell
 git clone https://github.com/Arondight/arondight.github.io.git
@@ -16,10 +18,28 @@ cd arondight.github.io
 ./init.sh
 ```
 
+Only do this at the very beginning.
+
+## SERVER
+
+```shell
+./server.sh
+```
+
+Then visit [127.0.0.1:4000](http://127.0.0.1:4000) in your web browser.
+
+## DEPLOY
+
+```shell
+./deploy.sh
+```
+
 # DEPENDENCIES
 
-1. git
+1. bash
+* git
 * npm (also support [cnpm](https://github.com/cnpm/cnpm))
+* hexo
 
 # COPYRIGHT
 

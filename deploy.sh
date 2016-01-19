@@ -1,23 +1,15 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Build It!
+# Deploy It!
 # ==============================================================================
 
 C_DIR=$(dirname $(readlink -f $0))
-MY_DIR=${C_DIR}/my
+GENERATE_SH=$C_DIR/generate.sh
 
-if [[ ! -d $MY_DIR ]]
+if [[ -r $GENERATE_SH ]]
 then
-  exit 0
+  source $GENERATE_SH
 fi
 
-if type rsync >/dev/null 2>&1
-then
-  env rsync -avP ${MY_DIR}/ $C_DIR/
-elif type cp >/dev/null 2>&1
-then
-  env cp -rvf ${MY_DIR}/* $C_DIR
-else
-  exit 1
-fi
+env hexo deploy
 
