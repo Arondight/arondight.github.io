@@ -20,10 +20,10 @@ cd arondight.github.io
 
 Only do this at the very beginning.
 
-## SERVER
+## SERVE
 
 ```shell
-./server.sh
+./serve.sh
 ```
 
 Then visit [127.0.0.1:4000](http://127.0.0.1:4000) in your web browser.
