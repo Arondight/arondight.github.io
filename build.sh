@@ -13,7 +13,7 @@ fi
 
 if type rsync >/dev/null 2>&1
 then
-  env rsync -avP ${MY_DIR}/ $C_DIR/
+  env rsync -aP ${MY_DIR}/ $C_DIR/
 elif type cp >/dev/null 2>&1
 then
   env cp -rvf ${MY_DIR}/* $C_DIR
