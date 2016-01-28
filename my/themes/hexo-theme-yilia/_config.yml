@@ -33,6 +33,7 @@ open_in_new: false
 
 # Miscellaneous
 google_analytics: 'UA-72246506-1'
+baidu_tongji: '55d7496b74b59fcaa2a67bd11b36a7b6'
 favicon: /img/avatar.jpg
 
 #你的头像url
@@ -51,7 +52,8 @@ tagcloud: true
 #friends: false
 #开启——
 friends:
-  8992309: http://abbycin.tk
+  1987: http://site.arondight.me
+  3890929: http://isliberty.me
   Shy泠的博客: https://shyling.com
   Sonico's Home: http://blog.supvesonico.moe
   Yanhao's Blog: http://www.yanhao.site
