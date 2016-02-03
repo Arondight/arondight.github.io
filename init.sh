@@ -45,3 +45,8 @@ then
   source $BUILD_SH
 fi
 
+if [[ -r $C_DIR/theme/init.sh ]]
+then
+  source $C_DIR/theme/init.sh
+fi
+

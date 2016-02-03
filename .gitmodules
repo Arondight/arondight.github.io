@@ -1,3 +1,3 @@
-[submodule "themes/hexo-theme-yilia"]
-	path = themes/hexo-theme-yilia
-	url = https://github.com/litten/hexo-theme-yilia.git
+[submodule "themes/hexo-theme-yelee"]
+	path = themes/hexo-theme-yelee
+	url = https://github.com/MOxFIVE/hexo-theme-yelee
