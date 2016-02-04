@@ -1,3 +1,6 @@
+v2016-02-04.3
+  * Fix wrong path in themes/init.sh
+
 v2016-02-04.2
   * Fix UA display unnormal at Linux
 
