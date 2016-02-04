@@ -123,7 +123,7 @@ function os(e) {
     } else if (e.match(/ubuntu/ig)) {
         os = '<span class="os_ubuntu"><i class="fa fa-desktop"></i> Ubuntu'
     } else if (e.match(/linux/ig)) {
-        os = '<span class="os_linux"><i class="fa fa-linux"></i> Linux'
+        os = '<span class="os_linux"><i class="fa fa-linux"></i> GNU/Linux'
     } else if (e.match(/mac/ig)) {
         os = '<span class="os_mac"><i class="fa fa-apple"></i> Mac OS X'
     } else if (e.match(/unix/ig)) {

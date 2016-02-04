@@ -1,8 +1,11 @@
+v2016-02-04.4
+  * Display Linux as GNU/Linux
+
 v2016-02-04.3
   * Fix wrong path in themes/init.sh
 
 v2016-02-04.2
-  * Fix UA display unnormal at Linux
+  * Fix UA display unnormal on Linux
 
 v2016-02-04
   * Show information from UA
