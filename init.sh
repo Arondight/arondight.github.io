@@ -6,6 +6,7 @@
 NPM_CMD=''
 C_DIR=$(dirname $(readlink -f $0))
 MY_DIR=${C_DIR}/my
+THEME_DIR=${C_DIR}/themes
 BUILD_SH=${C_DIR}/build.sh
 PACKAGE_JSON=${C_DIR}/package.json
 GITMODULES=${C_DIR}/.gitmodules
@@ -45,8 +46,8 @@ then
   source $BUILD_SH
 fi
 
-if [[ -r $C_DIR/theme/init.sh ]]
+if [[ -r ${THEME_DIR}/init.sh ]]
 then
-  source $C_DIR/theme/init.sh
+  source ${THEME_DIR}/init.sh
 fi
 

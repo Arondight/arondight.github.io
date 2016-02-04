@@ -183,8 +183,8 @@ baidu_tongji: '55d7496b74b59fcaa2a67bd11b36a7b6'
 # http://ibruce.info/2015/04/04/busuanzi/
 visit_counter:
   on: true
-  site_visit: 访客量
-  page_visit: 阅读量
+  site_visit: 全站访问量
+  page_visit: 本页访问量
 
 # GitHub Repo Widget
 # https://github.com/hustcc/GitHub-Repo-Widget.js
