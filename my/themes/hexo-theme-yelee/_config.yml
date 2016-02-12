@@ -133,16 +133,19 @@ jquery_ui: true
 tagcloud: true
 
 # Blogroll, Link exchange | 友情链接
+#friends: false
 friends:
   3890929: http://isliberty.me
+  coolrc's blog: http://coolrc.top
+  Farkasity: http://blog.farkasity.me
   GlassGear: http://blog.winkidney.com
+  Kissbug8720's Blog: http://blog.ishell.me
   Shy泠的博客: https://shyling.com
   Sonico's Home: http://blog.supvesonico.moe
   Yanhao's Blog: http://www.yanhao.site
   Мвудаг/Этура Яннъ: http://etula.ga
   蔓舞寻樱的博客: https://alleysakura.com
   中土國民會全球資訊網: https://blog-netarmy.rhcloud.com
-#friends: false
 
 #是否开启“关于我”。
 aboutme: 平凡的愚者，无梦的旅人。
