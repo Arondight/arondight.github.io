@@ -757,180 +757,6 @@ a {
   -ms-transition: -ms-transform 0.3s ease-in;
   transition: transform 0.3s ease-in;
 }
-#header .header-nav .social {
-  margin-top: 10px;
-  text-align: center;
-  font-family: Arial;
-}
-#header .header-nav .social li {
-  display: inline-block;
-  width: 37px;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  margin-right: 3px;
-  margin-bottom: 6px;
-  font: 23px FontAwesome;
-  background: #6f7170;
-  opacity: 0.58;
-  text-align: center;
-}
-#header .header-nav .social li a {
-  line-height: 37px;
-  color: #fff;
-}
-#header .header-nav .social li:hover {
-  opacity: 1;
-  -webkit-transform: scale(1.08);
-  -moz-transform: scale(1.08);
-  -ms-transform: scale(1.08);
-  transform: scale(1.08);
-}
-#header .header-nav .social li:nth-child(5n),
-#header .header-nav .social li:last-child {
-  margin-right: 0;
-}
-#header .header-nav .social .新浪微博::before,
-#header .header-nav .social .V2EX::before,
-#header .header-nav .social .知乎::before,
-#header .header-nav .social .豆瓣::before,
-#header .header-nav .social .TiddlyWiki::before,
-#header .header-nav .social .SegmentFault::before,
-#header .header-nav .social .简书::before,
-#header .header-nav .social .虾米音乐::before,
-#header .header-nav .social .网易云音乐::before {
-  content: "\f18a";
-  color: transparent;
-}
-#header .header-nav .social #新浪微博 {
-  background: url("/img/weibo.png") center no-repeat #ecc260;
-}
-#header .header-nav .social #GitHub {
-  background: url("/img/github.png") center no-repeat #fff;
-}
-#header .header-nav .social .GitHub:before {
-  content: "\f113";
-  color: transparent;
-}
-#header .header-nav .social #V2EX {
-  background: url("/img/v2ex.png") center no-repeat #e4cdb4;
-}
-#header .header-nav .social #RSS {
-  background: #ef7522;
-}
-#header .header-nav .social .RSS:before {
-  content: "\f09e";
-}
-#header .header-nav .social #知乎 {
-  background: url("/img/zhihu.png") center no-repeat #0078d8;
-}
-#header .header-nav .social #豆瓣 {
-  background: url("/img/douban.png") center no-repeat #06c611;
-}
-#header .header-nav .social #Google {
-  background: #c83d20;
-}
-#header .header-nav .social .Google:before {
-  content: "\f1a0";
-}
-#header .header-nav .social #Twitter {
-  background: #55cff8;
-}
-#header .header-nav .social .Twitter:before {
-  content: "\f099";
-}
-#header .header-nav .social #LinkedIn {
-  background: #005a87;
-}
-#header .header-nav .social .LinkedIn:before {
-  content: "\f0e1";
-}
-#header .header-nav .social #Email {
-  background: #6fc0e4;
-}
-#header .header-nav .social .Email:before {
-  content: "\f003";
-}
-#header .header-nav .social #Facebook {
-  background: #3b5998;
-}
-#header .header-nav .social .Facebook:before {
-  content: "\f09a";
-}
-#header .header-nav .social #QQ {
-  background: #1cbcef;
-}
-#header .header-nav .social .QQ:before {
-  content: "\f1d6";
-}
-#header .header-nav .social #微信 {
-  background: #8cdc49;
-}
-#header .header-nav .social .微信:before {
-  content: "\f1d7";
-}
-#header .header-nav .social #PayPal {
-  background: #03a4e4;
-}
-#header .header-nav .social .PayPal:before {
-  content: "\f1ed";
-}
-#header .header-nav .social #StackOverflow {
-  background: #f48024;
-}
-#header .header-nav .social .StackOverflow:before {
-  content: "\f16c";
-}
-#header .header-nav .social #Instagram {
-  background: #bab0a6;
-}
-#header .header-nav .social .Instagram:before {
-  content: "\f16d";
-}
-#header .header-nav .social #Flickr {
-  background: #0365c8;
-}
-#header .header-nav .social .Flickr:before {
-  content: "\f16e";
-}
-#header .header-nav .social #Medium {
-  background: #00ab6b;
-}
-#header .header-nav .social .Medium:before {
-  content: "\f23a";
-}
-#header .header-nav .social #reddit {
-  background: #0278d1;
-}
-#header .header-nav .social .reddit:before {
-  content: "\f281";
-}
-#header .header-nav .social #TiddlyWiki {
-  background: url("/img/TiddlyWiki.png") center no-repeat #6283dd;
-}
-#header .header-nav .social #Tumblr {
-  background: #3a5976;
-}
-#header .header-nav .social .Tumblr:before {
-  content: "\f173";
-}
-#header .header-nav .social #_500px {
-  background: #0099e5;
-}
-#header .header-nav .social ._500px:before {
-  content: "\f26e";
-}
-#header .header-nav .social #SegmentFault {
-  background: url("/img/SegmentFault.png") center no-repeat #018f56;
-}
-#header .header-nav .social #简书 {
-  background: url("/img/简书.png") center no-repeat #e99888;
-}
-#header .header-nav .social #网易云音乐 {
-  background: url("/img/网易云音乐.png") center no-repeat #e51e02;
-}
-#header .header-nav .social #虾米音乐 {
-  background: url("/img/虾米音乐.png") center no-repeat #ff6a00;
-}
 #header .switch-part {
   width: 100%;
   position: absolute;
@@ -963,6 +789,204 @@ a {
   left: 300%;
   text-align: left;
   line-height: 30px;
+}
+#header .header-nav .social {
+  margin-top: 10px;
+  text-align: center;
+  font-family: Arial;
+}
+#header .header-nav .social li {
+  display: inline-block;
+  width: 37px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  margin-right: 3px;
+  margin-bottom: 6px;
+  font: 23px FontAwesome;
+  background: #6f7170;
+  opacity: 0.58;
+  text-align: center;
+}
+#header .header-nav .social li a {
+  line-height: 37px;
+  color: #fff;
+}
+#header .header-nav .social li:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+#header .header-nav .social li:nth-child(5n),
+#header .header-nav .social li:last-child {
+  margin-right: 0;
+}
+#header .header-nav .social .新浪微博:before {
+  content: '\f18a';
+  color: transparent;
+}
+#header .header-nav .social #新浪微博 {
+  background: url("/img/新浪微博.png") center no-repeat #ecc260;
+}
+#header .header-nav .social .知乎:before {
+  content: '\f18a';
+  color: transparent;
+}
+#header .header-nav .social #知乎 {
+  background: url("/img/知乎.png") center no-repeat #0078d8;
+}
+#header .header-nav .social .豆瓣:before {
+  content: '\f18a';
+  color: transparent;
+}
+#header .header-nav .social #豆瓣 {
+  background: url("/img/豆瓣.png") center no-repeat #06c611;
+}
+#header .header-nav .social .GitHub:before {
+  content: '\f18a';
+  color: transparent;
+}
+#header .header-nav .social #GitHub {
+  background: url("/img/GitHub.png") center no-repeat #fff;
+}
+#header .header-nav .social .V2EX:before {
+  content: '\f18a';
+  color: transparent;
+}
+#header .header-nav .social #V2EX {
+  background: url("/img/V2EX.png") center no-repeat #e4cdb4;
+}
+#header .header-nav .social .TiddlyWiki:before {
+  content: '\f18a';
+  color: transparent;
+}
+#header .header-nav .social #TiddlyWiki {
+  background: url("/img/TiddlyWiki.png") center no-repeat #6283dd;
+}
+#header .header-nav .social .简书:before {
+  content: '\f18a';
+  color: transparent;
+}
+#header .header-nav .social #简书 {
+  background: url("/img/简书.png") center no-repeat #e99888;
+}
+#header .header-nav .social .SegmentFault:before {
+  content: '\f18a';
+  color: transparent;
+}
+#header .header-nav .social #SegmentFault {
+  background: url("/img/SegmentFault.png") center no-repeat #018f56;
+}
+#header .header-nav .social .网易云音乐:before {
+  content: '\f18a';
+  color: transparent;
+}
+#header .header-nav .social #网易云音乐 {
+  background: url("/img/网易云音乐.png") center no-repeat #e51e02;
+}
+#header .header-nav .social .虾米音乐:before {
+  content: '\f18a';
+  color: transparent;
+}
+#header .header-nav .social #虾米音乐 {
+  background: url("/img/虾米音乐.png") center no-repeat #ff6a00;
+}
+#header .header-nav .social .RSS:before {
+  content: '\f09e';
+}
+#header .header-nav .social #RSS {
+  background: #ef7522;
+}
+#header .header-nav .social .Google:before {
+  content: '\f1a0';
+}
+#header .header-nav .social #Google {
+  background: #c83d20;
+}
+#header .header-nav .social .Twitter:before {
+  content: '\f099';
+}
+#header .header-nav .social #Twitter {
+  background: #55cff8;
+}
+#header .header-nav .social .LinkedIn:before {
+  content: '\f0e1';
+}
+#header .header-nav .social #LinkedIn {
+  background: #005a87;
+}
+#header .header-nav .social .Email:before {
+  content: '\f003';
+}
+#header .header-nav .social #Email {
+  background: #6fc0e4;
+}
+#header .header-nav .social .Facebook:before {
+  content: '\f09a';
+}
+#header .header-nav .social #Facebook {
+  background: #3b5998;
+}
+#header .header-nav .social .QQ:before {
+  content: '\f1d6';
+}
+#header .header-nav .social #QQ {
+  background: #1cbcef;
+}
+#header .header-nav .social .微信:before {
+  content: '\f1d7';
+}
+#header .header-nav .social #微信 {
+  background: #8cdc49;
+}
+#header .header-nav .social .PayPal:before {
+  content: '\f1ed';
+}
+#header .header-nav .social #PayPal {
+  background: #03a4e4;
+}
+#header .header-nav .social .StackOverflow:before {
+  content: '\f16c';
+}
+#header .header-nav .social #StackOverflow {
+  background: #f48024;
+}
+#header .header-nav .social .Instagram:before {
+  content: '\f16d';
+}
+#header .header-nav .social #Instagram {
+  background: #bab0a6;
+}
+#header .header-nav .social .Flickr:before {
+  content: '\f16e';
+}
+#header .header-nav .social #Flickr {
+  background: #0365c8;
+}
+#header .header-nav .social .reddit:before {
+  content: '\f281';
+}
+#header .header-nav .social #reddit {
+  background: #0278d1;
+}
+#header .header-nav .social .Medium:before {
+  content: '\f23a';
+}
+#header .header-nav .social #Medium {
+  background: #00ab6b;
+}
+#header .header-nav .social .Tumblr:before {
+  content: '\f173';
+}
+#header .header-nav .social #Tumblr {
+  background: #3a5976;
+}
+#header .header-nav .social ._500px:before {
+  content: '\f26e';
+}
+#header .header-nav .social #_500px {
+  background: #0099e5;
 }
 .duoshuo {
   padding: 0 40px;

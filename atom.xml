@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-02-07T07:31:49.766Z</updated>
+  <updated>2016-02-17T12:12:19.759Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -14,6 +14,167 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用SSH反向隧道进行内网穿透</title>
+    <link href="https://arondight.github.io/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    <id>https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</id>
+    <published>2016-02-17T10:09:57.000Z</published>
+    <updated>2016-02-17T12:12:19.759Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;u5BF9_u5E94_u7684_u60C5_u51B5&quot;&gt;&lt;a href=&quot;#u5BF9_u5E94_u7684_u60C5_u51B5&quot; class=&quot;headerlink&quot; title=&quot;对应的情况&quot;&gt;&lt;/a&gt;对应的情况&lt;/h1&gt;&lt;p&gt;这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。&lt;/p&gt;
+&lt;p&gt;假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用&lt;strong&gt;公网IP + 端口&lt;/strong&gt; 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。&lt;/p&gt;
+&lt;p&gt;首先有如下约定，因为很重要所以放在前面：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;机器代号&lt;/th&gt;
+&lt;th&gt;机器位置&lt;/th&gt;
+&lt;th&gt;地址&lt;/th&gt;
+&lt;th&gt;账户&lt;/th&gt;
+&lt;th&gt;ssh/sshd 端口&lt;/th&gt;
+&lt;th&gt;是否需要运行sshd&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;位于公网&lt;/td&gt;
+&lt;td&gt;a.site&lt;/td&gt;
+&lt;td&gt;usera&lt;/td&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B&lt;/td&gt;
+&lt;td&gt;位于NAT 之后&lt;/td&gt;
+&lt;td&gt;b.localhost&lt;/td&gt;
+&lt;td&gt;userb&lt;/td&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;C&lt;/td&gt;
+&lt;td&gt;位于NAT 之后&lt;/td&gt;
+&lt;td&gt;c.localhost&lt;/td&gt;
+&lt;td&gt;userc&lt;/td&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ol&gt;
+&lt;li&gt;这里默认你的系统init 程序为&lt;code&gt;systemd&lt;/code&gt;，如果你使用其他的init 程序，如果没有特殊理由还是换到一个现代化的GNU/Linux 系统吧……&lt;/li&gt;
+&lt;li&gt;如果&lt;strong&gt;B&lt;/strong&gt; 关闭了所有端口，请按组合键&lt;code&gt;Ctrl+W&lt;/code&gt;，因为这篇文章是建立在B 上正常运行着&lt;code&gt;sshd&lt;/code&gt; 的前提上的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;SSH__u53CD_u5411_u96A7_u9053&quot;&gt;&lt;a href=&quot;#SSH__u53CD_u5411_u96A7_u9053&quot; class=&quot;headerlink&quot; title=&quot;SSH 反向隧道&quot;&gt;&lt;/a&gt;SSH 反向隧道&lt;/h1&gt;&lt;p&gt;这种手段实质上是由B 向A 主动地建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上，只要这条隧道不关闭，这个转发就是有效的。有了这个端口转发，只需要访问A 的6766 端口反向连接B 即可。&lt;/p&gt;
+&lt;p&gt;首先在&lt;strong&gt;B&lt;/strong&gt; 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; -qngfNTR &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt;:b.localhost:&lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后在&lt;strong&gt;A&lt;/strong&gt; 上利用6766 端口反向SSH 到B：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@b.localhost&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;要做的事情其实就是这么简单。&lt;/p&gt;
+&lt;h1 id=&quot;u96A7_u9053_u7684_u7EF4_u6301&quot;&gt;&lt;a href=&quot;#u96A7_u9053_u7684_u7EF4_u6301&quot; class=&quot;headerlink&quot; title=&quot;隧道的维持&quot;&gt;&lt;/a&gt;隧道的维持&lt;/h1&gt;&lt;h2 id=&quot;u7A33_u5B9A_u6027_u7EF4_u6301&quot;&gt;&lt;a href=&quot;#u7A33_u5B9A_u6027_u7EF4_u6301&quot; class=&quot;headerlink&quot; title=&quot;稳定性维持&quot;&gt;&lt;/a&gt;稳定性维持&lt;/h2&gt;&lt;p&gt;然而不幸的是SSH 连接是会超时关闭的，如果连接关闭，隧道无法维持，那么A 就无法利用反向隧道穿透B 所在的NAT 了，为此我们需要一种方案来提供一条稳定的SSH 反向隧道。&lt;/p&gt;
+&lt;p&gt;一个最简单的方法就是&lt;code&gt;autossh&lt;/code&gt;，这个软件会在超时之后自动重新建立SSH 隧道，这样就解决了隧道的稳定性问题，如果你使用&lt;a href=&quot;https://www.archlinux.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Arch Linux&lt;/a&gt;，你可以这样获得它：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo pacman -S autossh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;下面在&lt;strong&gt;B&lt;/strong&gt; 上做之前类似的事情，不同的是该隧道会由&lt;code&gt;autossh&lt;/code&gt; 来维持：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;operator&quot;&gt;-f&lt;/span&gt;M &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt;:b.localhost:&lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;-M&lt;/code&gt; 参数指定的端口用来监听隧道的状态，与端口转发无关。&lt;/p&gt;
+&lt;p&gt;之后你可以在A 上通过6766 端口访问B 了：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;u96A7_u9053_u7684_u81EA_u52A8_u5EFA_u7ACB&quot;&gt;&lt;a href=&quot;#u96A7_u9053_u7684_u81EA_u52A8_u5EFA_u7ACB&quot; class=&quot;headerlink&quot; title=&quot;隧道的自动建立&quot;&gt;&lt;/a&gt;隧道的自动建立&lt;/h2&gt;&lt;p&gt;然而这又有了另外一个问题，如果B 重启隧道就会消失。那么需要有一种手段在B 每次启动时使用&lt;code&gt;autossh&lt;/code&gt; 来建立SSH 隧道。很自然的一个想法就是做成服务，之后会给出在&lt;code&gt;systemd&lt;/code&gt; 下的一种解决方案。&lt;/p&gt;
+&lt;h1 id=&quot;u201C_u6253_u6D1E_u201D&quot;&gt;&lt;a href=&quot;#u201C_u6253_u6D1E_u201D&quot; class=&quot;headerlink&quot; title=&quot;“打洞”&quot;&gt;&lt;/a&gt;“打洞”&lt;/h1&gt;&lt;p&gt;之所以标题这么起，是因为自己觉得这件事情有点类似于UDP 打洞，即通过一台在公网的机器，让两台分别位于各自NAT 之后的机器可以建立SSH 连接。&lt;/p&gt;
+&lt;p&gt;下面演示如何使用SSH 反向隧道，让C 使用反向隧道连接到B。&lt;/p&gt;
+&lt;p&gt;首先在&lt;strong&gt;A&lt;/strong&gt; 上编辑&lt;code&gt;sshd&lt;/code&gt; 的配置文件&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;，将&lt;code&gt;GatewayPorts&lt;/code&gt; 开关打开：&lt;/p&gt;
+&lt;figure class=&quot;highlight nginx&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;GatewayPorts&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;yes&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后重启&lt;code&gt;sshd&lt;/code&gt;：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ sudo systemctl restart sshd&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后在&lt;strong&gt;B&lt;/strong&gt; 上对之前用到的&lt;code&gt;autossh&lt;/code&gt; 指令略加修改：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;operator&quot;&gt;-f&lt;/span&gt;M &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:b.localhost:22&#39;&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;之后在&lt;strong&gt;C&lt;/strong&gt; 上利用&lt;strong&gt;A&lt;/strong&gt; 的6766 端口SSH 连接到&lt;strong&gt;B&lt;/strong&gt;：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;C $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;至此你已经轻而易举的穿透了两层NAT。&lt;/p&gt;
+&lt;h1 id=&quot;u6700_u7EC8_u7684_u89E3_u51B3_u65B9_u6848&quot;&gt;&lt;a href=&quot;#u6700_u7EC8_u7684_u89E3_u51B3_u65B9_u6848&quot; class=&quot;headerlink&quot; title=&quot;最终的解决方案&quot;&gt;&lt;/a&gt;最终的解决方案&lt;/h1&gt;&lt;p&gt;整合一下前面提到的，最终的解决方案如下：&lt;/p&gt;
+&lt;p&gt;首先打开&lt;strong&gt;A&lt;/strong&gt; 上&lt;code&gt;sshd&lt;/code&gt; 的&lt;code&gt;GatewayPorts&lt;/code&gt; 开关，并重启&lt;code&gt;sshd&lt;/code&gt;（如有需要）。&lt;/p&gt;
+&lt;p&gt;然后在&lt;strong&gt;B&lt;/strong&gt; 上新建一个用户&lt;em&gt;autossh&lt;/em&gt;，根据权限最小化思想，B 上的&lt;code&gt;autossh&lt;/code&gt; 服务将以&lt;em&gt;autossh&lt;/em&gt; 用户的身份运行，以尽大可能避免出现安全问题：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ sudo useradd -m autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ sudo passwd autossh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;紧接着在&lt;strong&gt;B&lt;/strong&gt; 上为&lt;em&gt;autossh&lt;/em&gt; 用户创建SSH 密钥，并上传到A：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ su - autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh-keygen -t &lt;span class=&quot;string&quot;&gt;&#39;rsa&#39;&lt;/span&gt; -C &lt;span class=&quot;string&quot;&gt;&#39;autossh@b.localhost&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh-copy-id usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;注意该&lt;strong&gt;密钥不要设置密码&lt;/strong&gt;，也就是运行&lt;code&gt;ssh-keygen&lt;/code&gt; 指令时尽管一路回车，不要输入额外的字符。&lt;/p&gt;
+&lt;p&gt;然后在&lt;strong&gt;B&lt;/strong&gt; 上创建以&lt;em&gt;autossh&lt;/em&gt; 用户权限调用&lt;code&gt;autossh&lt;/code&gt; 的service 文件。将下面文本写入到文件&lt;code&gt;/lib/systemd/system/autossh.service&lt;/code&gt;，并设置权限为644：&lt;/p&gt;
+&lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;[Unit]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;Description=&lt;span class=&quot;value&quot;&gt;Auto SSH Tunnel&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;After=&lt;span class=&quot;value&quot;&gt;network.target&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Service]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;User=&lt;span class=&quot;value&quot;&gt;autossh&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;Type=&lt;span class=&quot;value&quot;&gt;simple&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;ExecStart=&lt;span class=&quot;value&quot;&gt;/bin/autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; -fM &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:b.localhost:22&#39;&lt;/span&gt; usera@a.site -i /home/autossh/.ssh/id_rsa&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;ExecReload=&lt;span class=&quot;value&quot;&gt;/bin/kill -HUP &lt;span class=&quot;variable&quot;&gt;$MAINPID&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;KillMode=&lt;span class=&quot;value&quot;&gt;process&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;Restart=&lt;span class=&quot;value&quot;&gt;always&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Install]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;WantedBy=&lt;span class=&quot;value&quot;&gt;multi-user.target&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;在&lt;strong&gt;B&lt;/strong&gt; 上设置该服务自动启动：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ sudo systemctl &lt;span class=&quot;built_in&quot;&gt;enable&lt;/span&gt; autossh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果你愿意，在这之后可以立刻启动它：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ sudo systemctl start autossh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后你可以在&lt;strong&gt;A&lt;/strong&gt; 上使用这条反向隧道穿透B 所在的NAT SSH 连接到B：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@&lt;span class=&quot;number&quot;&gt;127.0&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;0.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;或者是在&lt;strong&gt;C&lt;/strong&gt; 上直接穿透两层NAT SSH 连接到B：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;C $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;u5BF9_u5E94_u7684_u60C5_u51B5&quot;&gt;&lt;a href=&quot;#u5BF9_u5E94_u7684_u60C5_u51B5&quot; class=&quot;headerlink&quot; title=&quot;对应的情况&quot;&gt;&lt;/a&gt;对应的情况&lt;/h1&gt;&lt;p&gt;这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。&lt;/p&gt;
+&lt;p&gt;假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用&lt;strong&gt;公网IP + 端口&lt;/strong&gt; 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。&lt;/p&gt;
+&lt;p&gt;首先有如下约定，因为很重要所以放在前面：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;机器代号&lt;/th&gt;
+&lt;th&gt;机器位置&lt;/th&gt;
+&lt;th&gt;地址&lt;/th&gt;
+&lt;th&gt;账户&lt;/th&gt;
+&lt;th&gt;ssh/sshd 端口&lt;/th&gt;
+&lt;th&gt;是否需要运行sshd&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;位于公网&lt;/td&gt;
+&lt;td&gt;a.site&lt;/td&gt;
+&lt;td&gt;usera&lt;/td&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B&lt;/td&gt;
+&lt;td&gt;位于NAT 之后&lt;/td&gt;
+&lt;td&gt;b.localhost&lt;/td&gt;
+&lt;td&gt;userb&lt;/td&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;C&lt;/td&gt;
+&lt;td&gt;位于NAT 之后&lt;/td&gt;
+&lt;td&gt;c.localhost&lt;/td&gt;
+&lt;td&gt;userc&lt;/td&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ol&gt;
+&lt;li&gt;这里默认你的系统init 程序为&lt;code&gt;systemd&lt;/code&gt;，如果你使用其他的init 程序，如果没有特殊理由还是换到一个现代化的GNU/Linux 系统吧……&lt;/li&gt;
+&lt;li&gt;如果&lt;strong&gt;B&lt;/strong&gt; 关闭了所有端口，请按组合键&lt;code&gt;Ctrl+W&lt;/code&gt;，因为这篇文章是建立在B 上正常运行着&lt;code&gt;sshd&lt;/code&gt; 的前提上的。&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="SSH" scheme="https://arondight.github.io/tags/SSH/"/>
+    
+      <category term="内网穿透" scheme="https://arondight.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    
+      <category term="技术" scheme="https://arondight.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="运维" scheme="https://arondight.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+      <category term="隧道" scheme="https://arondight.github.io/tags/%E9%9A%A7%E9%81%93/"/>
+    
+  </entry>
   
   <entry>
     <title>新年快乐</title>

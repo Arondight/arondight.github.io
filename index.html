@@ -127,6 +127,8 @@
                         
                             <li><a href="/tags/技术">技术</a></li>
                         
+                            <li><a href="/About">关于</a></li>
+                        
                         </ul>
                     </nav>
                     <nav class="header-nav">
@@ -147,7 +149,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/中二/" style="font-size: 10px;">中二</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/新年/" style="font-size: 10px;">新年</a> <a href="/tags/日常/" style="font-size: 20px;">日常</a> <a href="/tags/汇编/" style="font-size: 10px;">汇编</a> <a href="/tags/溢出/" style="font-size: 10px;">溢出</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a>
+                        <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/中二/" style="font-size: 10px;">中二</a> <a href="/tags/内网穿透/" style="font-size: 10px;">内网穿透</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/新年/" style="font-size: 10px;">新年</a> <a href="/tags/日常/" style="font-size: 20px;">日常</a> <a href="/tags/汇编/" style="font-size: 10px;">汇编</a> <a href="/tags/溢出/" style="font-size: 10px;">溢出</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a> <a href="/tags/随笔/" style="font-size: 20px;">随笔</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
                     </div>
                 </section>
                 
@@ -224,6 +226,8 @@
                 
                     <li><a href="/tags/技术">技术</a></li>
                 
+                    <li><a href="/About">关于</a></li>
+                
                 <div class="clearfix"></div>
                 </ul>
             </nav>
@@ -244,6 +248,112 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-使用SSH反向隧道进行内网穿透" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/17/使用SSH反向隧道进行内网穿透/" class="article-date">
+      <time datetime="2016-02-17T10:09:57.000Z" itemprop="datePublished">2016-02-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/17/使用SSH反向隧道进行内网穿透/">使用SSH反向隧道进行内网穿透</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1 id="u5BF9_u5E94_u7684_u60C5_u51B5"><a href="#u5BF9_u5E94_u7684_u60C5_u51B5" class="headerlink" title="对应的情况"></a>对应的情况</h1><p>这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。</p>
+<p>假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用<strong>公网IP + 端口</strong> 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。</p>
+<p>首先有如下约定，因为很重要所以放在前面：</p>
+<table>
+<thead>
+<tr>
+<th>机器代号</th>
+<th>机器位置</th>
+<th>地址</th>
+<th>账户</th>
+<th>ssh/sshd 端口</th>
+<th>是否需要运行sshd</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>位于公网</td>
+<td>a.site</td>
+<td>usera</td>
+<td>22</td>
+<td>是</td>
+</tr>
+<tr>
+<td>B</td>
+<td>位于NAT 之后</td>
+<td>b.localhost</td>
+<td>userb</td>
+<td>22</td>
+<td>是</td>
+</tr>
+<tr>
+<td>C</td>
+<td>位于NAT 之后</td>
+<td>c.localhost</td>
+<td>userc</td>
+<td>22</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>这里默认你的系统init 程序为<code>systemd</code>，如果你使用其他的init 程序，如果没有特殊理由还是换到一个现代化的GNU/Linux 系统吧……</li>
+<li>如果<strong>B</strong> 关闭了所有端口，请按组合键<code>Ctrl+W</code>，因为这篇文章是建立在B 上正常运行着<code>sshd</code> 的前提上的。</li>
+</ol>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内网穿透/">内网穿透</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/隧道/">隧道</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/02/17/使用SSH反向隧道进行内网穿透/#more">阅读更多 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-新年快乐" class="article article-type-post" itemscope itemprop="blogPost">
   
