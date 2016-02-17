@@ -41,7 +41,7 @@ B $ ssh -p 22 -qngfNTR 6766:b.localhost:22 usera@a.site
 然后在**A** 上利用6766 端口反向SSH 到B：
 
 ```bash
-A $ ssh -p 6766 userb@b.localhost
+A $ ssh -p 6766 userb@127.0.0.1
 ```
 
 要做的事情其实就是这么简单。
@@ -69,7 +69,7 @@ B $ autossh -p 22 -fM 6777 -NR 6766:b.localhost:22 usera@a.site
 之后你可以在A 上通过6766 端口访问B 了：
 
 ```bash
-A $ ssh -p 6766 userb@a.site
+A $ ssh -p 6766 userb@127.0.0.1
 ```
 
 ## 隧道的自动建立
@@ -80,7 +80,7 @@ A $ ssh -p 6766 userb@a.site
 
 之所以标题这么起，是因为自己觉得这件事情有点类似于UDP 打洞，即通过一台在公网的机器，让两台分别位于各自NAT 之后的机器可以建立SSH 连接。
 
-下面演示如何使用SSH 反向隧道，让C 使用反向隧道连接到B。
+下面演示如何使用SSH 反向隧道，让C 连接到B。
 
 首先在**A** 上编辑`sshd` 的配置文件`/etc/ssh/sshd_config`，将`GatewayPorts` 开关打开：
 
