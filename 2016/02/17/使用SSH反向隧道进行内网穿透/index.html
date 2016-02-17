@@ -25,7 +25,7 @@
 
 机器代号
 机">
-<meta property="og:updated_time" content="2016-02-17T12:12:19.759Z">
+<meta property="og:updated_time" content="2016-02-17T12:41:10.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用SSH反向隧道进行内网穿透">
 <meta name="twitter:description" content="对应的情况这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。
@@ -354,7 +354,7 @@
 <p>首先在<strong>B</strong> 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ ssh -p <span class="number">22</span> -qngfNTR <span class="number">6766</span>:b.localhost:<span class="number">22</span> usera@a.site</span><br></pre></td></tr></table></figure>
 <p>然后在<strong>A</strong> 上利用6766 端口反向SSH 到B：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p <span class="number">6766</span> userb@b.localhost</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p <span class="number">6766</span> userb@<span class="number">127.0</span>.<span class="number">0.1</span></span><br></pre></td></tr></table></figure>
 <p>要做的事情其实就是这么简单。</p>
 <h1 id="u96A7_u9053_u7684_u7EF4_u6301"><a href="#u96A7_u9053_u7684_u7EF4_u6301" class="headerlink" title="隧道的维持"></a>隧道的维持</h1><h2 id="u7A33_u5B9A_u6027_u7EF4_u6301"><a href="#u7A33_u5B9A_u6027_u7EF4_u6301" class="headerlink" title="稳定性维持"></a>稳定性维持</h2><p>然而不幸的是SSH 连接是会超时关闭的，如果连接关闭，隧道无法维持，那么A 就无法利用反向隧道穿透B 所在的NAT 了，为此我们需要一种方案来提供一条稳定的SSH 反向隧道。</p>
 <p>一个最简单的方法就是<code>autossh</code>，这个软件会在超时之后自动重新建立SSH 隧道，这样就解决了隧道的稳定性问题，如果你使用<a href="https://www.archlinux.org" target="_blank" rel="external">Arch Linux</a>，你可以这样获得它：</p>
@@ -363,10 +363,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ autossh -p <span class="number">22</span> <span class="operator">-f</span>M <span class="number">6777</span> -NR <span class="number">6766</span>:b.localhost:<span class="number">22</span> usera@a.site</span><br></pre></td></tr></table></figure>
 <p><code>-M</code> 参数指定的端口用来监听隧道的状态，与端口转发无关。</p>
 <p>之后你可以在A 上通过6766 端口访问B 了：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p <span class="number">6766</span> userb@a.site</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p <span class="number">6766</span> userb@<span class="number">127.0</span>.<span class="number">0.1</span></span><br></pre></td></tr></table></figure>
 <h2 id="u96A7_u9053_u7684_u81EA_u52A8_u5EFA_u7ACB"><a href="#u96A7_u9053_u7684_u81EA_u52A8_u5EFA_u7ACB" class="headerlink" title="隧道的自动建立"></a>隧道的自动建立</h2><p>然而这又有了另外一个问题，如果B 重启隧道就会消失。那么需要有一种手段在B 每次启动时使用<code>autossh</code> 来建立SSH 隧道。很自然的一个想法就是做成服务，之后会给出在<code>systemd</code> 下的一种解决方案。</p>
 <h1 id="u201C_u6253_u6D1E_u201D"><a href="#u201C_u6253_u6D1E_u201D" class="headerlink" title="“打洞”"></a>“打洞”</h1><p>之所以标题这么起，是因为自己觉得这件事情有点类似于UDP 打洞，即通过一台在公网的机器，让两台分别位于各自NAT 之后的机器可以建立SSH 连接。</p>
-<p>下面演示如何使用SSH 反向隧道，让C 使用反向隧道连接到B。</p>
+<p>下面演示如何使用SSH 反向隧道，让C 连接到B。</p>
 <p>首先在<strong>A</strong> 上编辑<code>sshd</code> 的配置文件<code>/etc/ssh/sshd_config</code>，将<code>GatewayPorts</code> 开关打开：</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">GatewayPorts</span> <span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
 <p>然后重启<code>sshd</code>：</p>

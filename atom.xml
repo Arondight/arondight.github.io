@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-02-17T12:12:19.759Z</updated>
+  <updated>2016-02-17T12:41:10.842Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     <id>https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</id>
     <published>2016-02-17T10:09:57.000Z</published>
-    <updated>2016-02-17T12:12:19.759Z</updated>
+    <updated>2016-02-17T12:41:10.842Z</updated>
     
     <content type="html">&lt;h1 id=&quot;u5BF9_u5E94_u7684_u60C5_u51B5&quot;&gt;&lt;a href=&quot;#u5BF9_u5E94_u7684_u60C5_u51B5&quot; class=&quot;headerlink&quot; title=&quot;对应的情况&quot;&gt;&lt;/a&gt;对应的情况&lt;/h1&gt;&lt;p&gt;这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。&lt;/p&gt;
 &lt;p&gt;假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用&lt;strong&gt;公网IP + 端口&lt;/strong&gt; 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。&lt;/p&gt;
@@ -72,7 +72,7 @@
 &lt;p&gt;首先在&lt;strong&gt;B&lt;/strong&gt; 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; -qngfNTR &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt;:b.localhost:&lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后在&lt;strong&gt;A&lt;/strong&gt; 上利用6766 端口反向SSH 到B：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@b.localhost&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@&lt;span class=&quot;number&quot;&gt;127.0&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;0.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;要做的事情其实就是这么简单。&lt;/p&gt;
 &lt;h1 id=&quot;u96A7_u9053_u7684_u7EF4_u6301&quot;&gt;&lt;a href=&quot;#u96A7_u9053_u7684_u7EF4_u6301&quot; class=&quot;headerlink&quot; title=&quot;隧道的维持&quot;&gt;&lt;/a&gt;隧道的维持&lt;/h1&gt;&lt;h2 id=&quot;u7A33_u5B9A_u6027_u7EF4_u6301&quot;&gt;&lt;a href=&quot;#u7A33_u5B9A_u6027_u7EF4_u6301&quot; class=&quot;headerlink&quot; title=&quot;稳定性维持&quot;&gt;&lt;/a&gt;稳定性维持&lt;/h2&gt;&lt;p&gt;然而不幸的是SSH 连接是会超时关闭的，如果连接关闭，隧道无法维持，那么A 就无法利用反向隧道穿透B 所在的NAT 了，为此我们需要一种方案来提供一条稳定的SSH 反向隧道。&lt;/p&gt;
 &lt;p&gt;一个最简单的方法就是&lt;code&gt;autossh&lt;/code&gt;，这个软件会在超时之后自动重新建立SSH 隧道，这样就解决了隧道的稳定性问题，如果你使用&lt;a href=&quot;https://www.archlinux.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Arch Linux&lt;/a&gt;，你可以这样获得它：&lt;/p&gt;
@@ -81,10 +81,10 @@
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;operator&quot;&gt;-f&lt;/span&gt;M &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt;:b.localhost:&lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;code&gt;-M&lt;/code&gt; 参数指定的端口用来监听隧道的状态，与端口转发无关。&lt;/p&gt;
 &lt;p&gt;之后你可以在A 上通过6766 端口访问B 了：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@&lt;span class=&quot;number&quot;&gt;127.0&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;0.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;u96A7_u9053_u7684_u81EA_u52A8_u5EFA_u7ACB&quot;&gt;&lt;a href=&quot;#u96A7_u9053_u7684_u81EA_u52A8_u5EFA_u7ACB&quot; class=&quot;headerlink&quot; title=&quot;隧道的自动建立&quot;&gt;&lt;/a&gt;隧道的自动建立&lt;/h2&gt;&lt;p&gt;然而这又有了另外一个问题，如果B 重启隧道就会消失。那么需要有一种手段在B 每次启动时使用&lt;code&gt;autossh&lt;/code&gt; 来建立SSH 隧道。很自然的一个想法就是做成服务，之后会给出在&lt;code&gt;systemd&lt;/code&gt; 下的一种解决方案。&lt;/p&gt;
 &lt;h1 id=&quot;u201C_u6253_u6D1E_u201D&quot;&gt;&lt;a href=&quot;#u201C_u6253_u6D1E_u201D&quot; class=&quot;headerlink&quot; title=&quot;“打洞”&quot;&gt;&lt;/a&gt;“打洞”&lt;/h1&gt;&lt;p&gt;之所以标题这么起，是因为自己觉得这件事情有点类似于UDP 打洞，即通过一台在公网的机器，让两台分别位于各自NAT 之后的机器可以建立SSH 连接。&lt;/p&gt;
-&lt;p&gt;下面演示如何使用SSH 反向隧道，让C 使用反向隧道连接到B。&lt;/p&gt;
+&lt;p&gt;下面演示如何使用SSH 反向隧道，让C 连接到B。&lt;/p&gt;
 &lt;p&gt;首先在&lt;strong&gt;A&lt;/strong&gt; 上编辑&lt;code&gt;sshd&lt;/code&gt; 的配置文件&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;，将&lt;code&gt;GatewayPorts&lt;/code&gt; 开关打开：&lt;/p&gt;
 &lt;figure class=&quot;highlight nginx&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;GatewayPorts&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;yes&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后重启&lt;code&gt;sshd&lt;/code&gt;：&lt;/p&gt;
