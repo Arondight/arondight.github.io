@@ -1,8 +1,9 @@
 title: 使用SSH反向隧道进行内网穿透
 date: 2016-02-17 18:09:57
 toc: true
-tags:
+categories:
   - 技术
+tags:
   - 运维
   - 内网穿透
   - SSH
@@ -23,10 +24,10 @@ tags:
 | B | 位于NAT 之后 | b.localhost | userb | 22 | 是 |
 | C | 位于NAT 之后 | c.localhost | userc | 22 | 否 |
 
+<!-- more -->
+
 1. 这里默认你的系统init 程序为`systemd`，如果你使用其他的init 程序，如果没有特殊理由还是换到一个现代化的GNU/Linux 系统吧……
 2. 如果**B** 关闭了所有端口，请按组合键`Ctrl+W`，因为这篇文章是建立在B 上正常运行着`sshd` 的前提上的。
-
-<!-- more -->
 
 # SSH 反向隧道
 

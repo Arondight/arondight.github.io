@@ -7,8 +7,8 @@
 menu:
   主页: /
   博文: /archives
-  日常: /tags/日常
-  技术: /tags/技术
+  日常: /categories/日常
+  技术: /categories/技术
   关于: /About
 
 # Link to your avatar | 填写头像地址
