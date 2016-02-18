@@ -16,7 +16,7 @@ date: 2016-02-17 15:09:40
 + 靠Linux C 吃饭，码字常用Vim。
 + 真爱是Perl，能够原谅这门语言的很多缺陷。
 + 崇尚C++，但功力不够。
-+ Java/**Python** 一生黑。
++ Python 一生黑。
 + 尽管一直用Vim，但目前没有最爱的编辑器。
 + 在用了5 年Slackware 之后，最近2 年成了Arch 神教的忠实教徒。
 + 对空格有近乎变态的执着，在以下情况下一定会后跟空格：
@@ -43,5 +43,5 @@ date: 2016-02-17 15:09:40
 
 2016 年春
 
-@[Arondight](http://arondight.me)
+@[Arondight](http://arondight.github.io)
 
