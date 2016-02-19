@@ -13,6 +13,20 @@ GITMODULES=${C_DIR}/.gitmodules
 
 cd $C_DIR
 
+if [[ -d $C_DIR/.deploy_git ]]
+then
+  echo "warn: it seems this repo has been initialized, do nothing."
+  exit 0
+fi
+
+if ! type git >/dev/null 2>&1
+then
+  echo "failed: git is needed but not found, quit."
+  exit 1
+else
+  env git clone -b master https://github.com/Arondight/arondight.github.io.git ./.deploy_git
+fi
+
 if type cnpm >/dev/null 2>&1
 then
   # See https://github.com/cnpm/cnpm
