@@ -2,6 +2,21 @@ title: 关于
 date: 2016-02-17 15:09:40
 ---
 
+<style type="text/css">
+  #ds-recent-visitors {
+    margin: 0;
+    padding: 0;
+  }
+  #ds-recent-visitors div img {
+    display: inline-block !important;
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    padding: 2px;
+  }
+</style>
+
 > Everyone who comes in here wants three things:
 >　　1. They want it quick.
 >　　2. They want it good.
@@ -44,4 +59,8 @@ date: 2016-02-17 15:09:40
 2016 年春
 
 @[Arondight](http://arondight.github.io)
+
+---
+
+<ul class="ds-recent-visitors" data-num-items="30" data-avatar-size="56"></ul>
 
