@@ -102,7 +102,7 @@ blockquote_style:
 left_col_width: 300
 
 # Copyright info. of post | 文末版权信息
-copyright: false
+copyright: true
 
 # Table of contents | 文章目录
 toc: true
@@ -193,5 +193,5 @@ visit_counter:
 
 # GitHub Repo Widget
 # https://github.com/hustcc/GitHub-Repo-Widget.js
-github_widget: false
+github_widget: true
 

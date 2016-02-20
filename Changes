@@ -1,3 +1,8 @@
+v2016-02-20
+  * Use theme built-in Baidu Tongji
+  * Add copyright for all posts
+  * Update some node modules
+
 v2016-02-19.2
   * Modify init.sh
 
