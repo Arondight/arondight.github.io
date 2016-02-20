@@ -25,7 +25,7 @@
 
 机器代号
 机">
-<meta property="og:updated_time" content="2016-02-18T12:29:38.907Z">
+<meta property="og:updated_time" content="2016-02-19T15:07:53.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用SSH反向隧道进行内网穿透">
 <meta name="twitter:description" content="对应的情况这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。
@@ -67,6 +67,17 @@
           open_in_new: false
       }
   </script>
+  
+      <script>
+          var _hmt = _hmt || [];
+          (function() {
+              var hm = document.createElement("script");
+              hm.src = "//hm.baidu.com/hm.js?55d7496b74b59fcaa2a67bd11b36a7b6";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+          })();
+      </script>
+  
 </head>
 <body>
   <div id="container">
@@ -168,7 +179,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/中二/" style="font-size: 10px;">中二</a> <a href="/tags/内网穿透/" style="font-size: 10px;">内网穿透</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a> <a href="/tags/开始/" style="font-size: 10px;">开始</a> <a href="/tags/新年/" style="font-size: 10px;">新年</a> <a href="/tags/汇编/" style="font-size: 10px;">汇编</a> <a href="/tags/溢出/" style="font-size: 10px;">溢出</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
+                        <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/中二/" style="font-size: 10px;">中二</a> <a href="/tags/内网穿透/" style="font-size: 10px;">内网穿透</a> <a href="/tags/工作/" style="font-size: 10px;">工作</a> <a href="/tags/开始/" style="font-size: 10px;">开始</a> <a href="/tags/新年/" style="font-size: 10px;">新年</a> <a href="/tags/栈帧/" style="font-size: 10px;">栈帧</a> <a href="/tags/汇编/" style="font-size: 10px;">汇编</a> <a href="/tags/溢出/" style="font-size: 10px;">溢出</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
                     </div>
                 </section>
                 
@@ -350,10 +361,9 @@
 </tbody>
 </table>
 <a id="more"></a>
-<ol>
-<li>这里默认你的系统init 程序为<code>systemd</code>，如果你使用其他的init 程序，如果没有特殊理由还是换到一个现代化的GNU/Linux 系统吧……</li>
-<li>如果<strong>B</strong> 关闭了所有端口，请按组合键<code>Ctrl+W</code>，因为这篇文章是建立在B 上正常运行着<code>sshd</code> 的前提上的。</li>
-</ol>
+<blockquote>
+<p>这里默认你的系统init 程序为<code>systemd</code>，如果你使用其他的init 程序，如果没有特殊理由还是换到一个现代化的GNU/Linux 系统吧……</p>
+</blockquote>
 <h1 id="SSH__u53CD_u5411_u96A7_u9053"><a href="#SSH__u53CD_u5411_u96A7_u9053" class="headerlink" title="SSH 反向隧道"></a>SSH 反向隧道</h1><p>这种手段实质上是由B 向A 主动地建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上，只要这条隧道不关闭，这个转发就是有效的。有了这个端口转发，只需要访问A 的6766 端口反向连接B 即可。</p>
 <p>首先在<strong>B</strong> 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ ssh -p <span class="number">22</span> -qngfNTR <span class="number">6766</span>:b.localhost:<span class="number">22</span> usera@a.site</span><br></pre></td></tr></table></figure>
@@ -404,6 +414,22 @@
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/02/17/使用SSH反向隧道进行内网穿透/">使用SSH反向隧道进行内网穿透</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Arondight 的个人博客">Arondight</a></p>
+        <p><span>发布时间:</span>2016年02月17日 - 18时09分</p>
+        <p><span>最后更新:</span>2016年02月19日 - 23时07分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/02/17/使用SSH反向隧道进行内网穿透/" title="使用SSH反向隧道进行内网穿透">https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/　　作者: Arondight" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
 
 
     <nav id="article-nav">
@@ -573,6 +599,8 @@
 </footer>
     </div>
     
+    <script src="/js/GithubRepoWidget.js" type="text/javascript"></script>
+
 <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="/js/main.js" type="text/javascript"></script>
 
@@ -617,21 +645,6 @@ ga('send', 'pageview');
 
 
 
-<!-- Baidu Tongji -->
-<script type="text/javascript">
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?55d7496b74b59fcaa2a67bd11b36a7b6";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-<!-- End Baidu Tongji -->
-
-
-
-
 <div class="scroll" id="scroll">
     <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
     <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
@@ -651,11 +664,6 @@ var _hmt = _hmt || [];
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-
-
-
   </div>
 </body>
 </html>

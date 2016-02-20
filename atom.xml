@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-02-18T12:29:38.907Z</updated>
+  <updated>2016-02-19T15:07:53.480Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     <id>https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</id>
     <published>2016-02-17T10:09:57.000Z</published>
-    <updated>2016-02-18T12:29:38.907Z</updated>
+    <updated>2016-02-19T15:07:53.480Z</updated>
     
     <content type="html">&lt;h1 id=&quot;u5BF9_u5E94_u7684_u60C5_u51B5&quot;&gt;&lt;a href=&quot;#u5BF9_u5E94_u7684_u60C5_u51B5&quot; class=&quot;headerlink&quot; title=&quot;对应的情况&quot;&gt;&lt;/a&gt;对应的情况&lt;/h1&gt;&lt;p&gt;这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。&lt;/p&gt;
 &lt;p&gt;假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用&lt;strong&gt;公网IP + 端口&lt;/strong&gt; 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。&lt;/p&gt;
@@ -64,10 +64,9 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;ol&gt;
-&lt;li&gt;这里默认你的系统init 程序为&lt;code&gt;systemd&lt;/code&gt;，如果你使用其他的init 程序，如果没有特殊理由还是换到一个现代化的GNU/Linux 系统吧……&lt;/li&gt;
-&lt;li&gt;如果&lt;strong&gt;B&lt;/strong&gt; 关闭了所有端口，请按组合键&lt;code&gt;Ctrl+W&lt;/code&gt;，因为这篇文章是建立在B 上正常运行着&lt;code&gt;sshd&lt;/code&gt; 的前提上的。&lt;/li&gt;
-&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里默认你的系统init 程序为&lt;code&gt;systemd&lt;/code&gt;，如果你使用其他的init 程序，如果没有特殊理由还是换到一个现代化的GNU/Linux 系统吧……&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h1 id=&quot;SSH__u53CD_u5411_u96A7_u9053&quot;&gt;&lt;a href=&quot;#SSH__u53CD_u5411_u96A7_u9053&quot; class=&quot;headerlink&quot; title=&quot;SSH 反向隧道&quot;&gt;&lt;/a&gt;SSH 反向隧道&lt;/h1&gt;&lt;p&gt;这种手段实质上是由B 向A 主动地建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上，只要这条隧道不关闭，这个转发就是有效的。有了这个端口转发，只需要访问A 的6766 端口反向连接B 即可。&lt;/p&gt;
 &lt;p&gt;首先在&lt;strong&gt;B&lt;/strong&gt; 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; -qngfNTR &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt;:b.localhost:&lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -177,7 +176,7 @@
     <link href="https://arondight.github.io/2016/02/08/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/"/>
     <id>https://arondight.github.io/2016/02/08/新年快乐/</id>
     <published>2016-02-07T16:00:00.000Z</published>
-    <updated>2016-02-18T09:03:03.183Z</updated>
+    <updated>2016-02-19T15:07:03.120Z</updated>
     
     <content type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;shebang&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cat &amp;lt;&amp;lt;&lt;span class=&quot;string&quot;&gt;&#39;By_Arondight&#39;&lt;/span&gt; | env gcc -xc -o .\ - - \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;/dev/null &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;&amp;gt;&amp;amp;&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;amp;&amp;amp; ./.\ - &amp;amp;&amp;amp; env rm .\ -&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;char _[]=&lt;span class=&quot;string&quot;&gt;&quot;\xe6\x96\xb0\xe5\xb9\xb4\xe5\xbf\xab\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\xe4\xb9\x90\xef\xbc\x81\x0a&quot;&lt;/span&gt;;____(___)&amp;lt;%putchar&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;((___++)[_])&amp;amp;&amp;amp;____(___);_&lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;);%&amp;gt;main()&amp;lt;%long&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;__=____;*(&amp;amp;__+&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)=__;__asm__(&lt;span class=&quot;string&quot;&gt;&quot;\x6d\x6f\x76\x6c\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\x20\x24\x30\x2c\x25\x65\x64\x69\x0a\x09&quot;&lt;/span&gt;);%&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;By_Arondight&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;惟愿可以遇到美好的人和事。&lt;/p&gt;
@@ -191,14 +190,14 @@
     
       <category term="日常" scheme="https://arondight.github.io/categories/%E6%97%A5%E5%B8%B8/"/>
     
-      <category term="技术" scheme="https://arondight.github.io/categories/%E6%97%A5%E5%B8%B8/%E6%8A%80%E6%9C%AF/"/>
-    
     
       <category term="C" scheme="https://arondight.github.io/tags/C/"/>
     
       <category term="Shell" scheme="https://arondight.github.io/tags/Shell/"/>
     
       <category term="新年" scheme="https://arondight.github.io/tags/%E6%96%B0%E5%B9%B4/"/>
+    
+      <category term="栈帧" scheme="https://arondight.github.io/tags/%E6%A0%88%E5%B8%A7/"/>
     
       <category term="汇编" scheme="https://arondight.github.io/tags/%E6%B1%87%E7%BC%96/"/>
     
@@ -211,10 +210,10 @@
     <link href="https://arondight.github.io/2016/01/15/%E5%8F%AF%E8%83%BD%E8%A6%81%E6%8D%A2%E5%B7%A5%E4%BD%9C%E4%BA%86/"/>
     <id>https://arondight.github.io/2016/01/15/可能要换工作了/</id>
     <published>2016-01-15T12:27:51.000Z</published>
-    <updated>2016-02-19T01:36:08.197Z</updated>
+    <updated>2016-02-19T15:07:23.527Z</updated>
     
     <content type="html">&lt;p&gt;昨天和公司提的离职，本来想干满一年再换方向的，后来还是鼓足勇气决定试一下，最后也总算拿到了一个方向满意的offer 吧。&lt;/p&gt;
-&lt;p&gt;最有吸引力的应该是Idea，通过牺牲带宽的代价把一个丢包很严重的网络稳定性提升到接近专线的级别，感觉很有去实现的价值。自己需要做设备的控制中心，设备的认证、管理和配置的分发。参加工作的5 个月里，我一直想在工作中从零完全由自己去实现一个软件的，感觉蛮幸运，可以任凭自己发挥想象力去实现感兴趣的东西。事实上觉得现在自己还是不足以去完成这项工作的，不过如果去做一份足以完全胜任的工作，那么工作也就失去了一半的意义了嘛。&lt;/p&gt;
+&lt;p&gt;最有吸引力的应该是Idea，通过牺牲带宽的代价把一个丢包很严重的网络稳定性提升到接近专线的级别，感觉很有去实现的价值。自己需要做设备的控制中心，完成设备的认证、管理和配置的分发。参加工作的5 个月里，我一直想在工作中从零完全由自己去实现一个软件的，感觉蛮幸运，可以任凭自己发挥想象力去实现感兴趣的东西。事实上觉得现在自己还是不足以去完成这项工作的，不过如果去做一份足以完全胜任的工作，那么工作也就失去了一半的意义了嘛。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;至于各方面究竟会不会顺利，自己现在也拿不准，然而前后拿捏了一下，还是觉得是非常值得去尝试的。毕竟除了方向非常合口味之外，给的薪水也蛮不错的嘛。以前自己提着行李来北京的时候总想着有一天要把薪水弄到税后5 位数，没想到毕业不到半年已经实现了。&lt;/p&gt;
 &lt;p&gt;最后觉得Leader 很好，也很喜欢他的人格魅力。HR 是一个常混ACG 的大姐姐（年纪或许要大一些），聊天的时候感觉很开心时间也过得很快。当时聊到爱好的第一个问题是问我是不是常去漫展和玩Cosplay，然而现在的年纪已经玩不了Cosplay 了吧，如果年轻几岁的话大约我会很喜欢Cosplay 的。&lt;/p&gt;
@@ -223,7 +222,7 @@
     <summary type="html">
     
       &lt;p&gt;昨天和公司提的离职，本来想干满一年再换方向的，后来还是鼓足勇气决定试一下，最后也总算拿到了一个方向满意的offer 吧。&lt;/p&gt;
-&lt;p&gt;最有吸引力的应该是Idea，通过牺牲带宽的代价把一个丢包很严重的网络稳定性提升到接近专线的级别，感觉很有去实现的价值。自己需要做设备的控制中心，设备的认证、管理和配置的分发。参加工作的5 个月里，我一直想在工作中从零完全由自己去实现一个软件的，感觉蛮幸运，可以任凭自己发挥想象力去实现感兴趣的东西。事实上觉得现在自己还是不足以去完成这项工作的，不过如果去做一份足以完全胜任的工作，那么工作也就失去了一半的意义了嘛。&lt;/p&gt;
+&lt;p&gt;最有吸引力的应该是Idea，通过牺牲带宽的代价把一个丢包很严重的网络稳定性提升到接近专线的级别，感觉很有去实现的价值。自己需要做设备的控制中心，完成设备的认证、管理和配置的分发。参加工作的5 个月里，我一直想在工作中从零完全由自己去实现一个软件的，感觉蛮幸运，可以任凭自己发挥想象力去实现感兴趣的东西。事实上觉得现在自己还是不足以去完成这项工作的，不过如果去做一份足以完全胜任的工作，那么工作也就失去了一半的意义了嘛。&lt;/p&gt;
     
     </summary>
     
