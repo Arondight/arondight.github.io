@@ -141,6 +141,7 @@ friends:
   Farkasity: http://blog.farkasity.me
   GlassGear: http://blog.winkidney.com
   Kissbug8720's Blog: http://blog.ishell.me
+  Love live!: http://www.targetlocked.xyz
   Shy泠的博客: https://shyling.com
   Sonico's Home: http://blog.supvesonico.moe
   Yanhao's Blog: http://www.yanhao.site
@@ -188,7 +189,7 @@ baidu_tongji: '55d7496b74b59fcaa2a67bd11b36a7b6'
 # http://ibruce.info/2015/04/04/busuanzi/
 visit_counter:
   on: true
-  site_visit: 独立访问量
+  site_visit: 全站访客量
   page_visit: 本页展现数
 
 # GitHub Repo Widget
