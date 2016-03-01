@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-03-01T14:23:31.829Z</updated>
+  <updated>2016-03-01T15:36:18.362Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     <id>https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</id>
     <published>2016-02-17T10:09:57.000Z</published>
-    <updated>2016-03-01T14:23:31.829Z</updated>
+    <updated>2016-03-01T15:36:18.362Z</updated>
     
     <content type="html">&lt;h1 id=&quot;对应的情况&quot;&gt;&lt;a href=&quot;#对应的情况&quot; class=&quot;headerlink&quot; title=&quot;对应的情况&quot;&gt;&lt;/a&gt;对应的情况&lt;/h1&gt;&lt;p&gt;这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。&lt;/p&gt;
 &lt;p&gt;假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用&lt;strong&gt;公网IP + 端口&lt;/strong&gt; 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。&lt;/p&gt;
@@ -176,7 +176,7 @@
     <link href="https://arondight.github.io/2016/02/08/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/"/>
     <id>https://arondight.github.io/2016/02/08/新年快乐/</id>
     <published>2016-02-07T16:00:00.000Z</published>
-    <updated>2016-02-28T10:12:33.343Z</updated>
+    <updated>2016-03-01T15:36:18.362Z</updated>
     
     <content type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cat &amp;lt;&amp;lt;&lt;span class=&quot;string&quot;&gt;&#39;By_Arondight&#39;&lt;/span&gt; | env gcc -xc -o .\ - - \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;/dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&amp;amp; ./.\ - &amp;amp;&amp;amp; env rm .\ -&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;char _[]=&lt;span class=&quot;string&quot;&gt;&quot;\xe6\x96\xb0\xe5\xb9\xb4\xe5\xbf\xab\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\xe4\xb9\x90\xef\xbc\x81\x0a&quot;&lt;/span&gt;;____(___)&amp;lt;%putchar&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;((___++)[_])&amp;amp;&amp;amp;____(___);_&lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt;(0);%&amp;gt;main()&amp;lt;%long&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;__=____;*(&amp;amp;__+2)=__;__asm__(&lt;span class=&quot;string&quot;&gt;&quot;\x6d\x6f\x76\x6c\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\x20\x24\x30\x2c\x25\x65\x64\x69\x0a\x09&quot;&lt;/span&gt;);%&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;By_Arondight&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;惟愿可以遇到美好的人和事。&lt;/p&gt;
@@ -188,7 +188,7 @@
     
     </summary>
     
-      <category term="日常" scheme="https://arondight.github.io/categories/%E6%97%A5%E5%B8%B8/"/>
+      <category term="节" scheme="https://arondight.github.io/categories/%E8%8A%82/"/>
     
     
       <category term="新年" scheme="https://arondight.github.io/tags/%E6%96%B0%E5%B9%B4/"/>

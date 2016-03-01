@@ -1492,6 +1492,9 @@ body .ui-tooltip {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #fff;
 }
+.article-entry .table-area {
+  overflow: auto;
+}
 .article-entry table {
   width: 100%;
   max-width: 65em;
