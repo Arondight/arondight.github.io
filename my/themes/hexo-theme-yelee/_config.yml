@@ -10,6 +10,7 @@ menu:
   日常: /categories/日常
   技术: /categories/技术
   关于: /About
+  节:   /categories/节
 
 # Link to your avatar | 填写头像地址
 avatar: /img/avatar.jpg
@@ -142,15 +143,17 @@ friends:
   GlassGear: http://blog.winkidney.com
   Kissbug8720's Blog: http://blog.ishell.me
   Love live!: http://www.targetlocked.xyz
+  Menci: https://blog.menci.moe
   Shy泠的博客: https://shyling.com
   Sonico's Home: http://blog.supvesonico.moe
   Yanhao's Blog: http://www.yanhao.site
   Мвудаг/Этура Яннъ: http://etula.ga
   蔓舞寻樱的博客: https://alleysakura.com
+  无毁的湖光: http://readingsteiner.github.io
   中土國民會全球資訊網: https://blog-netarmy.rhcloud.com
 
 #是否开启“关于我”。
-aboutme: 平凡的愚者，无梦的旅人。
+aboutme: 他即将迎来一个夹杂着沉淀物的夏天
 #aboutme: false
 
 # 是否在新窗口打开链接
