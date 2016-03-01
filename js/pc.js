@@ -17,16 +17,6 @@ define([], function(){
         }
     })();
 
-    var resetTags = function(){
-        var tags = $(".tagcloud a");
-        tags.css({"font-size": "12px"});
-        for(var i=0,len=tags.length; i<len; i++){
-            var num = tags.eq(i).html().length % 5 +1;
-            tags[i].className = "";
-            tags.eq(i).addClass("color"+num);
-        }
-    }
-
     var slide = function(idx){
         // 修复IE10+切换无效的bug
         var $wrap = $(".switch-wrap"),
@@ -43,6 +33,16 @@ define([], function(){
         $wrap[0].style.cssText = transform.join('');
         $(".icon-wrap").addClass("hide");
         $(".icon-wrap").eq(idx).removeClass("hide");
+    }
+
+    var resetTags = function(){
+        var tags = $(".tagcloud a");
+        tags.css({"font-size": "12px"});
+        for(var i = 0; i < tags.length; i++){
+            var num = parseInt(4*Math.random()) + 1;
+            tags.eq(i).addClass("color" + num);
+        };
+        $(".article-category a:nth-child(-n+2)").attr("class", "color5");
     }
 
     var bind = function(){

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-02-19T15:07:53.480Z</updated>
+  <updated>2016-03-01T14:23:31.829Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     <id>https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</id>
     <published>2016-02-17T10:09:57.000Z</published>
-    <updated>2016-02-19T15:07:53.480Z</updated>
+    <updated>2016-03-01T14:23:31.829Z</updated>
     
     <content type="html">&lt;h1 id=&quot;对应的情况&quot;&gt;&lt;a href=&quot;#对应的情况&quot; class=&quot;headerlink&quot; title=&quot;对应的情况&quot;&gt;&lt;/a&gt;对应的情况&lt;/h1&gt;&lt;p&gt;这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。&lt;/p&gt;
 &lt;p&gt;假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用&lt;strong&gt;公网IP + 端口&lt;/strong&gt; 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。&lt;/p&gt;
@@ -69,29 +69,29 @@
 &lt;/blockquote&gt;
 &lt;h1 id=&quot;SSH-反向隧道&quot;&gt;&lt;a href=&quot;#SSH-反向隧道&quot; class=&quot;headerlink&quot; title=&quot;SSH 反向隧道&quot;&gt;&lt;/a&gt;SSH 反向隧道&lt;/h1&gt;&lt;p&gt;这种手段实质上是由B 向A 主动地建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上，只要这条隧道不关闭，这个转发就是有效的。有了这个端口转发，只需要访问A 的6766 端口反向连接B 即可。&lt;/p&gt;
 &lt;p&gt;首先在&lt;strong&gt;B&lt;/strong&gt; 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; -qngfNTR &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt;:b.localhost:&lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh -p 22 -qngfNTR 6766:b.localhost:22 usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后在&lt;strong&gt;A&lt;/strong&gt; 上利用6766 端口反向SSH 到B：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@&lt;span class=&quot;number&quot;&gt;127.0&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;0.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p 6766 userb@127.0.0.1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;要做的事情其实就是这么简单。&lt;/p&gt;
 &lt;h1 id=&quot;隧道的维持&quot;&gt;&lt;a href=&quot;#隧道的维持&quot; class=&quot;headerlink&quot; title=&quot;隧道的维持&quot;&gt;&lt;/a&gt;隧道的维持&lt;/h1&gt;&lt;h2 id=&quot;稳定性维持&quot;&gt;&lt;a href=&quot;#稳定性维持&quot; class=&quot;headerlink&quot; title=&quot;稳定性维持&quot;&gt;&lt;/a&gt;稳定性维持&lt;/h2&gt;&lt;p&gt;然而不幸的是SSH 连接是会超时关闭的，如果连接关闭，隧道无法维持，那么A 就无法利用反向隧道穿透B 所在的NAT 了，为此我们需要一种方案来提供一条稳定的SSH 反向隧道。&lt;/p&gt;
 &lt;p&gt;一个最简单的方法就是&lt;code&gt;autossh&lt;/code&gt;，这个软件会在超时之后自动重新建立SSH 隧道，这样就解决了隧道的稳定性问题，如果你使用&lt;a href=&quot;https://www.archlinux.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Arch Linux&lt;/a&gt;，你可以这样获得它：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo pacman -S autossh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;下面在&lt;strong&gt;B&lt;/strong&gt; 上做之前类似的事情，不同的是该隧道会由&lt;code&gt;autossh&lt;/code&gt; 来维持：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;operator&quot;&gt;-f&lt;/span&gt;M &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt;:b.localhost:&lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p 22 &lt;span class=&quot;_&quot;&gt;-f&lt;/span&gt;M 6777 -NR 6766:b.localhost:22 usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;code&gt;-M&lt;/code&gt; 参数指定的端口用来监听隧道的状态，与端口转发无关。&lt;/p&gt;
 &lt;p&gt;之后你可以在A 上通过6766 端口访问B 了：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@&lt;span class=&quot;number&quot;&gt;127.0&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;0.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p 6766 userb@127.0.0.1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;隧道的自动建立&quot;&gt;&lt;a href=&quot;#隧道的自动建立&quot; class=&quot;headerlink&quot; title=&quot;隧道的自动建立&quot;&gt;&lt;/a&gt;隧道的自动建立&lt;/h2&gt;&lt;p&gt;然而这又有了另外一个问题，如果B 重启隧道就会消失。那么需要有一种手段在B 每次启动时使用&lt;code&gt;autossh&lt;/code&gt; 来建立SSH 隧道。很自然的一个想法就是做成服务，之后会给出在&lt;code&gt;systemd&lt;/code&gt; 下的一种解决方案。&lt;/p&gt;
 &lt;h1 id=&quot;“打洞”&quot;&gt;&lt;a href=&quot;#“打洞”&quot; class=&quot;headerlink&quot; title=&quot;“打洞”&quot;&gt;&lt;/a&gt;“打洞”&lt;/h1&gt;&lt;p&gt;之所以标题这么起，是因为自己觉得这件事情有点类似于UDP 打洞，即通过一台在公网的机器，让两台分别位于各自NAT 之后的机器可以建立SSH 连接。&lt;/p&gt;
 &lt;p&gt;下面演示如何使用SSH 反向隧道，让C 连接到B。&lt;/p&gt;
 &lt;p&gt;首先在&lt;strong&gt;A&lt;/strong&gt; 上编辑&lt;code&gt;sshd&lt;/code&gt; 的配置文件&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;，将&lt;code&gt;GatewayPorts&lt;/code&gt; 开关打开：&lt;/p&gt;
-&lt;figure class=&quot;highlight nginx&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;GatewayPorts&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;yes&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight nginx&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;GatewayPorts&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;yes&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后重启&lt;code&gt;sshd&lt;/code&gt;：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ sudo systemctl restart sshd&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后在&lt;strong&gt;B&lt;/strong&gt; 上对之前用到的&lt;code&gt;autossh&lt;/code&gt; 指令略加修改：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;operator&quot;&gt;-f&lt;/span&gt;M &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:b.localhost:22&#39;&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p 22 &lt;span class=&quot;_&quot;&gt;-f&lt;/span&gt;M 6777 -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:b.localhost:22&#39;&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;之后在&lt;strong&gt;C&lt;/strong&gt; 上利用&lt;strong&gt;A&lt;/strong&gt; 的6766 端口SSH 连接到&lt;strong&gt;B&lt;/strong&gt;：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;C $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;C $ ssh -p 6766 userb@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;至此你已经轻而易举的穿透了两层NAT。&lt;/p&gt;
 &lt;h1 id=&quot;最终的解决方案&quot;&gt;&lt;a href=&quot;#最终的解决方案&quot; class=&quot;headerlink&quot; title=&quot;最终的解决方案&quot;&gt;&lt;/a&gt;最终的解决方案&lt;/h1&gt;&lt;p&gt;整合一下前面提到的，最终的解决方案如下：&lt;/p&gt;
 &lt;p&gt;首先打开&lt;strong&gt;A&lt;/strong&gt; 上&lt;code&gt;sshd&lt;/code&gt; 的&lt;code&gt;GatewayPorts&lt;/code&gt; 开关，并重启&lt;code&gt;sshd&lt;/code&gt;（如有需要）。&lt;/p&gt;
@@ -101,15 +101,15 @@
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ su - autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh-keygen -t &lt;span class=&quot;string&quot;&gt;&#39;rsa&#39;&lt;/span&gt; -C &lt;span class=&quot;string&quot;&gt;&#39;autossh@b.localhost&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh-copy-id usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;注意该&lt;strong&gt;密钥不要设置密码&lt;/strong&gt;，也就是运行&lt;code&gt;ssh-keygen&lt;/code&gt; 指令时尽管一路回车，不要输入额外的字符。&lt;/p&gt;
 &lt;p&gt;然后在&lt;strong&gt;B&lt;/strong&gt; 上创建以&lt;em&gt;autossh&lt;/em&gt; 用户权限调用&lt;code&gt;autossh&lt;/code&gt; 的service 文件。将下面文本写入到文件&lt;code&gt;/lib/systemd/system/autossh.service&lt;/code&gt;，并设置权限为644：&lt;/p&gt;
-&lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;[Unit]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;Description=&lt;span class=&quot;value&quot;&gt;Auto SSH Tunnel&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;After=&lt;span class=&quot;value&quot;&gt;network.target&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Service]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;User=&lt;span class=&quot;value&quot;&gt;autossh&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;Type=&lt;span class=&quot;value&quot;&gt;simple&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;ExecStart=&lt;span class=&quot;value&quot;&gt;/bin/autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; -fM &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:b.localhost:22&#39;&lt;/span&gt; usera@a.site -i /home/autossh/.ssh/id_rsa&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;ExecReload=&lt;span class=&quot;value&quot;&gt;/bin/kill -HUP &lt;span class=&quot;variable&quot;&gt;$MAINPID&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;KillMode=&lt;span class=&quot;value&quot;&gt;process&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;Restart=&lt;span class=&quot;value&quot;&gt;always&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Install]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;setting&quot;&gt;WantedBy=&lt;span class=&quot;value&quot;&gt;multi-user.target&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;[Unit]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Description&lt;/span&gt;=Auto SSH Tunnel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;After&lt;/span&gt;=network.target&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Service]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;User&lt;/span&gt;=autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Type&lt;/span&gt;=simple&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;ExecStart&lt;/span&gt;=/bin/autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; -fM &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:b.localhost:22&#39;&lt;/span&gt; usera@a.site -i /home/autossh/.ssh/id_rsa&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;ExecReload&lt;/span&gt;=/bin/kill -HUP &lt;span class=&quot;variable&quot;&gt;$MAINPID&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;KillMode&lt;/span&gt;=process&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Restart&lt;/span&gt;=always&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Install]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;WantedBy&lt;/span&gt;=multi-user.target&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;在&lt;strong&gt;B&lt;/strong&gt; 上设置该服务自动启动：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ sudo systemctl &lt;span class=&quot;built_in&quot;&gt;enable&lt;/span&gt; autossh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;如果你愿意，在这之后可以立刻启动它：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ sudo systemctl start autossh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后你可以在&lt;strong&gt;A&lt;/strong&gt; 上使用这条反向隧道穿透B 所在的NAT SSH 连接到B：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@&lt;span class=&quot;number&quot;&gt;127.0&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;0.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p 6766 userb@127.0.0.1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;或者是在&lt;strong&gt;C&lt;/strong&gt; 上直接穿透两层NAT SSH 连接到B：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;C $ ssh -p &lt;span class=&quot;number&quot;&gt;6766&lt;/span&gt; userb@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;C $ ssh -p 6766 userb@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 </content>
     
     <summary type="html">
@@ -161,11 +161,11 @@
       <category term="技术" scheme="https://arondight.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="SSH" scheme="https://arondight.github.io/tags/SSH/"/>
+      <category term="运维" scheme="https://arondight.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
     
       <category term="内网穿透" scheme="https://arondight.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     
-      <category term="运维" scheme="https://arondight.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
+      <category term="SSH" scheme="https://arondight.github.io/tags/SSH/"/>
     
       <category term="隧道" scheme="https://arondight.github.io/tags/%E9%9A%A7%E9%81%93/"/>
     
@@ -176,9 +176,9 @@
     <link href="https://arondight.github.io/2016/02/08/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/"/>
     <id>https://arondight.github.io/2016/02/08/新年快乐/</id>
     <published>2016-02-07T16:00:00.000Z</published>
-    <updated>2016-02-19T15:07:03.120Z</updated>
+    <updated>2016-02-28T10:12:33.343Z</updated>
     
-    <content type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;shebang&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cat &amp;lt;&amp;lt;&lt;span class=&quot;string&quot;&gt;&#39;By_Arondight&#39;&lt;/span&gt; | env gcc -xc -o .\ - - \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;/dev/null &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;&amp;gt;&amp;amp;&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; &amp;amp;&amp;amp; ./.\ - &amp;amp;&amp;amp; env rm .\ -&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;char _[]=&lt;span class=&quot;string&quot;&gt;&quot;\xe6\x96\xb0\xe5\xb9\xb4\xe5\xbf\xab\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\xe4\xb9\x90\xef\xbc\x81\x0a&quot;&lt;/span&gt;;____(___)&amp;lt;%putchar&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;((___++)[_])&amp;amp;&amp;amp;____(___);_&lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;);%&amp;gt;main()&amp;lt;%long&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;__=____;*(&amp;amp;__+&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)=__;__asm__(&lt;span class=&quot;string&quot;&gt;&quot;\x6d\x6f\x76\x6c\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\x20\x24\x30\x2c\x25\x65\x64\x69\x0a\x09&quot;&lt;/span&gt;);%&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;By_Arondight&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    <content type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cat &amp;lt;&amp;lt;&lt;span class=&quot;string&quot;&gt;&#39;By_Arondight&#39;&lt;/span&gt; | env gcc -xc -o .\ - - \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;/dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&amp;amp; ./.\ - &amp;amp;&amp;amp; env rm .\ -&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;char _[]=&lt;span class=&quot;string&quot;&gt;&quot;\xe6\x96\xb0\xe5\xb9\xb4\xe5\xbf\xab\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\xe4\xb9\x90\xef\xbc\x81\x0a&quot;&lt;/span&gt;;____(___)&amp;lt;%putchar&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;((___++)[_])&amp;amp;&amp;amp;____(___);_&lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt;(0);%&amp;gt;main()&amp;lt;%long&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;__=____;*(&amp;amp;__+2)=__;__asm__(&lt;span class=&quot;string&quot;&gt;&quot;\x6d\x6f\x76\x6c\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\x20\x24\x30\x2c\x25\x65\x64\x69\x0a\x09&quot;&lt;/span&gt;);%&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;By_Arondight&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;惟愿可以遇到美好的人和事。&lt;/p&gt;
 </content>
     
@@ -191,17 +191,17 @@
       <category term="日常" scheme="https://arondight.github.io/categories/%E6%97%A5%E5%B8%B8/"/>
     
     
+      <category term="新年" scheme="https://arondight.github.io/tags/%E6%96%B0%E5%B9%B4/"/>
+    
       <category term="C" scheme="https://arondight.github.io/tags/C/"/>
     
       <category term="Shell" scheme="https://arondight.github.io/tags/Shell/"/>
     
-      <category term="新年" scheme="https://arondight.github.io/tags/%E6%96%B0%E5%B9%B4/"/>
-    
-      <category term="栈帧" scheme="https://arondight.github.io/tags/%E6%A0%88%E5%B8%A7/"/>
-    
       <category term="汇编" scheme="https://arondight.github.io/tags/%E6%B1%87%E7%BC%96/"/>
     
       <category term="溢出" scheme="https://arondight.github.io/tags/%E6%BA%A2%E5%87%BA/"/>
+    
+      <category term="栈帧" scheme="https://arondight.github.io/tags/%E6%A0%88%E5%B8%A7/"/>
     
   </entry>
   
@@ -210,7 +210,7 @@
     <link href="https://arondight.github.io/2016/01/15/%E5%8F%AF%E8%83%BD%E8%A6%81%E6%8D%A2%E5%B7%A5%E4%BD%9C%E4%BA%86/"/>
     <id>https://arondight.github.io/2016/01/15/可能要换工作了/</id>
     <published>2016-01-15T12:27:51.000Z</published>
-    <updated>2016-02-19T15:07:23.527Z</updated>
+    <updated>2016-02-28T10:12:33.327Z</updated>
     
     <content type="html">&lt;p&gt;昨天和公司提的离职，本来想干满一年再换方向的，后来还是鼓足勇气决定试一下，最后也总算拿到了一个方向满意的offer 吧。&lt;/p&gt;
 &lt;p&gt;最有吸引力的应该是Idea，通过牺牲带宽的代价把一个丢包很严重的网络稳定性提升到接近专线的级别，感觉很有去实现的价值。自己需要做设备的控制中心，完成设备的认证、管理和配置的分发。参加工作的5 个月里，我一直想在工作中从零完全由自己去实现一个软件的，感觉蛮幸运，可以任凭自己发挥想象力去实现感兴趣的东西。事实上觉得现在自己还是不足以去完成这项工作的，不过如果去做一份足以完全胜任的工作，那么工作也就失去了一半的意义了嘛。&lt;/p&gt;
@@ -238,7 +238,7 @@
     <link href="https://arondight.github.io/2016/01/10/%E8%BD%AF%E4%BB%B6%E5%92%8C%E4%B8%96%E7%95%8C%EF%BC%8C%E6%84%9A%E8%80%85%E7%9A%84%E4%B8%AD%E4%BA%8C%E4%B9%8B%E8%AF%AD/"/>
     <id>https://arondight.github.io/2016/01/10/软件和世界，愚者的中二之语/</id>
     <published>2016-01-10T11:24:11.000Z</published>
-    <updated>2016-02-21T16:22:36.970Z</updated>
+    <updated>2016-02-28T10:12:33.380Z</updated>
     
     <content type="html">&lt;p&gt;写这篇文章的现在心情有点糟，突然地被要求周末要去公司排练舞蹈，以后半个月也被不讲理地安排下班后加班排练，感觉自己完全把握不住自己的生活——作为一个程序员来说。&lt;/p&gt;
 &lt;p&gt;从毕业到现在大约已经工作5 个月了，老实说，并没有什么令人激动的事情发生。虽然写的一部分代码也可以说正在被很多很多人使用着，然而我觉得这并没有让他们的生活发生什么变化。周遭的生活被工作夺走了，但是心中的期待并没有得到回应，虽然这么说有一点点不讲理，但是内心还是有一点失落的。&lt;/p&gt;
@@ -272,9 +272,9 @@
       <category term="日常" scheme="https://arondight.github.io/categories/%E6%97%A5%E5%B8%B8/"/>
     
     
-      <category term="中二" scheme="https://arondight.github.io/tags/%E4%B8%AD%E4%BA%8C/"/>
-    
       <category term="随笔" scheme="https://arondight.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="中二" scheme="https://arondight.github.io/tags/%E4%B8%AD%E4%BA%8C/"/>
     
   </entry>
   
@@ -283,7 +283,7 @@
     <link href="https://arondight.github.io/2016/01/03/%E9%9A%8F%E4%BE%BF%E5%86%99%E4%B8%80%E7%82%B9%E4%B8%9C%E8%A5%BF/"/>
     <id>https://arondight.github.io/2016/01/03/随便写一点东西/</id>
     <published>2016-01-03T07:34:18.000Z</published>
-    <updated>2016-02-18T08:54:02.437Z</updated>
+    <updated>2016-02-28T10:12:33.397Z</updated>
     
     <content type="html">&lt;p&gt;下午慢慢折腾了一下Hexo，然后成果就是这个博客。老实说我也不太清楚以后究竟在这上面会写点什么，多半会是所处的日常吧。&lt;/p&gt;
 &lt;p&gt;折腾完大约是下午接近4 点的样子，足足搞了快5 个小时。透过窄窄的窗子所看到的已经是很惨淡的阳光了。回过神来今天已经是公历新年后的第3 天了，或许因为最近1 个半月想了很多的事情，不知不觉已经将一年最后的时间消耗殆尽，不难过也不开心。&lt;/p&gt;

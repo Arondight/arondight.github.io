@@ -25,7 +25,7 @@
 
 机器代号
 机">
-<meta property="og:updated_time" content="2016-02-19T15:07:53.480Z">
+<meta property="og:updated_time" content="2016-03-01T14:23:31.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用SSH反向隧道进行内网穿透">
 <meta name="twitter:description" content="对应的情况这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。
@@ -43,17 +43,17 @@
     <link rel="icon" href="/img/avatar.jpg">
   
   
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
   
   
       <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
-      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
   <script>
       var yiliaConfig = {
@@ -64,9 +64,16 @@
           isArchive: false,
           isTag: false,
           isCategory: false,
-          open_in_new: false
+          open_in_new: false,
       }
   </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
   
       <script>
           var _hmt = _hmt || [];
@@ -86,11 +93,8 @@
 <div class="intrude-less">
     <header id="header" class="inner">
         <a href="/" class="profilepic">
-            
-            <img lazy-src="/img/avatar.jpg" class="js-avatar">
-            
+            <img src="/img/avatar.jpg" class="animated zoomIn">
         </a>
-
         <hgroup>
           <h1 class="header-author"><a href="/">Arondight</a></h1>
         </hgroup>
@@ -200,6 +204,8 @@
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.targetlocked.xyz">Love live!</a>
                     
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog.menci.moe">Menci</a>
+                    
                       <a target="_blank" class="main-nav-link switch-friends-link" href="https://shyling.com">Shy泠的博客</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.supvesonico.moe">Sonico&#39;s Home</a>
@@ -209,6 +215,8 @@
                       <a target="_blank" class="main-nav-link switch-friends-link" href="http://etula.ga">Мвудаг/Этура Яннъ</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="https://alleysakura.com">蔓舞寻樱的博客</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://readingsteiner.github.io">无毁的湖光</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog-netarmy.rhcloud.com">中土國民會全球資訊網</a>
                     
@@ -220,7 +228,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">平凡的愚者，无梦的旅人。</div>
+                    <div id="js-aboutme">他即将迎来一个夹杂着沉淀物的夏天</div>
                 </section>
                 
             </div>
@@ -237,9 +245,7 @@
     <div class="intrude-less">
         <header id="header" class="inner">
             <a href="/" class="profilepic">
-                
-                    <img lazy-src="/img/avatar.jpg" class="js-avatar">
-                
+                <img src="/img/avatar.jpg" class="animated zoomIn">
             </a>
             <hgroup>
               <h1 class="header-author"><a href="/" title="回到主页">Arondight</a></h1>
@@ -368,29 +374,29 @@
 </blockquote>
 <h1 id="SSH-反向隧道"><a href="#SSH-反向隧道" class="headerlink" title="SSH 反向隧道"></a>SSH 反向隧道</h1><p>这种手段实质上是由B 向A 主动地建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上，只要这条隧道不关闭，这个转发就是有效的。有了这个端口转发，只需要访问A 的6766 端口反向连接B 即可。</p>
 <p>首先在<strong>B</strong> 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ ssh -p <span class="number">22</span> -qngfNTR <span class="number">6766</span>:b.localhost:<span class="number">22</span> usera@a.site</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ ssh -p 22 -qngfNTR 6766:b.localhost:22 usera@a.site</span><br></pre></td></tr></table></figure>
 <p>然后在<strong>A</strong> 上利用6766 端口反向SSH 到B：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p <span class="number">6766</span> userb@<span class="number">127.0</span>.<span class="number">0.1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p 6766 userb@127.0.0.1</span><br></pre></td></tr></table></figure>
 <p>要做的事情其实就是这么简单。</p>
 <h1 id="隧道的维持"><a href="#隧道的维持" class="headerlink" title="隧道的维持"></a>隧道的维持</h1><h2 id="稳定性维持"><a href="#稳定性维持" class="headerlink" title="稳定性维持"></a>稳定性维持</h2><p>然而不幸的是SSH 连接是会超时关闭的，如果连接关闭，隧道无法维持，那么A 就无法利用反向隧道穿透B 所在的NAT 了，为此我们需要一种方案来提供一条稳定的SSH 反向隧道。</p>
 <p>一个最简单的方法就是<code>autossh</code>，这个软件会在超时之后自动重新建立SSH 隧道，这样就解决了隧道的稳定性问题，如果你使用<a href="https://www.archlinux.org" target="_blank" rel="external">Arch Linux</a>，你可以这样获得它：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S autossh</span><br></pre></td></tr></table></figure>
 <p>下面在<strong>B</strong> 上做之前类似的事情，不同的是该隧道会由<code>autossh</code> 来维持：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ autossh -p <span class="number">22</span> <span class="operator">-f</span>M <span class="number">6777</span> -NR <span class="number">6766</span>:b.localhost:<span class="number">22</span> usera@a.site</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ autossh -p 22 <span class="_">-f</span>M 6777 -NR 6766:b.localhost:22 usera@a.site</span><br></pre></td></tr></table></figure>
 <p><code>-M</code> 参数指定的端口用来监听隧道的状态，与端口转发无关。</p>
 <p>之后你可以在A 上通过6766 端口访问B 了：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p <span class="number">6766</span> userb@<span class="number">127.0</span>.<span class="number">0.1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p 6766 userb@127.0.0.1</span><br></pre></td></tr></table></figure>
 <h2 id="隧道的自动建立"><a href="#隧道的自动建立" class="headerlink" title="隧道的自动建立"></a>隧道的自动建立</h2><p>然而这又有了另外一个问题，如果B 重启隧道就会消失。那么需要有一种手段在B 每次启动时使用<code>autossh</code> 来建立SSH 隧道。很自然的一个想法就是做成服务，之后会给出在<code>systemd</code> 下的一种解决方案。</p>
 <h1 id="“打洞”"><a href="#“打洞”" class="headerlink" title="“打洞”"></a>“打洞”</h1><p>之所以标题这么起，是因为自己觉得这件事情有点类似于UDP 打洞，即通过一台在公网的机器，让两台分别位于各自NAT 之后的机器可以建立SSH 连接。</p>
 <p>下面演示如何使用SSH 反向隧道，让C 连接到B。</p>
 <p>首先在<strong>A</strong> 上编辑<code>sshd</code> 的配置文件<code>/etc/ssh/sshd_config</code>，将<code>GatewayPorts</code> 开关打开：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">GatewayPorts</span> <span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">GatewayPorts</span> <span class="literal">yes</span></span><br></pre></td></tr></table></figure>
 <p>然后重启<code>sshd</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ sudo systemctl restart sshd</span><br></pre></td></tr></table></figure>
 <p>然后在<strong>B</strong> 上对之前用到的<code>autossh</code> 指令略加修改：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ autossh -p <span class="number">22</span> <span class="operator">-f</span>M <span class="number">6777</span> -NR <span class="string">'*:6766:b.localhost:22'</span> usera@a.site</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ autossh -p 22 <span class="_">-f</span>M 6777 -NR <span class="string">'*:6766:b.localhost:22'</span> usera@a.site</span><br></pre></td></tr></table></figure>
 <p>之后在<strong>C</strong> 上利用<strong>A</strong> 的6766 端口SSH 连接到<strong>B</strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C $ ssh -p <span class="number">6766</span> userb@a.site</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C $ ssh -p 6766 userb@a.site</span><br></pre></td></tr></table></figure>
 <p>至此你已经轻而易举的穿透了两层NAT。</p>
 <h1 id="最终的解决方案"><a href="#最终的解决方案" class="headerlink" title="最终的解决方案"></a>最终的解决方案</h1><p>整合一下前面提到的，最终的解决方案如下：</p>
 <p>首先打开<strong>A</strong> 上<code>sshd</code> 的<code>GatewayPorts</code> 开关，并重启<code>sshd</code>（如有需要）。</p>
@@ -400,15 +406,15 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B $ su - autossh</span><br><span class="line">B $ ssh-keygen -t <span class="string">'rsa'</span> -C <span class="string">'autossh@b.localhost'</span></span><br><span class="line">B $ ssh-copy-id usera@a.site</span><br></pre></td></tr></table></figure>
 <p>注意该<strong>密钥不要设置密码</strong>，也就是运行<code>ssh-keygen</code> 指令时尽管一路回车，不要输入额外的字符。</p>
 <p>然后在<strong>B</strong> 上创建以<em>autossh</em> 用户权限调用<code>autossh</code> 的service 文件。将下面文本写入到文件<code>/lib/systemd/system/autossh.service</code>，并设置权限为644：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[Unit]</span></span><br><span class="line"><span class="setting">Description=<span class="value">Auto SSH Tunnel</span></span></span><br><span class="line"><span class="setting">After=<span class="value">network.target</span></span></span><br><span class="line"><span class="title"></span><br><span class="line">[Service]</span></span><br><span class="line"><span class="setting">User=<span class="value">autossh</span></span></span><br><span class="line"><span class="setting">Type=<span class="value">simple</span></span></span><br><span class="line"><span class="setting">ExecStart=<span class="value">/bin/autossh -p <span class="number">22</span> -fM <span class="number">6777</span> -NR <span class="string">'*:6766:b.localhost:22'</span> usera@a.site -i /home/autossh/.ssh/id_rsa</span></span></span><br><span class="line"><span class="setting">ExecReload=<span class="value">/bin/kill -HUP <span class="variable">$MAINPID</span></span></span></span><br><span class="line"><span class="setting">KillMode=<span class="value">process</span></span></span><br><span class="line"><span class="setting">Restart=<span class="value">always</span></span></span><br><span class="line"><span class="title"></span><br><span class="line">[Install]</span></span><br><span class="line"><span class="setting">WantedBy=<span class="value">multi-user.target</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=Auto SSH Tunnel</span><br><span class="line"><span class="attr">After</span>=network.target</span><br><span class="line"><span class="section"></span><br><span class="line">[Service]</span></span><br><span class="line"><span class="attr">User</span>=autossh</span><br><span class="line"><span class="attr">Type</span>=simple</span><br><span class="line"><span class="attr">ExecStart</span>=/bin/autossh -p <span class="number">22</span> -fM <span class="number">6777</span> -NR <span class="string">'*:6766:b.localhost:22'</span> usera@a.site -i /home/autossh/.ssh/id_rsa</span><br><span class="line"><span class="attr">ExecReload</span>=/bin/kill -HUP <span class="variable">$MAINPID</span></span><br><span class="line"><span class="attr">KillMode</span>=process</span><br><span class="line"><span class="attr">Restart</span>=always</span><br><span class="line"><span class="section"></span><br><span class="line">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br></pre></td></tr></table></figure>
 <p>在<strong>B</strong> 上设置该服务自动启动：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ sudo systemctl <span class="built_in">enable</span> autossh</span><br></pre></td></tr></table></figure>
 <p>如果你愿意，在这之后可以立刻启动它：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ sudo systemctl start autossh</span><br></pre></td></tr></table></figure>
 <p>然后你可以在<strong>A</strong> 上使用这条反向隧道穿透B 所在的NAT SSH 连接到B：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p <span class="number">6766</span> userb@<span class="number">127.0</span>.<span class="number">0.1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p 6766 userb@127.0.0.1</span><br></pre></td></tr></table></figure>
 <p>或者是在<strong>C</strong> 上直接穿透两层NAT SSH 连接到B：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C $ ssh -p <span class="number">6766</span> userb@a.site</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C $ ssh -p 6766 userb@a.site</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -420,7 +426,7 @@
         <p><span>本文标题:</span><a href="/2016/02/17/使用SSH反向隧道进行内网穿透/">使用SSH反向隧道进行内网穿透</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Arondight 的个人博客">Arondight</a></p>
         <p><span>发布时间:</span>2016年02月17日 - 18时09分</p>
-        <p><span>最后更新:</span>2016年02月19日 - 23时07分</p>
+        <p><span>最后更新:</span>2016年03月01日 - 22时23分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/02/17/使用SSH反向隧道进行内网穿透/" title="使用SSH反向隧道进行内网穿透">https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/　　作者: Arondight" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -463,7 +469,7 @@
 
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 <script>
     var valueHide = "隐藏目录";
     var valueShow = "显示目录";
@@ -601,10 +607,10 @@
 </footer>
     </div>
     
-    <script src="/js/GithubRepoWidget.js" type="text/javascript"></script>
+    <script src="/js/GithubRepoWidget.js"></script>
 
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
 
     <style>
         body {

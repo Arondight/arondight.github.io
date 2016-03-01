@@ -584,9 +584,6 @@ a {
   #container .ua {
     display: none !important;
   }
-  #container #header .social li:nth-child(5n) {
-    margin-right: 3px;
-  }
   #container .github-text {
     display: none;
   }
@@ -622,24 +619,26 @@ a {
   position: relative;
   overflow: hidden;
   background: #88acdb;
-  -webkit-transition: all 0.2s ease-in;
   -webkit-box-orient: horizontal;
   -webkit-box-pack: center;
   -webkit-box-align: center;
   text-align: center;
 }
 #header .profilepic img {
-  width: 20%;
-  height: 20%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  opacity: 0;
-  -webkit-transition: all 0.2s ease-in;
-}
-#header .profilepic img.show {
   width: 100%;
   height: 100%;
-  opacity: 1;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-animation-duration: 0.4s;
+  -moz-animation-duration: 0.4s;
+  -ms-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-delay: 0.3s;
+  -moz-animation-delay: 0.3s;
+  -ms-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+  -webkit-animation-duration: 0.4s;
+  -webkit-animation-delay: 0.3s;
 }
 #header .profilepic:hover {
   background: #fff;
@@ -797,8 +796,7 @@ a {
   width: 37px;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  margin-right: 3px;
-  margin-bottom: 6px;
+  margin: 0 2px 6px;
   font: 23px FontAwesome;
   background: #6f7170;
   opacity: 0.58;
@@ -816,10 +814,6 @@ a {
   -moz-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
-}
-#header .header-nav .social li:nth-child(5n),
-#header .header-nav .social li:last-child {
-  margin-right: 0;
 }
 #header .header-nav .social .新浪微博:before {
   content: '\f18a';
@@ -1252,7 +1246,7 @@ body .ui-tooltip {
   background: transparent;
 }
 .body-wrap {
-  margin-bottom: 80px;
+  margin-bottom: 126px;
   overflow: hidden;
 }
 .article {
