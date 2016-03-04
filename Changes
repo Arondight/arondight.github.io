@@ -1,3 +1,8 @@
+v2016-03-04
+  * Use color scheme yilia
+  * Modify post "使用SSH反向隧道进行内网穿透"
+  * Call themes/init.sh at build.sh
+
 v2016-03-01
   * For a coming new summer
   * For sections of my life
