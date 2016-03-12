@@ -1254,7 +1254,6 @@ body .ui-tooltip {
   margin-bottom: 5px;
   position: relative;
   background: rgba(255,255,255,0.45);
-  opacity: 0;
   -webkit-transition: all 0.2s ease-in;
 }
 .article.show {

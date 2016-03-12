@@ -34,12 +34,14 @@
       <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
   
   <link rel="stylesheet" href="/css/style.css">
+  
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
   <script>
       var yiliaConfig = {
           fancybox: true,
@@ -372,8 +374,6 @@
 </style>
 
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 <script>
     var valueHide = "隐藏目录";
     var valueShow = "显示目录";
@@ -447,7 +447,6 @@
     </div>
 
     <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/02/17/使用SSH反向隧道进行内网穿透/">使用SSH反向隧道进行内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/08/新年快乐/">新年快乐</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/15/可能要换工作了/">可能要换工作了</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/软件和世界，愚者的中二之语/">软件和世界，愚者的中二之语</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/随便写一点东西/">随便写一点东西</a></li></ul>
-    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
         $(".post-list-item a").attr("target","_blank");
@@ -513,8 +512,7 @@
     
     <script src="/js/GithubRepoWidget.js"></script>
 
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
 
 
 <!-- Google Analytics -->
