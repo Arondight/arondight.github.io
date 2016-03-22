@@ -150,6 +150,7 @@ friends:
   Menci: https://blog.menci.moe
   Shy泠的博客: https://shyling.com
   Sonico's Home: http://blog.supvesonico.moe
+  xw_y_am's blog: http://web.xwyam.info/blog
   Yanhao's Blog: http://www.yanhao.site
   Мвудаг/Этура Яннъ: http://etula.ga
   蔓舞寻樱的博客: https://alleysakura.com
@@ -202,4 +203,15 @@ visit_counter:
 # GitHub Repo Widget
 # https://github.com/hustcc/GitHub-Repo-Widget.js
 github_widget: true
+
+# Progress Bar | 页面加载进度条
+# Demo: http://github.hubspot.com/pace/docs/welcome/
+# type: barber-shop|big-counter|bounce|center-atom|center-circle|
+#       center-radar|center-simple|corner-indicator|flash|flat-top|
+#       loading-bar|mac-osx|minimal
+# color: black|blue|green|orange|pink|purple|red|silver|white|yellow|
+progressBar:
+  on: true
+  type: "minimal"  # Keep Quotes | 保留引号避免出错
+  color: green
 
