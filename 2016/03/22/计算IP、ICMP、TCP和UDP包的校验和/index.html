@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  
+  <title>计算IP、ICMP、TCP和UDP包的校验和 | 河 的 第 三 条 岸</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="校验和算法校验和的计算方法在文档RFC 1071 中有如下说明：
+
+(1)  Adjacent octets to be checksummed are paired to form 16-bit     integers, and the 1’s complement sum of these 16-bit integers is     formed.
+(2)  To generate a c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算IP、ICMP、TCP和UDP包的校验和">
+<meta property="og:url" content="https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/index.html">
+<meta property="og:site_name" content="河 的 第 三 条 岸">
+<meta property="og:description" content="校验和算法校验和的计算方法在文档RFC 1071 中有如下说明：
+
+(1)  Adjacent octets to be checksummed are paired to form 16-bit     integers, and the 1’s complement sum of these 16-bit integers is     formed.
+(2)  To generate a c">
+<meta property="og:updated_time" content="2016-03-22T15:21:02.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算IP、ICMP、TCP和UDP包的校验和">
+<meta name="twitter:description" content="校验和算法校验和的计算方法在文档RFC 1071 中有如下说明：
+
+(1)  Adjacent octets to be checksummed are paired to form 16-bit     integers, and the 1’s complement sum of these 16-bit integers is     formed.
+(2)  To generate a c">
+  
+    <link rel="alternative" href="/atom.xml" title="河 的 第 三 条 岸" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/avatar.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+      <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+      <script>
+          var _hmt = _hmt || [];
+          (function() {
+              var hm = document.createElement("script");
+              hm.src = "//hm.baidu.com/hm.js?55d7496b74b59fcaa2a67bd11b36a7b6";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+          })();
+      </script>
+  
+
+  
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/green/pace-theme-minimal.css" rel="stylesheet">
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Arondight</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">A Blog About Me</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives">博文</a></li>
+                        
+                            <li><a href="/categories/日常">日常</a></li>
+                        
+                            <li><a href="/categories/技术">技术</a></li>
+                        
+                            <li><a href="/About">关于</a></li>
+                        
+                            <li><a href="/categories/节">节</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/Arondight" title="GitHub"></a></li>
+                            
+                                <li id="虾米音乐"><a class="虾米音乐" target="_blank" href="http://www.xiami.com/u/6110365" title="虾米音乐"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:mail@arondight.me" title="Email"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/ICMP/" style="font-size: 10px;">ICMP</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/中二/" style="font-size: 10px;">中二</a> <a href="/tags/内网穿透/" style="font-size: 10px;">内网穿透</a> <a href="/tags/历物语/" style="font-size: 10px;">历物语</a> <a href="/tags/开始/" style="font-size: 10px;">开始</a> <a href="/tags/新年/" style="font-size: 10px;">新年</a> <a href="/tags/日常/" style="font-size: 10px;">日常</a> <a href="/tags/栈帧/" style="font-size: 10px;">栈帧</a> <a href="/tags/校验和/" style="font-size: 10px;">校验和</a> <a href="/tags/汇编/" style="font-size: 10px;">汇编</a> <a href="/tags/溢出/" style="font-size: 10px;">溢出</a> <a href="/tags/物语系列/" style="font-size: 10px;">物语系列</a> <a href="/tags/网络协议/" style="font-size: 10px;">网络协议</a> <a href="/tags/西尾维新/" style="font-size: 10px;">西尾维新</a> <a href="/tags/轻小说/" style="font-size: 10px;">轻小说</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a> <a href="/tags/隧道/" style="font-size: 10px;">隧道</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://isliberty.me">3890929</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://coolrc.top">coolrc&#39;s blog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.farkasity.me">Farkasity</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.winkidney.com">GlassGear</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.ishell.me">Kissbug8720&#39;s Blog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.targetlocked.xyz">Love live!</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog.menci.moe">Menci</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://shyling.com">Shy泠的博客</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.supvesonico.moe">Sonico&#39;s Home</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://web.xwyam.info/blog">xw_y_am&#39;s blog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.yanhao.site">Yanhao&#39;s Blog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://etula.ga">Мвудаг/Этура Яннъ</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://alleysakura.com">蔓舞寻樱的博客</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://readingsteiner.github.io">无毁的湖光</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog-netarmy.rhcloud.com">中土國民會全球資訊網</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">他即将迎来一个夹杂着沉淀物的夏天</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Arondight</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Arondight</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">A Blog About Me</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives">博文</a></li>
+                
+                    <li><a href="/categories/日常">日常</a></li>
+                
+                    <li><a href="/categories/技术">技术</a></li>
+                
+                    <li><a href="/About">关于</a></li>
+                
+                    <li><a href="/categories/节">节</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/Arondight" title="GitHub"></a></li>
+                            
+                                <li id="虾米音乐"><a class="虾米音乐" target="_blank" href="http://www.xiami.com/u/6110365" title="虾米音乐"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:mail@arondight.me" title="Email"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-计算IP、ICMP、TCP和UDP包的校验和" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/" class="article-date">
+      <time datetime="2016-03-22T12:06:40.000Z" itemprop="datePublished">2016-03-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      计算IP、ICMP、TCP和UDP包的校验和
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICMP/">ICMP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IP/">IP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/">TCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UDP/">UDP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/校验和/">校验和</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络协议/">网络协议</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="校验和算法"><a href="#校验和算法" class="headerlink" title="校验和算法"></a>校验和算法</h1><p>校验和的计算方法在文档<a href="https://tools.ietf.org/html/rfc1071" target="_blank" rel="external">RFC 1071</a> 中有如下说明：</p>
+<blockquote>
+<p>(1)  Adjacent octets to be checksummed are paired to form 16-bit<br>     integers, and the 1’s complement sum of these 16-bit integers is<br>     formed.</p>
+<p>(2)  To generate a checksum, the checksum field itself is cleared,<br>     the 16-bit 1’s complement sum is computed over the octets<br>     concerned, and the 1’s complement of this sum is placed in the<br>     checksum field.</p>
+</blockquote>
+<a id="more"></a>
+<p>即首先将校验和字段清零，将待求和数据调整为偶数字节（如为奇数字节则最后一个字节扩展为字）。然后用反码相加法（进位加到低位上）、以字为单位累加待求和数据。最后将累加结果取反并截低16 位作为校验和。</p>
+<blockquote>
+<p>之所以使用反码相加法，是为了让计算结果和网络序或主机序无关。</p>
+</blockquote>
+<p>根据这个规则，计算校验和的的C 语言函数可以做如下实现。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint16_t</span></span><br><span class="line">GetChecksum (<span class="keyword">const</span> <span class="keyword">void</span> * <span class="keyword">const</span> addr, <span class="keyword">const</span> <span class="keyword">size_t</span> bytes)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">uint16_t</span> *word;</span><br><span class="line">  <span class="keyword">uint32_t</span> sum;</span><br><span class="line">  <span class="keyword">uint16_t</span> checksum;</span><br><span class="line">  <span class="keyword">size_t</span> nleft;</span><br><span class="line"></span><br><span class="line">  assert (addr);</span><br><span class="line">  assert (bytes &gt; <span class="number">8</span> - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  word = (<span class="keyword">const</span> <span class="keyword">uint16_t</span> *)addr;</span><br><span class="line">  nleft = bytes;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 使用32 位累加器，顺序累加16 位数据，进位保存在高16 位 */</span></span><br><span class="line">  <span class="keyword">for</span> (sum = <span class="number">0</span>; nleft &gt; <span class="number">1</span>; nleft -=<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      sum += *word;</span><br><span class="line">      ++word;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 如果总字节为奇数则处理最后一个字节 */</span></span><br><span class="line">  sum += nleft ? *(<span class="keyword">uint8_t</span> *)word : <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 将进位加到低16 位，并将本次计算产生的进位再次加到低16 位 */</span></span><br><span class="line">  sum = (sum &gt;&gt; <span class="number">16</span>) + (sum &amp; <span class="number">0xffff</span>);</span><br><span class="line">  sum += (sum &gt;&gt; <span class="number">16</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 结果取反并截低16 位为校验和 */</span></span><br><span class="line">  <span class="keyword">return</span> checksum = ~sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面会使用这个校验和计算函数分别计算IP、ICMP、TCP和UDP 包的校验和。</p>
+<h1 id="IP-包校验和的计算"><a href="#IP-包校验和的计算" class="headerlink" title="IP 包校验和的计算"></a>IP 包校验和的计算</h1><p>IP 包校验和的计算范围在<a href="https://tools.ietf.org/html/rfc792" target="_blank" rel="external">RFC 791</a> 中有如下说明：</p>
+<blockquote>
+<p>   The checksum field is the 16 bit one’s complement of the one’s<br>   complement sum of all 16 bit words in the header.  For purposes of<br>   computing the checksum, the value of the checksum field is zero.</p>
+</blockquote>
+<p>即IP 包的校验和只计算包头。</p>
+<p>根据描述，IP 包的校验和可用C 语言做如下计算。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> iphdr *ipheader;</span><br><span class="line"></span><br><span class="line">ipheader = (<span class="keyword">struct</span> iphdr *)packet;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 填充ipheader... */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 计算该IP 包校验和 */</span></span><br><span class="line">ipheader-&gt;check = <span class="number">0</span>;</span><br><span class="line">ipheader-&gt;check = GetChecksum (ipheader, <span class="keyword">sizeof</span> (<span class="keyword">struct</span> iphdr));</span><br></pre></td></tr></table></figure>
+<h1 id="ICMP-包校验和的计算"><a href="#ICMP-包校验和的计算" class="headerlink" title="ICMP 包校验和的计算"></a>ICMP 包校验和的计算</h1><p>ICMP 包校验和的计算范围在[RFC 792][ID_RFC_792] 中有如下说明：</p>
+<blockquote>
+<p>   The checksum is the 16-bit ones’s complement of the one’s<br>   complement sum of the ICMP message starting with the ICMP Type.<br>   For computing the checksum , the checksum field should be zero.<br>   This checksum may be replaced in the future.</p>
+</blockquote>
+<p>即ICMP 包的计算范围包括包头和数据。</p>
+<p>根据描述，假设IP 包校验和已经计算完毕，那么其中的ICMP 包校验和可以用C 语言做如下计算。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> icmphdr *icmpheader;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">size_t</span> ipheaderSize = <span class="keyword">sizeof</span> (<span class="keyword">struct</span> iphdr);</span><br><span class="line"></span><br><span class="line">icmpheader = (<span class="keyword">struct</span> icmphdr *)(packet + ipheaderSize);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 填充icmpheader... */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 计算该ICMP 包校验和 */</span></span><br><span class="line">icmpheader-&gt;checksum = <span class="number">0</span>;</span><br><span class="line">icmpheader-&gt;checksum = GetChecksum (icmpheader, packetSize - ipheaderSize);</span><br></pre></td></tr></table></figure>
+<h1 id="TCP-和UDP-包校验和的计算"><a href="#TCP-和UDP-包校验和的计算" class="headerlink" title="TCP 和UDP 包校验和的计算"></a>TCP 和UDP 包校验和的计算</h1><h2 id="伪首部"><a href="#伪首部" class="headerlink" title="伪首部"></a>伪首部</h2><p>TCP 和UDP 校验和的计算要稍微麻烦一些，因为需要引入一个伪首部（pseudo header），伪首部的结构在<a href="https://tools.ietf.org/html/rfc768" target="_blank" rel="external">RFC 768</a> 中有如下说明：</p>
+<blockquote>
+<p> The pseudo  header  conceptually prefixed to the UDP header contains the<br> source  address,  the destination  address,  the protocol,  and the  UDP<br> length.   This information gives protection against misrouted datagrams.<br> This checksum procedure is the same as is used in TCP.</p>
+<pre><code> 0      7 8     15 16    23 24    31
++--------+--------+--------+--------+
+|          source address           |
++--------+--------+--------+--------+
+|        destination address        |
++--------+--------+--------+--------+
+|  zero  |protocol|   UDP length    |
++--------+--------+--------+--------+
+</code></pre></blockquote>
+<p>可见TCP 和UDP 的伪首部结构完全一致。</p>
+<p>根据描述，伪首部的结构可以用C 语言结构体做如下实现。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> pseudohdr</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">uint32_t</span> src;</span><br><span class="line">  <span class="keyword">uint32_t</span> dst;</span><br><span class="line">  <span class="keyword">uint8_t</span> zero;</span><br><span class="line">  <span class="keyword">uint8_t</span> protocol;</span><br><span class="line">  <span class="keyword">uint16_t</span> len;</span><br><span class="line">&#125; <span class="keyword">pseudohdr_t</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="TCP-包校验和的计算"><a href="#TCP-包校验和的计算" class="headerlink" title="TCP 包校验和的计算"></a>TCP 包校验和的计算</h2><p>TCP 包校验和的计算方法在<a href="https://tools.ietf.org/html/rfc793" target="_blank" rel="external">RFC 793</a> 中有如下说明：</p>
+<blockquote>
+<p> The checksum field is the 16 bit one’s complement of the one’s<br> complement sum of all 16 bit words in the header and text.  If a<br> segment contains an odd number of header and text octets to be<br> checksummed, the last octet is padded on the right with zeros to<br> form a 16 bit word for checksum purposes.  The pad is not<br> transmitted as part of the segment.  While computing the checksum,<br> the checksum field itself is replaced with zeros.</p>
+<p>   The checksum also covers a 96 bit pseudo header conceptually</p>
+</blockquote>
+<p>可见，算法和之前提到的校验和算法完全一致，根据描述校验和的计算需要包含伪首部和整个TCP 包。</p>
+<p>根据描述，假设IP 包校验和已经计算完毕，那么其中的TCP 包校验和可以用C 语言做如下计算。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *tcpsumblock;          <span class="comment">/* 伪首部 + TCP 头 + 数据 */</span></span><br><span class="line"><span class="keyword">struct</span> iphdr *ipheader;</span><br><span class="line"><span class="keyword">struct</span> tcphdr *tcpheader;</span><br><span class="line"><span class="keyword">pseudohdr_t</span> pseudoheader;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">size_t</span> ipheaderSize = (<span class="keyword">struct</span> iphdr *)packet;</span><br><span class="line"></span><br><span class="line">ipheader = (<span class="keyword">struct</span> iphdr *)packet;</span><br><span class="line">tcpheader = (<span class="keyword">struct</span> tcphdr *)(packet + ipheaderSize);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 填充tcpheader... */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 填充pseudoheader */</span></span><br><span class="line">pseudoheader.src = ipheader-&gt;saddr;</span><br><span class="line">pseudoheader.dst = ipheader-&gt;daddr;</span><br><span class="line">pseudoheader.zero = <span class="number">0</span>;</span><br><span class="line">pseudoheader.protocol = ipheader-&gt;protocol;</span><br><span class="line">pseudoheader.len = htons (<span class="keyword">sizeof</span> (<span class="keyword">struct</span> tcphdr));</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 填充tcpsumblock */</span></span><br><span class="line">tcpheader-&gt;check = <span class="number">0</span>;</span><br><span class="line">tcpsumblock = (<span class="keyword">char</span> *)<span class="built_in">malloc</span> (packetSize);</span><br><span class="line"><span class="built_in">memcpy</span> (tcpsumblock, &amp;pseudoheader, <span class="keyword">sizeof</span> (<span class="keyword">pseudohdr_t</span>));</span><br><span class="line"><span class="built_in">memcpy</span> (tcpsumblock + <span class="keyword">sizeof</span> (<span class="keyword">pseudohdr_t</span>), packet, packetSize);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 计算TCP 包校验和 */</span></span><br><span class="line">tcpheader-&gt;check =</span><br><span class="line">  GetChecksum (tcpsumblock, <span class="keyword">sizeof</span> (<span class="keyword">pseudohdr_t</span>) + packetSize - ipheaderSize);</span><br><span class="line"></span><br><span class="line"><span class="built_in">free</span> (tcpsumblock);</span><br><span class="line">tcpsumblock = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="UDP-包校验和的计算"><a href="#UDP-包校验和的计算" class="headerlink" title="UDP 包校验和的计算"></a>UDP 包校验和的计算</h2><p>UDP 包校验和的计算方法在<a href="https://tools.ietf.org/html/rfc768" target="_blank" rel="external">RFC 793</a> 中有如下说明：</p>
+<blockquote>
+<p> Checksum is the 16-bit one’s complement of the one’s complement sum of a<br> pseudo header of information from the IP header, the UDP header, and the<br> data,  padded  with zero octets  at the end (if  necessary)  to  make  a<br> multiple of two octets.</p>
+</blockquote>
+<p>所以UDP 包校验和的计算方法和TCP 包如出一辙，同样包含了一个伪首部。</p>
+<p>具体的实现可以参考之前计算TCP 包校验的C 语言实现。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/">计算IP、ICMP、TCP和UDP包的校验和</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Arondight</a></p>
+        <p><span>发布时间:</span>2016-03-22, 20:06:40</p>
+        <p><span>最后更新:</span>2016-03-22, 23:21:02</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/" title="计算IP、ICMP、TCP和UDP包的校验和">https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/　　作者: Arondight" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/03/13/历风/">
+                    历风
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#校验和算法"><span class="toc-number">1.</span> <span class="toc-text">校验和算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IP-包校验和的计算"><span class="toc-number">2.</span> <span class="toc-text">IP 包校验和的计算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ICMP-包校验和的计算"><span class="toc-number">3.</span> <span class="toc-text">ICMP 包校验和的计算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP-和UDP-包校验和的计算"><span class="toc-number">4.</span> <span class="toc-text">TCP 和UDP 包校验和的计算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#伪首部"><span class="toc-number">4.1.</span> <span class="toc-text">伪首部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-包校验和的计算"><span class="toc-number">4.2.</span> <span class="toc-text">TCP 包校验和的计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP-包校验和的计算"><span class="toc-number">4.3.</span> <span class="toc-text">UDP 包校验和的计算</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="计算IP、ICMP、TCP和UDP包的校验和" data-title="计算IP、ICMP、TCP和UDP包的校验和" data-url="https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"arondight"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';
+        ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/03/13/历风/" title="下一篇: 历风">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/">计算IP、ICMP、TCP和UDP包的校验和</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/13/历风/">历风</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/17/使用SSH反向隧道进行内网穿透/">使用SSH反向隧道进行内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/08/新年快乐/">新年快乐</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/软件和世界，愚者的中二之语/">软件和世界，愚者的中二之语</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/随便写一点东西/">随便写一点东西</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Arondight
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-72246506-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+    <script src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

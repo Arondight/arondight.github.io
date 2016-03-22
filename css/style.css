@@ -248,6 +248,7 @@ a {
   -ms-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
   height: 100%;
+  overflow-y: auto;
 }
 #container .left-col .overlay {
   width: 100%;
@@ -334,9 +335,6 @@ a {
     margin: 0;
     padding-top: 10px;
     border: none;
-  }
-  #container .article-more-link a {
-    float: right;
   }
   #container #viewer-box .viewer-box-l {
     font-size: 14px;
@@ -729,7 +727,7 @@ a {
   position: relative;
   width: 100%;
   overflow: hidden;
-  min-height: 500px;
+  min-height: 260px;
   font-size: 14px;
 }
 #header .switch-area .switch-wrap {
@@ -772,6 +770,7 @@ a {
   line-height: 30px;
 }
 #header .switch-part3 .switch-friends-link {
+  display: inline-block;
   margin-right: 9px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -1655,7 +1654,7 @@ li:hover {
   position: fixed;
   border: none;
   left: 220px;
-  top: 382px;
+  top: 385px;
   background: none;
   font-size: 0.9em;
   font-weight: bold;
@@ -1735,7 +1734,7 @@ li:hover {
 }
 .copyright span {
   display: inline-block;
-  margin-right: 1em;
+  width: 5.8em;
   color: #b5b5b5;
   font-weight: bold;
 }
@@ -1746,11 +1745,10 @@ li:hover {
   color: #a3d2a3;
   text-decoration: underline;
 }
-.copyright:hover p .copy-path::after {
-  content: "复制";
+.copyright:hover .fa-clipboard {
+  color: #000;
 }
 .copyright .copy-path {
-  display: inline-block;
   margin-left: 1em;
 }
 .copyright .copy-path:hover {
@@ -2058,6 +2056,8 @@ li:hover {
 .article-entry pre code {
   text-shadow: none;
   padding: 0;
+  background: none;
+  color: #8e908c;
 }
 .article-entry .highlight {
   -webkit-border-radius: 2px;
