@@ -17,7 +17,7 @@
 
 (1)  Adjacent octets to be checksummed are paired to form 16-bit     integers, and the 1’s complement sum of these 16-bit integers is     formed.
 (2)  To generate a c">
-<meta property="og:updated_time" content="2016-03-22T15:21:02.207Z">
+<meta property="og:updated_time" content="2016-03-25T02:21:49.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算IP、ICMP、TCP和UDP包的校验和">
 <meta name="twitter:description" content="校验和算法校验和的计算方法在文档RFC 1071 中有如下说明：
@@ -35,6 +35,10 @@
   
   
       <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/green/pace-theme-minimal.css" rel="stylesheet">
   
   <link rel="stylesheet" href="/css/style.css">
   
@@ -74,11 +78,6 @@
               s.parentNode.insertBefore(hm, s);
           })();
       </script>
-  
-
-  
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/green/pace-theme-minimal.css" rel="stylesheet">
   
 </head>
 <body>
@@ -378,9 +377,10 @@
 <p>可见，算法和之前提到的校验和算法完全一致，根据描述校验和的计算需要包含伪首部和整个TCP 包。</p>
 <p>根据描述，假设IP 包校验和已经计算完毕，那么其中的TCP 包校验和可以用C 语言做如下计算。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *tcpsumblock;          <span class="comment">/* 伪首部 + TCP 头 + 数据 */</span></span><br><span class="line"><span class="keyword">struct</span> iphdr *ipheader;</span><br><span class="line"><span class="keyword">struct</span> tcphdr *tcpheader;</span><br><span class="line"><span class="keyword">pseudohdr_t</span> pseudoheader;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">size_t</span> ipheaderSize = (<span class="keyword">struct</span> iphdr *)packet;</span><br><span class="line"></span><br><span class="line">ipheader = (<span class="keyword">struct</span> iphdr *)packet;</span><br><span class="line">tcpheader = (<span class="keyword">struct</span> tcphdr *)(packet + ipheaderSize);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 填充tcpheader... */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 填充pseudoheader */</span></span><br><span class="line">pseudoheader.src = ipheader-&gt;saddr;</span><br><span class="line">pseudoheader.dst = ipheader-&gt;daddr;</span><br><span class="line">pseudoheader.zero = <span class="number">0</span>;</span><br><span class="line">pseudoheader.protocol = ipheader-&gt;protocol;</span><br><span class="line">pseudoheader.len = htons (<span class="keyword">sizeof</span> (<span class="keyword">struct</span> tcphdr));</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 填充tcpsumblock */</span></span><br><span class="line">tcpheader-&gt;check = <span class="number">0</span>;</span><br><span class="line">tcpsumblock = (<span class="keyword">char</span> *)<span class="built_in">malloc</span> (packetSize);</span><br><span class="line"><span class="built_in">memcpy</span> (tcpsumblock, &amp;pseudoheader, <span class="keyword">sizeof</span> (<span class="keyword">pseudohdr_t</span>));</span><br><span class="line"><span class="built_in">memcpy</span> (tcpsumblock + <span class="keyword">sizeof</span> (<span class="keyword">pseudohdr_t</span>), packet, packetSize);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 计算TCP 包校验和 */</span></span><br><span class="line">tcpheader-&gt;check =</span><br><span class="line">  GetChecksum (tcpsumblock, <span class="keyword">sizeof</span> (<span class="keyword">pseudohdr_t</span>) + packetSize - ipheaderSize);</span><br><span class="line"></span><br><span class="line"><span class="built_in">free</span> (tcpsumblock);</span><br><span class="line">tcpsumblock = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="UDP-包校验和的计算"><a href="#UDP-包校验和的计算" class="headerlink" title="UDP 包校验和的计算"></a>UDP 包校验和的计算</h2><p>UDP 包校验和的计算方法在<a href="https://tools.ietf.org/html/rfc768" target="_blank" rel="external">RFC 793</a> 中有如下说明：</p>
+<h2 id="UDP-包校验和的计算"><a href="#UDP-包校验和的计算" class="headerlink" title="UDP 包校验和的计算"></a>UDP 包校验和的计算</h2><p>UDP 包校验和的计算方法在<a href="https://tools.ietf.org/html/rfc768" target="_blank" rel="external">RFC 768</a> 中有如下说明：</p>
 <blockquote>
 <p> Checksum is the 16-bit one’s complement of the one’s complement sum of a<br> pseudo header of information from the IP header, the UDP header, and the<br> data,  padded  with zero octets  at the end (if  necessary)  to  make  a<br> multiple of two octets.</p>
+<p>The pseudo  header  conceptually prefixed to the UDP header contains the<br>source  address,  the destination  address,  the protocol,  and the  UDP<br>length.   This information gives protection against misrouted datagrams.<br>This checksum procedure is the same as is used in TCP.</p>
 </blockquote>
 <p>所以UDP 包校验和的计算方法和TCP 包如出一辙，同样包含了一个伪首部。</p>
 <p>具体的实现可以参考之前计算TCP 包校验的C 语言实现。</p>
@@ -395,7 +395,7 @@
         <p><span>本文标题:</span><a href="/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/">计算IP、ICMP、TCP和UDP包的校验和</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Arondight</a></p>
         <p><span>发布时间:</span>2016-03-22, 20:06:40</p>
-        <p><span>最后更新:</span>2016-03-22, 23:21:02</p>
+        <p><span>最后更新:</span>2016-03-25, 10:21:49</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/" title="计算IP、ICMP、TCP和UDP包的校验和">https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/　　作者: Arondight" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
