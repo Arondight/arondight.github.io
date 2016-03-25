@@ -213,12 +213,17 @@ TCP 包校验和的计算方法在[RFC 793][ID_RFC_793] 中有如下说明：
 
 ## UDP 包校验和的计算
 
-UDP 包校验和的计算方法在[RFC 793][ID_RFC_768] 中有如下说明：
+UDP 包校验和的计算方法在[RFC 768][ID_RFC_768] 中有如下说明：
 
 >  Checksum is the 16-bit one's complement of the one's complement sum of a
 >  pseudo header of information from the IP header, the UDP header, and the
 >  data,  padded  with zero octets  at the end (if  necessary)  to  make  a
 >  multiple of two octets.
+>
+> The pseudo  header  conceptually prefixed to the UDP header contains the
+> source  address,  the destination  address,  the protocol,  and the  UDP
+> length.   This information gives protection against misrouted datagrams.
+> This checksum procedure is the same as is used in TCP.
 
 所以UDP 包校验和的计算方法和TCP 包如出一辙，同样包含了一个伪首部。
 
