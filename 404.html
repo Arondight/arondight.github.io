@@ -1,8 +1,12 @@
 <!DOCTYPE html>
+<!-- saved from url=(0016)http://etula.ga/ -->
 <html>
 <head>
   <meta charset="utf-8" />
   <title>404 NOT FOUND</title>
+
+  <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+
   <style>
     html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, pre, abbr,
     blockquote, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
@@ -70,7 +74,21 @@
     li {
       list-style: none
     }
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      background-color: #f0f0f0;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+    }
     body {
+      color: #a4a4a4;
+      text-align: center;
+      font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
       margin: 0;
     }
     a {
@@ -78,21 +96,21 @@
       text-decoration: none;
     }
     .container {
-      width: 50%;
-      height: 50%;
+      width: 40%;
+      height:40%;
+      top: 30%;
+      left: 30%;
       position: absolute;
-      top: 40%;
-      left: 40%;
       z-index: 1;
     }
     .dialog .error-code {
-      font-family: Helvetica, Arial, sans-serif;
+      font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: 100;
       color: #a0a0a0;
       font-size: 200px;
     }
     .dialog .error-msg {
-      font-family: Helvetica, Arial, sans-serif;
+      font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: 400;
       font-size: 24px;
       color: #a1a1a1;
@@ -101,7 +119,7 @@
       display: block;
       margin-top: 8px;
       font-size: 12px;
-      color: #a3a3a3;
+      color: #a0a0a0;
     }
     .actions p a {
       color: #65c4df;
@@ -120,7 +138,7 @@
   </style>
 </head>
 
-<body>
+<body id="body">
   <div id="particles-js">
     <div class="container">
       <div class="dialog">
