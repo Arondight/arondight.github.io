@@ -2058,7 +2058,7 @@ li:hover {
   text-shadow: none;
   padding: 0;
   background: none;
-  color: #8e908c;
+  color: #4d4d4c;
 }
 .article-entry .highlight {
   -webkit-border-radius: 2px;
@@ -2826,6 +2826,7 @@ pre .javascript .function {
   width: 80%;
   height: 100%;
   float: left;
+  max-width: 23em;
 }
 #viewer-box .viewer-box-l .viewer-box-wrap {
   margin: 20px 10px 0px 20px;
