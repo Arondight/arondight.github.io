@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-03-25T02:21:49.157Z</updated>
+  <updated>2016-04-02T07:12:33.703Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/03/22/%E8%AE%A1%E7%AE%97IP%E3%80%81ICMP%E3%80%81TCP%E5%92%8CUDP%E5%8C%85%E7%9A%84%E6%A0%A1%E9%AA%8C%E5%92%8C/"/>
     <id>https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/</id>
     <published>2016-03-22T12:06:40.000Z</published>
-    <updated>2016-03-25T02:21:49.157Z</updated>
+    <updated>2016-04-02T07:12:33.703Z</updated>
     
     <content type="html">&lt;h1 id=&quot;校验和算法&quot;&gt;&lt;a href=&quot;#校验和算法&quot; class=&quot;headerlink&quot; title=&quot;校验和算法&quot;&gt;&lt;/a&gt;校验和算法&lt;/h1&gt;&lt;p&gt;校验和的计算方法在文档&lt;a href=&quot;https://tools.ietf.org/html/rfc1071&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RFC 1071&lt;/a&gt; 中有如下说明：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -35,14 +35,14 @@
 &lt;p&gt;根据这个规则，计算校验和的的C 语言函数可以做如下实现。&lt;/p&gt;
 &lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;uint16_t&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;GetChecksum (&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; * &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; addr, &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;size_t&lt;/span&gt; bytes)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;uint16_t&lt;/span&gt; *word;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;uint32_t&lt;/span&gt; sum;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;uint16_t&lt;/span&gt; checksum;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;size_t&lt;/span&gt; nleft;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  assert (addr);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  assert (bytes &amp;gt; &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt; - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  word = (&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;uint16_t&lt;/span&gt; *)addr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  nleft = bytes;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;/* 使用32 位累加器，顺序累加16 位数据，进位保存在高16 位 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (sum = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; nleft &amp;gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; nleft -=&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      sum += *word;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      ++word;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;/* 如果总字节为奇数则处理最后一个字节 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  sum += nleft ? *(&lt;span class=&quot;keyword&quot;&gt;uint8_t&lt;/span&gt; *)word : &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;/* 将进位加到低16 位，并将本次计算产生的进位再次加到低16 位 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  sum = (sum &amp;gt;&amp;gt; &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;) + (sum &amp;amp; &lt;span class=&quot;number&quot;&gt;0xffff&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  sum += (sum &amp;gt;&amp;gt; &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;/* 结果取反并截低16 位为校验和 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; checksum = ~sum;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;下面会使用这个校验和计算函数分别计算IP、ICMP、TCP和UDP 包的校验和。&lt;/p&gt;
-&lt;h1 id=&quot;IP-包校验和的计算&quot;&gt;&lt;a href=&quot;#IP-包校验和的计算&quot; class=&quot;headerlink&quot; title=&quot;IP 包校验和的计算&quot;&gt;&lt;/a&gt;IP 包校验和的计算&lt;/h1&gt;&lt;p&gt;IP 包校验和的计算范围在&lt;a href=&quot;https://tools.ietf.org/html/rfc792&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RFC 791&lt;/a&gt; 中有如下说明：&lt;/p&gt;
+&lt;h1 id=&quot;IP-包校验和的计算&quot;&gt;&lt;a href=&quot;#IP-包校验和的计算&quot; class=&quot;headerlink&quot; title=&quot;IP 包校验和的计算&quot;&gt;&lt;/a&gt;IP 包校验和的计算&lt;/h1&gt;&lt;p&gt;IP 包校验和的计算范围在&lt;a href=&quot;https://tools.ietf.org/html/rfc791&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RFC 791&lt;/a&gt; 中有如下说明：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;   The checksum field is the 16 bit one’s complement of the one’s&lt;br&gt;   complement sum of all 16 bit words in the header.  For purposes of&lt;br&gt;   computing the checksum, the value of the checksum field is zero.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;即IP 包的校验和只计算包头。&lt;/p&gt;
 &lt;p&gt;根据描述，IP 包的校验和可用C 语言做如下计算。&lt;/p&gt;
 &lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;struct&lt;/span&gt; iphdr *ipheader;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ipheader = (&lt;span class=&quot;keyword&quot;&gt;struct&lt;/span&gt; iphdr *)packet;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/* 填充ipheader... */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/* 计算该IP 包校验和 */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ipheader-&amp;gt;check = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ipheader-&amp;gt;check = GetChecksum (ipheader, &lt;span class=&quot;keyword&quot;&gt;sizeof&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;struct&lt;/span&gt; iphdr));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h1 id=&quot;ICMP-包校验和的计算&quot;&gt;&lt;a href=&quot;#ICMP-包校验和的计算&quot; class=&quot;headerlink&quot; title=&quot;ICMP 包校验和的计算&quot;&gt;&lt;/a&gt;ICMP 包校验和的计算&lt;/h1&gt;&lt;p&gt;ICMP 包校验和的计算范围在[RFC 792][ID_RFC_792] 中有如下说明：&lt;/p&gt;
+&lt;h1 id=&quot;ICMP-包校验和的计算&quot;&gt;&lt;a href=&quot;#ICMP-包校验和的计算&quot; class=&quot;headerlink&quot; title=&quot;ICMP 包校验和的计算&quot;&gt;&lt;/a&gt;ICMP 包校验和的计算&lt;/h1&gt;&lt;p&gt;ICMP 包校验和的计算范围在&lt;a href=&quot;https://tools.ietf.org/html/rfc792&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RFC 792&lt;/a&gt; 中有如下说明：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;   The checksum is the 16-bit ones’s complement of the one’s&lt;br&gt;   complement sum of the ICMP message starting with the ICMP Type.&lt;br&gt;   For computing the checksum , the checksum field should be zero.&lt;br&gt;   This checksum may be replaced in the future.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -105,86 +105,6 @@
       <category term="UDP" scheme="https://arondight.github.io/tags/UDP/"/>
     
       <category term="校验和" scheme="https://arondight.github.io/tags/%E6%A0%A1%E9%AA%8C%E5%92%8C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>历风</title>
-    <link href="https://arondight.github.io/2016/03/13/%E5%8E%86%E9%A3%8E/"/>
-    <id>https://arondight.github.io/2016/03/13/历风/</id>
-    <published>2016-03-13T07:11:18.000Z</published>
-    <updated>2016-03-13T07:38:23.669Z</updated>
-    
-    <content type="html">&lt;blockquote&gt;
-&lt;p&gt;八月十四日。&lt;/p&gt;
-&lt;p&gt;要问究竟发生了什么的话，那就是我跟欺诈师本人见面了——也不知道该说是见面，还是应该说撞面。&lt;/p&gt;
-&lt;p&gt;曾经说过不会再来访这个小镇的他，却说什么因为说过“再”这个字，所以就再回来了一次。开什么玩笑，快去死。&lt;/p&gt;
-&lt;p&gt;当时我跟他谈论的主要话题本来是跟另外的专家有关的事情，不过后来还是顺便问了一下。&lt;/p&gt;
-&lt;p&gt;“哼。”&lt;/p&gt;
-&lt;p&gt;他说道：&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;“解读风向的力量，刮起风的力量——我根本就不具备那样的本事。不，这句发言说不定也是骗人的。”&lt;/p&gt;
-&lt;p&gt;“……”&lt;/p&gt;
-&lt;p&gt;真的是说什么也不能信的家伙。&lt;/p&gt;
-&lt;p&gt;大概再怎么问他也是白费力气的吧——正当我这么想的时候。&lt;/p&gt;
-&lt;p&gt;“但是就我来说，解读风向的力量根本就不重要。”&lt;/p&gt;
-&lt;p&gt;他却接着这么说道。&lt;/p&gt;
-&lt;p&gt;“因为在瘟疫之中，最重要的是无风的状态。”&lt;/p&gt;
-&lt;p&gt;“无——无风？”&lt;/p&gt;
-&lt;p&gt;“在引发瘟疫的时候，我认为最重要的就是这一点了啊，阿良良木。”&lt;/p&gt;
-&lt;p&gt;“没有风——吗？”&lt;/p&gt;
-&lt;p&gt;“就是说当某种东西正在流行的时候，其他的东西就不会流行起来——严格来说，应该是就算其他东西流行起来，也不会怎么引人注目吧……所以如果想让自己意图中的东西流行起来，就算不选择目标，也必须选择舞台。”&lt;/p&gt;
-&lt;p&gt;“……”&lt;/p&gt;
-&lt;p&gt;“谣言不过七十五天——那么在那七十五天里就只能放弃创造潮流的想法。具体来说，以这个小镇为例，在春假期间我没有下手。因为当时‘吸血鬼’这个传闻正席卷着整个小镇，完全没有办法对抗那压倒性的NO.1的存在——要问这种压倒性压倒了什么，那就是这种病毒压倒了其他的所有病毒。然后等到那个传闻销声匿迹之后——我的流言就钻进了这个空荡荡的、处于饥饿状态的地方。”&lt;/p&gt;
-&lt;p&gt;听他这么说我才醒悟过来。&lt;/p&gt;
-&lt;p&gt;也就是说正是空白的产生引发了瘟疫——即使不是这样，至少那不也是一个容易发生的条件吗？&lt;/p&gt;
-&lt;p&gt;“怪谈、街谈巷说和都市传说——所谓的流言蜚语，总是会在人心动荡的时候发挥效力。所谓人心动荡，说白了就是丧失了可依靠的存在，也就是缺乏潮流的时代了——阿良良木，被欺诈师锁定为目标的都是一些什么样的人，你就试着思考一下吧。”&lt;/p&gt;
-&lt;p&gt;“试着思考一下什么的……那种事我才不想思考。”&lt;/p&gt;
-&lt;p&gt;“想一想吧。”&lt;/p&gt;
-&lt;p&gt;“别向我提出奇怪的要求啊。唔，这个……当然是有钱人吧？难道不是以富裕人群为目标的吗？”&lt;/p&gt;
-&lt;p&gt;“那只是善人的想法。但是出于满足状态的人是很难上当的——因为在生活上有余力的人，在精神上也保持着余力。所以欺诈师最看中的，就是那些对现状抱有不满、在生活上没有余力的人。”&lt;/p&gt;
-&lt;p&gt;“……所以在这个小镇上，你就把目标锁定为初中女生了吗？”&lt;/p&gt;
-&lt;p&gt;或者——&lt;/p&gt;
-&lt;p&gt;正如过去——他把目标锁定为由于女儿的病而陷入困境的战场原家那样。&lt;/p&gt;
-&lt;p&gt;“说的没错，充满不安的内心是最容易受骗的。因为就算说谎对方也没有仔细分析的余力。”&lt;/p&gt;
-&lt;p&gt;欺诈师毫不愧疚地说道。&lt;/p&gt;
-&lt;p&gt;“你刚才说我通过散播让人际关系恶化的‘符咒’来打下欺诈活动的基础——但是在这一点上，事实却正好相反。正因为人际关系发生了恶化，她们才会对我的‘符咒’趋之若鹜。”&lt;/p&gt;
-&lt;p&gt;无风状态并不等同于无菌状态。&lt;/p&gt;
-&lt;p&gt;反而是潜藏着能引起爆发性瘟疫的病毒——欺诈师说道。&lt;/p&gt;
-&lt;p&gt;“……错的都是受骗的一方——你是这个意思吗？”&lt;/p&gt;
-&lt;p&gt;“被你这样说，我就变得不想说这个了。就姑且说是时代的错吧。如果要讨论‘为什么这样的东西会流行起来？’‘有流行过吗？’这样的混乱状态，就必须先讨论混乱状态之前的空白。”&lt;/p&gt;
-&lt;p&gt;“空白——”&lt;/p&gt;
-&lt;p&gt;“或者也可以说是黑暗。所以我就给你一个忠告，如果有‘莫名其妙的东西’流行起来——记得怀疑时代，怀疑自己的立足点。你必须意识到有危险——意识到这是危险性的状况。因为不管是人为的操纵，还是自然形成的现象——那都是时代被黑暗所笼罩的证明。”&lt;/p&gt;
-&lt;p&gt;“被黑暗——所笼罩。”&lt;/p&gt;
-&lt;p&gt;“掀起潮流的容易程度，就跟掀起暴动的容易程度差不多——因为没有稳固的立足点，所以人就会随波逐流。当然，那样的时代，对我这样的欺诈师来说反而更容易谋生。”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;——《历物语》，第五话 历风&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;八月十四日。&lt;/p&gt;
-&lt;p&gt;要问究竟发生了什么的话，那就是我跟欺诈师本人见面了——也不知道该说是见面，还是应该说撞面。&lt;/p&gt;
-&lt;p&gt;曾经说过不会再来访这个小镇的他，却说什么因为说过“再”这个字，所以就再回来了一次。开什么玩笑，快去死。&lt;/p&gt;
-&lt;p&gt;当时我跟他谈论的主要话题本来是跟另外的专家有关的事情，不过后来还是顺便问了一下。&lt;/p&gt;
-&lt;p&gt;“哼。”&lt;/p&gt;
-&lt;p&gt;他说道：&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="节" scheme="https://arondight.github.io/categories/%E8%8A%82/"/>
-    
-    
-      <category term="日常" scheme="https://arondight.github.io/tags/%E6%97%A5%E5%B8%B8/"/>
-    
-      <category term="轻小说" scheme="https://arondight.github.io/tags/%E8%BD%BB%E5%B0%8F%E8%AF%B4/"/>
-    
-      <category term="物语系列" scheme="https://arondight.github.io/tags/%E7%89%A9%E8%AF%AD%E7%B3%BB%E5%88%97/"/>
-    
-      <category term="历物语" scheme="https://arondight.github.io/tags/%E5%8E%86%E7%89%A9%E8%AF%AD/"/>
-    
-      <category term="西尾维新" scheme="https://arondight.github.io/tags/%E8%A5%BF%E5%B0%BE%E7%BB%B4%E6%96%B0/"/>
     
   </entry>
   
