@@ -152,9 +152,8 @@ friends:
   Sonico's Home: http://blog.supvesonico.moe
   xw_y_am's blog: http://web.xwyam.info/blog
   Yanhao's Blog: http://www.yanhao.site
-  Мвудаг/Этура Яннъ: http://etula.ga
+  Мвудаг/Этура Яннъ: http://etula.me
   蔓舞寻樱的博客: https://alleysakura.com
-  无毁的湖光: http://readingsteiner.github.io
   中土國民會全球資訊網: https://blog-netarmy.rhcloud.com
 
 #是否开启“关于我”。
@@ -197,8 +196,8 @@ baidu_tongji: '55d7496b74b59fcaa2a67bd11b36a7b6'
 # http://ibruce.info/2015/04/04/busuanzi/
 visit_counter:
   on: true
-  site_visit: 全站访客量
-  page_visit: 本页展现数
+  site_visit: true
+  page_visit: true
 
 # GitHub Repo Widget
 # https://github.com/hustcc/GitHub-Repo-Widget.js

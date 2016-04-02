@@ -123,7 +123,7 @@ ICMP 包校验和的计算范围在[RFC 792][ID_RFC_792] 中有如下说明：
   icmpheader->checksum = GetChecksum (icmpheader, packetSize - ipheaderSize);
 ```
 
-[ID_RFC_791]: https://tools.ietf.org/html/rfc792
+[ID_RFC_792]: https://tools.ietf.org/html/rfc792
 
 # TCP 和UDP 包校验和的计算
 
