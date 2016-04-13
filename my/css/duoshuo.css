@@ -194,7 +194,7 @@ span.ua {
   opacity: .8;
 }
 
-.os_vista,.os_2000,.os_windows,.os_xp,.os_7,.os_8,.os_8_1:hover {
+.os_vista:hover,.os_2000:hover,.os_windows:hover,.os_xp:hover,.os_7:hover,.os_8:hover,.os_8_1:hover {
   opacity: 1;
 }
 

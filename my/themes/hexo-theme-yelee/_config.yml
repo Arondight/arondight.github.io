@@ -85,6 +85,9 @@ youyan:
 ## "0": 灰白背景
 background_image: 0
 
+# Base Font Size | 字号调节
+base_font_size: 16  #px, 16 - 24
+
 ## General Color Scheme | 主题配色方案
 ## 可用值 Value: yilia
 jcolor_scheme: yilia
@@ -152,7 +155,7 @@ friends:
   Sonico's Home: http://blog.supvesonico.moe
   xw_y_am's blog: http://web.xwyam.info/blog
   Yanhao's Blog: http://www.yanhao.site
-  Мвудаг/Этура Яннъ: http://etula.me
+  Мвудаг/Этура Яннъ: https://etula.me
   蔓舞寻樱的博客: https://alleysakura.com
   中土國民會全球資訊網: https://blog-netarmy.rhcloud.com
 
@@ -179,7 +182,14 @@ fancybox: true
 mathjax: false
 
 # Socail Share | 是否开启分享
-share: false
+share:
+  on: false
+  baidu: false
+  addthis: false
+  addthis_pubid: "ra-56ff76c972fc0cf9"
+  ## Go to www.addthis.com/dashboard to get your pubid (in src of Code)
+  ## and customize AddThis share buttons
+
 
 # 百度、谷歌站长验证。填写 HTML 标签 content
 # Site Verification for Google and Baidu. HTML label content.
