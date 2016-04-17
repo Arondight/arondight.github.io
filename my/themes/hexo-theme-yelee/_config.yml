@@ -119,10 +119,6 @@ toc: true
 # Keep TOC title on the same line |
 toc_nowrap: false
 
-# 自定义"阅读全文"链接按钮的显示文字
-# Customize the text on excerpt link
-excerpt_link: "阅读更多"
-
 # 是否显示边栏中的搜索框（仅样式，未添加搜索功能）
 # Search Box in left column
 search_box: false
@@ -144,13 +140,14 @@ tagcloud: true
 # Blogroll, Link exchange | 友情链接
 #friends: false
 friends:
-  3890929: http://isliberty.me
+  3890929: https://isliberty.me
   coolrc's blog: http://coolrc.top
-  Farkasity: http://blog.farkasity.me
+  Farkasity's Blog: https://blog.farkasity.me
   GlassGear: http://blog.winkidney.com
   Kissbug8720's Blog: http://blog.ishell.me
   Love live!: http://www.targetlocked.xyz
   Menci: https://blog.menci.moe
+  Netcan: http://www.netcan666.com
   Shy泠的博客: https://shyling.com
   Sonico's Home: http://blog.supvesonico.moe
   xw_y_am's blog: http://web.xwyam.info/blog
@@ -186,7 +183,7 @@ share:
   on: false
   baidu: false
   addthis: false
-  addthis_pubid: "ra-56ff76c972fc0cf9"
+  addthis_pubid: ""
   ## Go to www.addthis.com/dashboard to get your pubid (in src of Code)
   ## and customize AddThis share buttons
 
@@ -223,4 +220,18 @@ progressBar:
   on: true
   type: "minimal"  # Keep Quotes | 保留引号避免出错
   color: green
+
+CDN:
+  jquery: //cdn.bootcss.com/jquery/1.9.1/jquery.min.js
+  require: //cdn.bootcss.com/require.js/2.1.22/require.min.js
+  fontawesome: //cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css
+  fancybox_js: //cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js
+  fancybox_css: //cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css
+  animate_css: //cdn.bootcss.com/animate.css/3.5.0/animate.min.css
+  jquery_ui_js: //cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js
+  jquery_ui_css: //cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css
+  pace_js: //cdn.bootcss.com/pace/1.0.2/pace.min.js
+  clipboard: //cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js
+  mathjax: //cdn.bootcss.com/mathjax/2.6.1/MathJax.js
+  scrollreveal: //cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js
 

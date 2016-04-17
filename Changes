@@ -1,3 +1,6 @@
+v2016-04-17
+  * New post "使用GPG签名Git提交和标签"
+
 v2016-04-14
   * Modify thread key for duoshuo
 
@@ -18,7 +21,6 @@ v2016-04-02.2
   * Modify page 404
 
 v2016-04-02
-  * Delete post "历风"
   * Modify "友情链接"
 
 v2016-03-25
@@ -26,9 +28,6 @@ v2016-03-25
 
 v2016-03-22
   * New post "计算IP、ICMP、TCP和UDP包的校验和"
-
-v2016-03-14
-  * New post "历风"
 
 v2016-03-13
   * Update themes
@@ -112,18 +111,12 @@ v2016-01-29
 v2016-01-19.3
   * Rename server.sh
 
-v2016-01-19.2
-  * Modify post "可能要换工作了"
-
 v2016-01-19
   * Modify build scripts
   * Modify page 404
 
 v2016-01-16
   * Add sitemap for baidu
-
-v2016-01-15
-  * New post "可能要换工作了"
 
 v2016-01-11
   * New page 404
