@@ -21,7 +21,7 @@
     <link rel="icon" href="/img/avatar.jpg">
   
   
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+      <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
   
   
       <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
@@ -32,13 +32,14 @@
   
   <link rel="stylesheet" href="/css/style.css">
   
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+      <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
   
   <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js"></script>
   <script>
       var yiliaConfig = {
           fancybox: true,
@@ -49,6 +50,8 @@
           isTag: false,
           isCategory: false,
           open_in_new: false,
+          fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js"
       }
   </script>
 
@@ -59,7 +62,6 @@
   
 
   
-
   
       <script>
           var _hmt = _hmt || [];
@@ -171,7 +173,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICMP/">ICMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/">IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中二/">中二</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网穿透/">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开始/">开始</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新年/">新年</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈帧/">栈帧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/校验和/">校验和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/溢出/">溢出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPG/">GPG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICMP/">ICMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/">IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中二/">中二</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网穿透/">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开始/">开始</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新年/">新年</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈帧/">栈帧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/校验和/">校验和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/溢出/">溢出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a></li></ul>
                     </div>
                 </section>
                 
@@ -180,11 +182,11 @@
                 <section class="switch-part switch-part3">
                     <div id="js-friends">
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://isliberty.me">3890929</a>
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://isliberty.me">3890929</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="http://coolrc.top">coolrc&#39;s blog</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.farkasity.me">Farkasity</a>
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog.farkasity.me">Farkasity&#39;s Blog</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.winkidney.com">GlassGear</a>
                     
@@ -193,6 +195,8 @@
                       <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.targetlocked.xyz">Love live!</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog.menci.moe">Menci</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.netcan666.com">Netcan</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="https://shyling.com">Shy泠的博客</a>
                     
@@ -287,6 +291,41 @@
           <a href="/archives/2016" class="archive-year">2016</a>
         </div>
         <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2016/04/17/使用GPG签名Git提交和标签/" class="archive-article-date">
+      <time datetime="2016-04-17T06:16:53.000Z" itemprop="datePublished">04-17</time>
+</a>
+        </div>
+         
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/04/17/使用GPG签名Git提交和标签/">使用GPG签名Git提交和标签</a>
+    </h1>
+  
+
+        <div class="article-info info-on-archive">
+          
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GPG/">GPG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li></ul>
+    </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
     
     <article class="archive-article archive-type-post">
   <div class="archive-article-inner">

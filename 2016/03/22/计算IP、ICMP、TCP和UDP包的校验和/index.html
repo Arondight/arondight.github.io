@@ -17,7 +17,7 @@
 
 (1)  Adjacent octets to be checksummed are paired to form 16-bit     integers, and the 1’s complement sum of these 16-bit integers is     formed.
 (2)  To generate a c">
-<meta property="og:updated_time" content="2016-04-02T07:12:33.703Z">
+<meta property="og:updated_time" content="2016-04-14T17:34:48.240Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算IP、ICMP、TCP和UDP包的校验和">
 <meta name="twitter:description" content="校验和算法校验和的计算方法在文档RFC 1071 中有如下说明：
@@ -31,7 +31,7 @@
     <link rel="icon" href="/img/avatar.jpg">
   
   
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+      <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
   
   
       <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
@@ -42,13 +42,14 @@
   
   <link rel="stylesheet" href="/css/style.css">
   
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+      <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
   
   <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js"></script>
   <script>
       var yiliaConfig = {
           fancybox: true,
@@ -59,6 +60,8 @@
           isTag: false,
           isCategory: false,
           open_in_new: false,
+          fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js"
       }
   </script>
 
@@ -69,7 +72,6 @@
   
 
   
-
   
       <script>
           var _hmt = _hmt || [];
@@ -181,7 +183,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICMP/">ICMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/">IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中二/">中二</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网穿透/">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开始/">开始</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新年/">新年</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈帧/">栈帧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/校验和/">校验和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/溢出/">溢出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPG/">GPG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICMP/">ICMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/">IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中二/">中二</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网穿透/">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开始/">开始</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新年/">新年</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈帧/">栈帧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/校验和/">校验和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/溢出/">溢出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a></li></ul>
                     </div>
                 </section>
                 
@@ -190,11 +192,11 @@
                 <section class="switch-part switch-part3">
                     <div id="js-friends">
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://isliberty.me">3890929</a>
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://isliberty.me">3890929</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="http://coolrc.top">coolrc&#39;s blog</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.farkasity.me">Farkasity</a>
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog.farkasity.me">Farkasity&#39;s Blog</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.winkidney.com">GlassGear</a>
                     
@@ -203,6 +205,8 @@
                       <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.targetlocked.xyz">Love live!</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog.menci.moe">Menci</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.netcan666.com">Netcan</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="https://shyling.com">Shy泠的博客</a>
                     
@@ -395,11 +399,10 @@
         <p><span>本文标题:</span><a href="/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/">计算IP、ICMP、TCP和UDP包的校验和</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Arondight</a></p>
         <p><span>发布时间:</span>2016-03-22, 20:06:40</p>
-        <p><span>最后更新:</span>2016-04-02, 15:12:33</p>
+        <p><span>最后更新:</span>2016-04-15, 01:34:48</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/" title="计算IP、ICMP、TCP和UDP包的校验和">https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/　　作者: Arondight" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -410,6 +413,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/04/17/使用GPG签名Git提交和标签/">
+                    使用GPG签名Git提交和标签
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -498,7 +507,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2016/04/17/使用GPG签名Git提交和标签/" title="上一篇: 使用GPG签名Git提交和标签">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -510,7 +521,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/">计算IP、ICMP、TCP和UDP包的校验和</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/17/使用SSH反向隧道进行内网穿透/">使用SSH反向隧道进行内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/08/新年快乐/">新年快乐</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/软件和世界，愚者的中二之语/">软件和世界，愚者的中二之语</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/随便写一点东西/">随便写一点东西</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/使用GPG签名Git提交和标签/">使用GPG签名Git提交和标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/">计算IP、ICMP、TCP和UDP包的校验和</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/17/使用SSH反向隧道进行内网穿透/">使用SSH反向隧道进行内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/08/新年快乐/">新年快乐</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/10/软件和世界，愚者的中二之语/">软件和世界，愚者的中二之语</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/随便写一点东西/">随便写一点东西</a></li></ul>
 
 
 
