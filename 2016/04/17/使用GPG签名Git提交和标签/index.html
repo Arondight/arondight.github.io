@@ -13,7 +13,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <meta property="og:site_name" content="河 的 第 三 条 岸">
 <meta property="og:description" content="GPG 是什么提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。
 GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥对，其中公钥单">
-<meta property="og:updated_time" content="2016-04-17T09:46:04.359Z">
+<meta property="og:updated_time" content="2016-04-18T13:37:10.765Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用GPG签名Git提交和标签">
 <meta name="twitter:description" content="GPG 是什么提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。
@@ -337,6 +337,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <li>密钥种类：形如<code>method1 and method2</code> 的选项是生成一个密钥对（公钥和私钥），可以用于签名/验证和加密/解密，如果你仅仅是为了签名而不想用于加密，可以使用一个形如<code>method</code> 的选项（只生成公钥）。</li>
 <li>密钥长度：越长越安全，同时加密解密的时间花费越多，选择一个你认为合理的长度。</li>
 <li>有效期限：你需要选择一个你认为合理的有效期限，公钥到期后，签名将失效，GPG 服务器也会删除该公钥，所以一般来说你需要使用一个永不过期的公钥。</li>
+<li>密钥密码：一定要为你的密钥设置一个足够强壮的密码！</li>
 </ol>
 <h2 id="上传公钥到服务器"><a href="#上传公钥到服务器" class="headerlink" title="上传公钥到服务器"></a>上传公钥到服务器</h2><p>现在你可以将你的公钥上传到任意GPG 服务器上了，通过交换机制，全球所有的GPG 服务器都会得到你的公钥。你可以列出你现在所拥有的公钥。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpg --list-keys</span><br></pre></td></tr></table></figure>
@@ -348,7 +349,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpg <span class="_">-a</span> -o gnupg.pub --export &lt;key ID&gt;</span><br></pre></td></tr></table></figure>
 <p>然后打开你的GitHub <a href="https://github.com/settings/keys" target="_blank" rel="external">密钥管理</a>界面，根据文件<code>gnupg.pub</code> 为你的GitHub 账户配置公钥。</p>
 <blockquote>
-<p>注意：这一步不是必须的，你不一定要使用GitHub，或许你更喜欢使用其他的商业产品，或者自己搭建一个Git 服务器。Git 本身就是支持GPG 签名的，GitHub 对GPG 的支持仅仅是把验证结果在网页上显示出来（使用你上传的公钥）。</p>
+<p>注意：这一步不是必须的，你不一定要使用GitHub，或许你更喜欢使用其他的商业产品，或者自己搭建一个Git 服务器。Git 本身就是支持GPG 签名的，GitHub 对GPG 的支持仅是把验证结果在网页上显示出来（使用你上传的公钥）。</p>
 </blockquote>
 <h2 id="导出指纹"><a href="#导出指纹" class="headerlink" title="导出指纹"></a>导出指纹</h2><p>然而不幸的是，任何人都可以冒充你的名义上传公钥到GPG 服务器，所以对方搜到以你的名义发布的公钥，不一定真的是你发布的。为了避免这个问题，你需要公布一个该公钥的指纹。GPG 导入公钥后必须手动设置信任度。这时候对方就可以通过对比手中公钥的指纹和你提供的指纹，来确定得到的公钥是否是你发布的公钥。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en_US gpg --fingerprint &lt;key ID&gt; &gt;fingerprint</span><br></pre></td></tr></table></figure>
@@ -356,13 +357,13 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <blockquote>
 <p>注意：其实你可以通过<code>--export-ownertrust</code> 和<code>--import-ownertrust</code> 来直接导出和导入信任度，但是不推荐这样做。</p>
 </blockquote>
-<h2 id="签名提交和标签"><a href="#签名提交和标签" class="headerlink" title="签名提交和标签"></a>签名提交和标签</h2><p>首先你需要为Git 设置一个用于签名的公钥。</p>
+<h2 id="签名提交和标签"><a href="#签名提交和标签" class="headerlink" title="签名提交和标签"></a>签名提交和标签</h2><p>首先你需要为Git 设置一个用于签名的公钥，通常来说所有的个人项目都用一个公钥进行签名，所以建议设置为全局配置。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.signingkey &lt;key ID&gt;</span><br></pre></td></tr></table></figure>
 <p>然后就可以使用这个公钥来签名提交。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -S</span><br></pre></td></tr></table></figure>
 <p>或者签名标签了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag <span class="_">-s</span> &lt;tag&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="关于私钥"><a href="#关于私钥" class="headerlink" title="关于私钥"></a>关于私钥</h2><p>你可能注意到了，整个过程中我们都没有使用到私钥。之前也提到过，GPG 签名和验证的过程不需要私钥，私钥在解密过程中使用的。所以如果你生成了一个包含私钥的密钥对，除非你清楚自己到底在做什么，不要把私钥泄露给除了你之外的任何人。</p>
+<h2 id="关于私钥"><a href="#关于私钥" class="headerlink" title="关于私钥"></a>关于私钥</h2><p>你可能注意到了，整个过程中我们都没有使用到私钥。之前也提到过，GPG 签名和验证的过程不需要私钥，私钥在解密过程中使用的。所以如果你生成了一个包含私钥的密钥对，任何情况向下都不要把私钥泄露给除了你之外的任何人。如果需要向对方发送加密信息，请让对方提供指纹，导入对方的公钥进行加密，而不要将自己的私钥发送过去。</p>
 <h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><h2 id="获得公钥"><a href="#获得公钥" class="headerlink" title="获得公钥"></a>获得公钥</h2><p>你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹，然后根据指纹到服务器上查找公钥。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpg --keyserver subkeys.pgp.net --search-keys &lt;key ID&gt;</span><br></pre></td></tr></table></figure>
 <p>选择对应的编号，会自动下载并导入该公钥。</p>
@@ -371,7 +372,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <p>你所看到的应该是一个文本交互界面，下面是一个样例。</p>
 <figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">gpg (GnuPG) <span class="number">2.1</span>.<span class="number">11</span>; Copyright (C) <span class="number">2016</span> Free Software Foundation, Inc.</span><br><span class="line">This <span class="keyword">is</span> free software: you are free <span class="keyword">to</span> change <span class="keyword">and</span> redistribute <span class="literal">it</span>.</span><br><span class="line">There <span class="keyword">is</span> NO WARRANTY, <span class="keyword">to</span> the extent permitted <span class="keyword">by</span> law.</span><br><span class="line"></span><br><span class="line">私钥可用。</span><br><span class="line"></span><br><span class="line">sec  rsa4096/B66CC194</span><br><span class="line">     创建于：<span class="number">2016</span>-<span class="number">04</span>-<span class="number">15</span>  有效至：永不过期  可用于：SC</span><br><span class="line">     信任度：绝对        有效性：绝对</span><br><span class="line">ssb  rsa4096/F96E3CB7</span><br><span class="line">     创建于：<span class="number">2016</span>-<span class="number">04</span>-<span class="number">15</span>  有效至：永不过期  可用于：E</span><br><span class="line">[ 绝对 ] (<span class="number">1</span>). Arondight &lt;shell_way@foxmail.com&gt;</span><br><span class="line"></span><br><span class="line">gpg&gt;</span><br></pre></td></tr></table></figure>
 <p>你可以键入<code>fpr</code> 来打印这个公钥的指纹，和你得到的指纹进行对比，如果一致的话，那么键入<code>trust</code> 来设置该密钥的信任度。最后键入<code>quit</code> 退出。</p>
-<h2 id="验证签名"><a href="#验证签名" class="headerlink" title="验证签名"></a>验证签名</h2><p>现在你可以用导入的公钥来验证你<code>git clone</code> 下来的仓库的提交和标签了，同样你需要首先告诉Git 应该使用哪个公钥对这个仓库进行验证。</p>
+<h2 id="验证签名"><a href="#验证签名" class="headerlink" title="验证签名"></a>验证签名</h2><p>现在你可以用导入的公钥来验证你<code>git clone</code> 下来的仓库的提交和标签了，同样你需要首先告诉Git 应该使用哪个公钥对这个仓库进行验证。一般来说不同作者的项目公钥都不同，建议不要将用于验证的公钥设置为全局。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config user.signingkey &lt;key ID&gt;</span><br></pre></td></tr></table></figure>
 <p>然后可以像下面这样验证一个提交。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git verify-commit HEAD</span><br></pre></td></tr></table></figure>
@@ -443,7 +444,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
         <p><span>本文标题:</span><a href="/2016/04/17/使用GPG签名Git提交和标签/">使用GPG签名Git提交和标签</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Arondight</a></p>
         <p><span>发布时间:</span>2016-04-17, 14:16:53</p>
-        <p><span>最后更新:</span>2016-04-17, 17:46:04</p>
+        <p><span>最后更新:</span>2016-04-18, 21:37:10</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/17/使用GPG签名Git提交和标签/" title="使用GPG签名Git提交和标签">https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/　　作者: Arondight" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

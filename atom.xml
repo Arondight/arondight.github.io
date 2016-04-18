@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-04-17T09:46:04.359Z</updated>
+  <updated>2016-04-18T13:37:10.765Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/"/>
     <id>https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</id>
     <published>2016-04-17T06:16:53.000Z</published>
-    <updated>2016-04-17T09:46:04.359Z</updated>
+    <updated>2016-04-18T13:37:10.765Z</updated>
     
     <content type="html">&lt;h1 id=&quot;GPG-是什么&quot;&gt;&lt;a href=&quot;#GPG-是什么&quot; class=&quot;headerlink&quot; title=&quot;GPG 是什么&quot;&gt;&lt;/a&gt;GPG 是什么&lt;/h1&gt;&lt;p&gt;提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。&lt;/p&gt;
 &lt;p&gt;GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥对，其中公钥单独可完成签名和验证，加密和解密则需要分别使用公钥和私钥来完成。&lt;/p&gt;
@@ -34,6 +34,7 @@
 &lt;li&gt;密钥种类：形如&lt;code&gt;method1 and method2&lt;/code&gt; 的选项是生成一个密钥对（公钥和私钥），可以用于签名/验证和加密/解密，如果你仅仅是为了签名而不想用于加密，可以使用一个形如&lt;code&gt;method&lt;/code&gt; 的选项（只生成公钥）。&lt;/li&gt;
 &lt;li&gt;密钥长度：越长越安全，同时加密解密的时间花费越多，选择一个你认为合理的长度。&lt;/li&gt;
 &lt;li&gt;有效期限：你需要选择一个你认为合理的有效期限，公钥到期后，签名将失效，GPG 服务器也会删除该公钥，所以一般来说你需要使用一个永不过期的公钥。&lt;/li&gt;
+&lt;li&gt;密钥密码：一定要为你的密钥设置一个足够强壮的密码！&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&quot;上传公钥到服务器&quot;&gt;&lt;a href=&quot;#上传公钥到服务器&quot; class=&quot;headerlink&quot; title=&quot;上传公钥到服务器&quot;&gt;&lt;/a&gt;上传公钥到服务器&lt;/h2&gt;&lt;p&gt;现在你可以将你的公钥上传到任意GPG 服务器上了，通过交换机制，全球所有的GPG 服务器都会得到你的公钥。你可以列出你现在所拥有的公钥。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg --list-keys&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -45,7 +46,7 @@
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg &lt;span class=&quot;_&quot;&gt;-a&lt;/span&gt; -o gnupg.pub --export &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后打开你的GitHub &lt;a href=&quot;https://github.com/settings/keys&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;密钥管理&lt;/a&gt;界面，根据文件&lt;code&gt;gnupg.pub&lt;/code&gt; 为你的GitHub 账户配置公钥。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注意：这一步不是必须的，你不一定要使用GitHub，或许你更喜欢使用其他的商业产品，或者自己搭建一个Git 服务器。Git 本身就是支持GPG 签名的，GitHub 对GPG 的支持仅仅是把验证结果在网页上显示出来（使用你上传的公钥）。&lt;/p&gt;
+&lt;p&gt;注意：这一步不是必须的，你不一定要使用GitHub，或许你更喜欢使用其他的商业产品，或者自己搭建一个Git 服务器。Git 本身就是支持GPG 签名的，GitHub 对GPG 的支持仅是把验证结果在网页上显示出来（使用你上传的公钥）。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;导出指纹&quot;&gt;&lt;a href=&quot;#导出指纹&quot; class=&quot;headerlink&quot; title=&quot;导出指纹&quot;&gt;&lt;/a&gt;导出指纹&lt;/h2&gt;&lt;p&gt;然而不幸的是，任何人都可以冒充你的名义上传公钥到GPG 服务器，所以对方搜到以你的名义发布的公钥，不一定真的是你发布的。为了避免这个问题，你需要公布一个该公钥的指纹。GPG 导入公钥后必须手动设置信任度。这时候对方就可以通过对比手中公钥的指纹和你提供的指纹，来确定得到的公钥是否是你发布的公钥。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;LANG=en_US gpg --fingerprint &amp;lt;key ID&amp;gt; &amp;gt;fingerprint&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -53,13 +54,13 @@
 &lt;blockquote&gt;
 &lt;p&gt;注意：其实你可以通过&lt;code&gt;--export-ownertrust&lt;/code&gt; 和&lt;code&gt;--import-ownertrust&lt;/code&gt; 来直接导出和导入信任度，但是不推荐这样做。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;签名提交和标签&quot;&gt;&lt;a href=&quot;#签名提交和标签&quot; class=&quot;headerlink&quot; title=&quot;签名提交和标签&quot;&gt;&lt;/a&gt;签名提交和标签&lt;/h2&gt;&lt;p&gt;首先你需要为Git 设置一个用于签名的公钥。&lt;/p&gt;
+&lt;h2 id=&quot;签名提交和标签&quot;&gt;&lt;a href=&quot;#签名提交和标签&quot; class=&quot;headerlink&quot; title=&quot;签名提交和标签&quot;&gt;&lt;/a&gt;签名提交和标签&lt;/h2&gt;&lt;p&gt;首先你需要为Git 设置一个用于签名的公钥，通常来说所有的个人项目都用一个公钥进行签名，所以建议设置为全局配置。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git config --global user.signingkey &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后就可以使用这个公钥来签名提交。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git commit -S&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;或者签名标签了。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git tag &lt;span class=&quot;_&quot;&gt;-s&lt;/span&gt; &amp;lt;tag&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;关于私钥&quot;&gt;&lt;a href=&quot;#关于私钥&quot; class=&quot;headerlink&quot; title=&quot;关于私钥&quot;&gt;&lt;/a&gt;关于私钥&lt;/h2&gt;&lt;p&gt;你可能注意到了，整个过程中我们都没有使用到私钥。之前也提到过，GPG 签名和验证的过程不需要私钥，私钥在解密过程中使用的。所以如果你生成了一个包含私钥的密钥对，除非你清楚自己到底在做什么，不要把私钥泄露给除了你之外的任何人。&lt;/p&gt;
+&lt;h2 id=&quot;关于私钥&quot;&gt;&lt;a href=&quot;#关于私钥&quot; class=&quot;headerlink&quot; title=&quot;关于私钥&quot;&gt;&lt;/a&gt;关于私钥&lt;/h2&gt;&lt;p&gt;你可能注意到了，整个过程中我们都没有使用到私钥。之前也提到过，GPG 签名和验证的过程不需要私钥，私钥在解密过程中使用的。所以如果你生成了一个包含私钥的密钥对，任何情况向下都不要把私钥泄露给除了你之外的任何人。如果需要向对方发送加密信息，请让对方提供指纹，导入对方的公钥进行加密，而不要将自己的私钥发送过去。&lt;/p&gt;
 &lt;h1 id=&quot;验证&quot;&gt;&lt;a href=&quot;#验证&quot; class=&quot;headerlink&quot; title=&quot;验证&quot;&gt;&lt;/a&gt;验证&lt;/h1&gt;&lt;h2 id=&quot;获得公钥&quot;&gt;&lt;a href=&quot;#获得公钥&quot; class=&quot;headerlink&quot; title=&quot;获得公钥&quot;&gt;&lt;/a&gt;获得公钥&lt;/h2&gt;&lt;p&gt;你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹，然后根据指纹到服务器上查找公钥。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg --keyserver subkeys.pgp.net --search-keys &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;选择对应的编号，会自动下载并导入该公钥。&lt;/p&gt;
@@ -68,7 +69,7 @@
 &lt;p&gt;你所看到的应该是一个文本交互界面，下面是一个样例。&lt;/p&gt;
 &lt;figure class=&quot;highlight livescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg (GnuPG) &lt;span class=&quot;number&quot;&gt;2.1&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;11&lt;/span&gt;; Copyright (C) &lt;span class=&quot;number&quot;&gt;2016&lt;/span&gt; Free Software Foundation, Inc.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;This &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; free software: you are free &lt;span class=&quot;keyword&quot;&gt;to&lt;/span&gt; change &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; redistribute &lt;span class=&quot;literal&quot;&gt;it&lt;/span&gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;There &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; NO WARRANTY, &lt;span class=&quot;keyword&quot;&gt;to&lt;/span&gt; the extent permitted &lt;span class=&quot;keyword&quot;&gt;by&lt;/span&gt; law.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;私钥可用。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sec  rsa4096/B66CC194&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     创建于：&lt;span class=&quot;number&quot;&gt;2016&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;04&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;15&lt;/span&gt;  有效至：永不过期  可用于：SC&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     信任度：绝对        有效性：绝对&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ssb  rsa4096/F96E3CB7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     创建于：&lt;span class=&quot;number&quot;&gt;2016&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;04&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;15&lt;/span&gt;  有效至：永不过期  可用于：E&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[ 绝对 ] (&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;). Arondight &amp;lt;shell_way@foxmail.com&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;gpg&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;你可以键入&lt;code&gt;fpr&lt;/code&gt; 来打印这个公钥的指纹，和你得到的指纹进行对比，如果一致的话，那么键入&lt;code&gt;trust&lt;/code&gt; 来设置该密钥的信任度。最后键入&lt;code&gt;quit&lt;/code&gt; 退出。&lt;/p&gt;
-&lt;h2 id=&quot;验证签名&quot;&gt;&lt;a href=&quot;#验证签名&quot; class=&quot;headerlink&quot; title=&quot;验证签名&quot;&gt;&lt;/a&gt;验证签名&lt;/h2&gt;&lt;p&gt;现在你可以用导入的公钥来验证你&lt;code&gt;git clone&lt;/code&gt; 下来的仓库的提交和标签了，同样你需要首先告诉Git 应该使用哪个公钥对这个仓库进行验证。&lt;/p&gt;
+&lt;h2 id=&quot;验证签名&quot;&gt;&lt;a href=&quot;#验证签名&quot; class=&quot;headerlink&quot; title=&quot;验证签名&quot;&gt;&lt;/a&gt;验证签名&lt;/h2&gt;&lt;p&gt;现在你可以用导入的公钥来验证你&lt;code&gt;git clone&lt;/code&gt; 下来的仓库的提交和标签了，同样你需要首先告诉Git 应该使用哪个公钥对这个仓库进行验证。一般来说不同作者的项目公钥都不同，建议不要将用于验证的公钥设置为全局。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git config user.signingkey &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后可以像下面这样验证一个提交。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git verify-commit HEAD&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
