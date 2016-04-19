@@ -13,7 +13,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <meta property="og:site_name" content="河 的 第 三 条 岸">
 <meta property="og:description" content="GPG 是什么提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。
 GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥对，其中公钥单">
-<meta property="og:updated_time" content="2016-04-18T13:37:10.765Z">
+<meta property="og:updated_time" content="2016-04-18T14:11:17.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用GPG签名Git提交和标签">
 <meta name="twitter:description" content="GPG 是什么提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。
@@ -343,7 +343,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpg --list-keys</span><br></pre></td></tr></table></figure>
 <p>根据用户名和邮箱，找到你之前生成的那个密钥。其中<code>pub</code> 代表公钥，<code>sub</code> 则是私钥。下面是一个样例输出。</p>
 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pub   rsa4096/B66CC194 <span class="number">2016</span>-<span class="number">04</span>-<span class="number">15</span> <span class="string">[SC]</span></span><br><span class="line">uid         <span class="string">[ 绝对 ]</span> Arondight &lt;shell_way@foxmail.com&gt;</span><br><span class="line">sub   rsa4096/F96E3CB7 <span class="number">2016</span>-<span class="number">04</span>-<span class="number">15</span> <span class="string">[E]</span></span><br></pre></td></tr></table></figure>
-<p>可以看到一个算法为RSA、长度为4096、钥匙号为<code>B66CC194</code> 的公钥。找出公钥后，就可以上传这个公钥到GPG 服务器了。</p>
+<p>可以看到一个算法为RSA、长度为4096、钥匙号（key ID）为<code>B66CC194</code> 的公钥。找出公钥后，就可以上传这个公钥到GPG 服务器了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpg --keyserver subkeys.pgp.net --send-keys &lt;key ID&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="上传公钥到GitHub"><a href="#上传公钥到GitHub" class="headerlink" title="上传公钥到GitHub"></a>上传公钥到GitHub</h2><p>GitHub 刚刚发布了支持GPG 签名的消息，所以你可以选择使用GitHub 托管你的仓库。首先你需要以文本形式导出你的公钥。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpg <span class="_">-a</span> -o gnupg.pub --export &lt;key ID&gt;</span><br></pre></td></tr></table></figure>
@@ -444,7 +444,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
         <p><span>本文标题:</span><a href="/2016/04/17/使用GPG签名Git提交和标签/">使用GPG签名Git提交和标签</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Arondight</a></p>
         <p><span>发布时间:</span>2016-04-17, 14:16:53</p>
-        <p><span>最后更新:</span>2016-04-18, 21:37:10</p>
+        <p><span>最后更新:</span>2016-04-18, 22:11:17</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/17/使用GPG签名Git提交和标签/" title="使用GPG签名Git提交和标签">https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/　　作者: Arondight" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

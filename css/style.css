@@ -121,12 +121,12 @@ html {
   font-size: 16px;
 }
 body {
-  font-family: "Lucida Grande", Verdana, "Helvetica Neue", Arial, sans-serif, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Lucida Grande", Verdana, "Helvetica Neue", Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
   background: #fff;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -moz-font-feature-settings: "liga" on;
-  color: rgba(0,0,0,0.75);
+  color: #333;
   -webkit-overflow-scrolling: touch;
 }
 ::selection {
@@ -138,7 +138,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Times, Georgia, serif, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+  font-family: Times, Georgia, serif;
+  font-weight: bold;
 }
 h1,
 h2,
@@ -147,7 +148,7 @@ h3 {
 }
 h1 {
   font-size: 1.6rem;
-  font-family: "Segoe UI", "Lucida Grande", Verdana, "Helvetica Neue", Arial, sans-serif, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Segoe UI", "Lucida Grande", Verdana, "Helvetica Neue", Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
 }
 h2 {
   font-size: 1.4rem;
@@ -549,7 +550,7 @@ a {
 .header-author {
   text-align: center;
   margin: 13px 0;
-  font-family: Roboto, "Roboto", serif;
+  font-family: Times, Georgia, serif;
   font-size: 30px;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
@@ -1105,7 +1106,7 @@ color
   -webkit-box-shadow: 0 0 0.8em rgba(0,0,0,0.6);
   box-shadow: 0 0 0.8em rgba(0,0,0,0.6);
   color: #fff;
-  font-family: "Lucida Grande", Verdana, "Helvetica Neue", Arial, sans-serif, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Lucida Grande", Verdana, "Helvetica Neue", Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
   font-size: 0.9em;
   background: rgba(0,0,0,0.65);
 }
@@ -1339,7 +1340,7 @@ body .ui-tooltip {
 .article-title {
   color: #696969;
   margin-left: 0px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.3;
   margin-bottom: 20px;
   -webkit-transition: color 0.3s;
@@ -1444,7 +1445,6 @@ body .ui-tooltip {
 }
 .article-entry h2 {
   margin: 0.5em auto;
-  font-weight: bold;
   color: #9c9;
   padding-bottom: 5px;
   border-bottom: 1px solid #ddd;
@@ -1464,7 +1464,6 @@ body .ui-tooltip {
   background: rgba(243,248,253,0.6);
   border: 1px solid #d2e8fa;
   padding: 0.2em 0.6em;
-  font-weight: normal;
 }
 .article-entry h3:hover a {
   text-decoration: underline;
@@ -1476,7 +1475,6 @@ body .ui-tooltip {
 .article-entry h5,
 .article-entry h6 {
   margin-top: 20px;
-  font-weight: bold;
   color: #574c4c;
   padding-bottom: 5px;
   border-bottom: 1px solid #ddd;
@@ -2069,7 +2067,7 @@ li:hover {
 }
 .article-entry pre,
 .article-entry code {
-  font-family: Menlo, Consolas, "Source Code Pro", Inconsolata, Monaco, monospace, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+  font-family: Menlo, Consolas, "Source Code Pro", Inconsolata, Monaco, monospace, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei";
   font-size: 1em;
 }
 .article-entry pre code {
@@ -2134,7 +2132,7 @@ li:hover {
 }
 .article-entry .gist .gist-file {
   border: none;
-  font-family: Menlo, Consolas, "Source Code Pro", Inconsolata, Monaco, monospace;
+  font-family: Menlo, Consolas, "Source Code Pro", Inconsolata, Monaco monospace;
   margin: 0;
 }
 .article-entry .gist .gist-file .gist-data {
@@ -2157,7 +2155,7 @@ li:hover {
 .article-entry .gist .gist-file .gist-meta {
   background: rgba(249,249,249,0.5);
   color: #8e908c;
-  font: 0.85em "Lucida Grande", Verdana, "Helvetica Neue", Arial, sans-serif;
+  font: 0.85em "Lucida Grande", Verdana, "Helvetica Neue", Arial;
   text-shadow: 0 0;
   padding: 0;
   margin-top: 1em;

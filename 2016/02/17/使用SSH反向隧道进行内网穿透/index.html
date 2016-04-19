@@ -25,7 +25,7 @@
 
 机器代号
 机">
-<meta property="og:updated_time" content="2016-04-14T17:34:48.237Z">
+<meta property="og:updated_time" content="2016-04-19T12:48:28.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用SSH反向隧道进行内网穿透">
 <meta name="twitter:description" content="对应的情况这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。
@@ -422,7 +422,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B $ su - autossh</span><br><span class="line">B $ ssh-keygen -t <span class="string">'rsa'</span> -C <span class="string">'autossh@b.localhost'</span></span><br><span class="line">B $ ssh-copy-id usera@a.site</span><br></pre></td></tr></table></figure>
 <p>注意该<strong>密钥不要设置密码</strong>，也就是运行<code>ssh-keygen</code> 指令时尽管一路回车，不要输入额外的字符。</p>
 <p>然后在<strong>B</strong> 上创建以<em>autossh</em> 用户权限调用<code>autossh</code> 的service 文件。将下面文本写入到文件<code>/lib/systemd/system/autossh.service</code>，并设置权限为644：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=Auto SSH Tunnel</span><br><span class="line"><span class="attr">After</span>=network.target</span><br><span class="line"><span class="section"></span><br><span class="line">[Service]</span></span><br><span class="line"><span class="attr">User</span>=autossh</span><br><span class="line"><span class="attr">Type</span>=simple</span><br><span class="line"><span class="attr">ExecStart</span>=/bin/autossh -p <span class="number">22</span> -M <span class="number">6777</span> -NR <span class="string">'*:6766:b.localhost:22'</span> usera@a.site -i /home/autossh/.ssh/id_rsa</span><br><span class="line"><span class="attr">ExecReload</span>=/bin/kill -HUP <span class="variable">$MAINPID</span></span><br><span class="line"><span class="attr">KillMode</span>=process</span><br><span class="line"><span class="attr">Restart</span>=always</span><br><span class="line"><span class="section"></span><br><span class="line">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=Auto SSH Tunnel</span><br><span class="line"><span class="attr">After</span>=network-<span class="literal">on</span>line.target</span><br><span class="line"><span class="section"></span><br><span class="line">[Service]</span></span><br><span class="line"><span class="attr">User</span>=autossh</span><br><span class="line"><span class="attr">Type</span>=simple</span><br><span class="line"><span class="attr">ExecStart</span>=/bin/autossh -p <span class="number">22</span> -M <span class="number">6777</span> -NR <span class="string">'*:6766:b.localhost:22'</span> usera@a.site -i /home/autossh/.ssh/id_rsa</span><br><span class="line"><span class="attr">ExecReload</span>=/bin/kill -HUP <span class="variable">$MAINPID</span></span><br><span class="line"><span class="attr">KillMode</span>=process</span><br><span class="line"><span class="attr">Restart</span>=always</span><br><span class="line"><span class="section"></span><br><span class="line">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br><span class="line"><span class="attr">WantedBy</span>=graphical.target</span><br></pre></td></tr></table></figure>
 <p>在<strong>B</strong> 上设置该服务自动启动：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ sudo systemctl <span class="built_in">enable</span> autossh</span><br></pre></td></tr></table></figure>
 <p>如果你愿意，在这之后可以立刻启动它：</p>
@@ -431,6 +431,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p 6766 userb@127.0.0.1</span><br></pre></td></tr></table></figure>
 <p>或者是在<strong>C</strong> 上直接穿透两层NAT SSH 连接到B：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C $ ssh -p 6766 userb@a.site</span><br></pre></td></tr></table></figure>
+<p>如果你对SSH 足够熟悉，你可以利用这条隧道做更多的事情，例如你可以在反向连接时指定动态端口转发：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C $ ssh -p 6766 -qngfNTD 7677 userb@a.site</span><br></pre></td></tr></table></figure>
+<p>假设<strong>C</strong> 是你家中的电脑，<strong>A</strong> 是你的VPS，<strong>B</strong> 是你公司的电脑。如果你这样做了，那么为浏览器设置端口为<code>7677</code> 的<code>sock4</code> 本地（127.0.0.1）代理后，你就可以在家里的浏览器上看到公司内网的网页。</p>
 
       
     </div>
@@ -442,7 +445,7 @@
         <p><span>本文标题:</span><a href="/2016/02/17/使用SSH反向隧道进行内网穿透/">使用SSH反向隧道进行内网穿透</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Arondight</a></p>
         <p><span>发布时间:</span>2016-02-17, 18:09:57</p>
-        <p><span>最后更新:</span>2016-04-15, 01:34:48</p>
+        <p><span>最后更新:</span>2016-04-19, 20:48:28</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/02/17/使用SSH反向隧道进行内网穿透/" title="使用SSH反向隧道进行内网穿透">https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/　　作者: Arondight" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
