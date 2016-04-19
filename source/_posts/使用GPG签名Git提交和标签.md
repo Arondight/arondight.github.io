@@ -55,7 +55,7 @@ uid         [ 绝对 ] Arondight <shell_way@foxmail.com>
 sub   rsa4096/F96E3CB7 2016-04-15 [E]
 ```
 
-可以看到一个算法为RSA、长度为4096、钥匙号为`B66CC194` 的公钥。找出公钥后，就可以上传这个公钥到GPG 服务器了。
+可以看到一个算法为RSA、长度为4096、钥匙号（key ID）为`B66CC194` 的公钥。找出公钥后，就可以上传这个公钥到GPG 服务器了。
 
 ```bash
 gpg --keyserver subkeys.pgp.net --send-keys <key ID>

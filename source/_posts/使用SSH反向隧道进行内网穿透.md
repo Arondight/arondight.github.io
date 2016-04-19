@@ -136,7 +136,7 @@ B $ ssh-copy-id usera@a.site
 ```
 [Unit]
 Description=Auto SSH Tunnel
-After=network.target
+After=network-online.target
 
 [Service]
 User=autossh
@@ -148,6 +148,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
+WantedBy=graphical.target
 ```
 
 在**B** 上设置该服务自动启动：
@@ -173,4 +174,12 @@ A $ ssh -p 6766 userb@127.0.0.1
 ```bash
 C $ ssh -p 6766 userb@a.site
 ```
+
+如果你对SSH 足够熟悉，你可以利用这条隧道做更多的事情，例如你可以在反向连接时指定动态端口转发：
+
+```bash
+C $ ssh -p 6766 -qngfNTD 7677 userb@a.site
+```
+
+假设**C** 是你家中的电脑，**A** 是你的VPS，**B** 是你公司的电脑。如果你这样做了，那么为浏览器设置端口为`7677` 的`sock4` 本地（127.0.0.1）代理后，你就可以在家里的浏览器上看到公司内网的网页。
 

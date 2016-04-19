@@ -12,7 +12,7 @@ This is source of [arondight.github.io][ID_SITE].
 
 ## INIT
 
-```shell
+```bash
 git clone https://github.com/Arondight/arondight.github.io.git
 cd arondight.github.io
 ./init.sh
@@ -22,7 +22,7 @@ Only do this at the very beginning.
 
 ## SERVE
 
-```shell
+```bash
 ./serve.sh
 ```
 
@@ -30,8 +30,14 @@ Then visit [127.0.0.1:4000](http://127.0.0.1:4000) in your web browser.
 
 ## DEPLOY
 
-```shell
+```bash
 ./deploy.sh
+```
+
+## PUSH
+
+```bash
+./push.sh
 ```
 
 # DEPENDENCIES
