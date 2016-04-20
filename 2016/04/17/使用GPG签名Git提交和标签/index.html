@@ -13,7 +13,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <meta property="og:site_name" content="河 的 第 三 条 岸">
 <meta property="og:description" content="GPG 是什么提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。
 GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥对，其中公钥单">
-<meta property="og:updated_time" content="2016-04-18T14:11:17.359Z">
+<meta property="og:updated_time" content="2016-04-20T11:33:46.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用GPG签名Git提交和标签">
 <meta name="twitter:description" content="GPG 是什么提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。
@@ -88,7 +88,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
             <img src="/img/avatar.jpg" class="animated zoomIn">
         </a>
         <hgroup>
-          <h1 class="header-author"><a href="/">Arondight</a></h1>
+          <h1 class="header-author"><a href="/">愛と奇跡の物語</a></h1>
         </hgroup>
 
         
@@ -236,7 +236,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
       <nav id="mobile-nav">
       <div class="overlay">
           <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Arondight</a></h1>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">愛と奇跡の物語</a></h1>
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
@@ -244,7 +244,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
                 <img src="/img/avatar.jpg" class="animated zoomIn">
             </a>
             <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">Arondight</a></h1>
+              <h1 class="header-author"><a href="/" title="回到主页">愛と奇跡の物語</a></h1>
             </hgroup>
             
             <p class="header-subtitle">A Blog About Me</p>
@@ -363,7 +363,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -S</span><br></pre></td></tr></table></figure>
 <p>或者签名标签了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag <span class="_">-s</span> &lt;tag&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="关于私钥"><a href="#关于私钥" class="headerlink" title="关于私钥"></a>关于私钥</h2><p>你可能注意到了，整个过程中我们都没有使用到私钥。之前也提到过，GPG 签名和验证的过程不需要私钥，私钥在解密过程中使用的。所以如果你生成了一个包含私钥的密钥对，任何情况向下都不要把私钥泄露给除了你之外的任何人。如果需要向对方发送加密信息，请让对方提供指纹，导入对方的公钥进行加密，而不要将自己的私钥发送过去。</p>
+<h2 id="关于私钥"><a href="#关于私钥" class="headerlink" title="关于私钥"></a>关于私钥</h2><p>你可能注意到了，整个过程中我们都没有使用到私钥。之前也提到过，GPG 签名和验证的过程不需要私钥，私钥在解密过程中使用的。所以如果你生成了一个包含私钥的密钥对，任何情况向下都不要把私钥泄露给除了你之外的任何人。如果需要向对方发送加密信息，请让对方提供指纹，导入对方的公钥进行加密，而不要用自己的公钥加密后再把自己的私钥发送过去。</p>
 <h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><h2 id="获得公钥"><a href="#获得公钥" class="headerlink" title="获得公钥"></a>获得公钥</h2><p>你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹，然后根据指纹到服务器上查找公钥。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpg --keyserver subkeys.pgp.net --search-keys &lt;key ID&gt;</span><br></pre></td></tr></table></figure>
 <p>选择对应的编号，会自动下载并导入该公钥。</p>
@@ -442,12 +442,12 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
     
     <div class="copyright">
         <p><span>本文标题:</span><a href="/2016/04/17/使用GPG签名Git提交和标签/">使用GPG签名Git提交和标签</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Arondight</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">愛と奇跡の物語</a></p>
         <p><span>发布时间:</span>2016-04-17, 14:16:53</p>
-        <p><span>最后更新:</span>2016-04-18, 22:11:17</p>
+        <p><span>最后更新:</span>2016-04-20, 19:33:46</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/17/使用GPG签名Git提交和标签/" title="使用GPG签名Git提交和标签">https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/　　作者: Arondight" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/　　作者: 愛と奇跡の物語" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -571,10 +571,10 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
     <div class="outer">
         <div id="footer-info">
             <div class="footer-left">
-                &copy; 2016 Arondight
+                <i class="fa fa-copyright"></i> 2016 愛と奇跡の物語
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         

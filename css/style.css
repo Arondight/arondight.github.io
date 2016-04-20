@@ -2244,6 +2244,12 @@ pre .javascript .function {
 #footer .outer {
   padding: 0 30px;
 }
+#footer .fa {
+  vertical-align: bottom;
+}
+#footer .fa-heart {
+  color: #f00;
+}
 .footer-left {
   float: left;
 }

@@ -5,11 +5,11 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-04-18T14:11:17.359Z</updated>
+  <updated>2016-04-20T11:33:46.078Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
-    <name>Arondight</name>
+    <name>愛と奇跡の物語</name>
     
   </author>
   
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/"/>
     <id>https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</id>
     <published>2016-04-17T06:16:53.000Z</published>
-    <updated>2016-04-18T14:11:17.359Z</updated>
+    <updated>2016-04-20T11:33:46.078Z</updated>
     
     <content type="html">&lt;h1 id=&quot;GPG-是什么&quot;&gt;&lt;a href=&quot;#GPG-是什么&quot; class=&quot;headerlink&quot; title=&quot;GPG 是什么&quot;&gt;&lt;/a&gt;GPG 是什么&lt;/h1&gt;&lt;p&gt;提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。&lt;/p&gt;
 &lt;p&gt;GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥对，其中公钥单独可完成签名和验证，加密和解密则需要分别使用公钥和私钥来完成。&lt;/p&gt;
@@ -60,7 +60,7 @@
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git commit -S&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;或者签名标签了。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git tag &lt;span class=&quot;_&quot;&gt;-s&lt;/span&gt; &amp;lt;tag&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;关于私钥&quot;&gt;&lt;a href=&quot;#关于私钥&quot; class=&quot;headerlink&quot; title=&quot;关于私钥&quot;&gt;&lt;/a&gt;关于私钥&lt;/h2&gt;&lt;p&gt;你可能注意到了，整个过程中我们都没有使用到私钥。之前也提到过，GPG 签名和验证的过程不需要私钥，私钥在解密过程中使用的。所以如果你生成了一个包含私钥的密钥对，任何情况向下都不要把私钥泄露给除了你之外的任何人。如果需要向对方发送加密信息，请让对方提供指纹，导入对方的公钥进行加密，而不要将自己的私钥发送过去。&lt;/p&gt;
+&lt;h2 id=&quot;关于私钥&quot;&gt;&lt;a href=&quot;#关于私钥&quot; class=&quot;headerlink&quot; title=&quot;关于私钥&quot;&gt;&lt;/a&gt;关于私钥&lt;/h2&gt;&lt;p&gt;你可能注意到了，整个过程中我们都没有使用到私钥。之前也提到过，GPG 签名和验证的过程不需要私钥，私钥在解密过程中使用的。所以如果你生成了一个包含私钥的密钥对，任何情况向下都不要把私钥泄露给除了你之外的任何人。如果需要向对方发送加密信息，请让对方提供指纹，导入对方的公钥进行加密，而不要用自己的公钥加密后再把自己的私钥发送过去。&lt;/p&gt;
 &lt;h1 id=&quot;验证&quot;&gt;&lt;a href=&quot;#验证&quot; class=&quot;headerlink&quot; title=&quot;验证&quot;&gt;&lt;/a&gt;验证&lt;/h1&gt;&lt;h2 id=&quot;获得公钥&quot;&gt;&lt;a href=&quot;#获得公钥&quot; class=&quot;headerlink&quot; title=&quot;获得公钥&quot;&gt;&lt;/a&gt;获得公钥&lt;/h2&gt;&lt;p&gt;你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹，然后根据指纹到服务器上查找公钥。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg --keyserver subkeys.pgp.net --search-keys &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;选择对应的编号，会自动下载并导入该公钥。&lt;/p&gt;
