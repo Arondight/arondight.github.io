@@ -22,11 +22,6 @@ function doInit
     return 0
   fi
 
-  if [[ -r $CLONE_SH ]]
-  then
-    source $CLONE_SH
-  fi
-
   if type cnpm >/dev/null 2>&1
   then
     # See https://github.com/cnpm/cnpm
@@ -43,6 +38,11 @@ function doInit
   then
     echo "failed: hexo is needed but not found. quit."
     return 1
+  fi
+
+  if [[ -r $CLONE_SH ]]
+  then
+    source $CLONE_SH
   fi
 
   if [[ -r $GITMODULES && -d ${C_DIR}/.git ]]

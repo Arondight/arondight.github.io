@@ -1,3 +1,9 @@
+v2016-04-20
+  * Modify page "About"
+  * Modify author for this site
+  * Modify init.sh
+  * Update themes
+
 v2016-04-19
   * Modify post "使用SSH反向隧道进行内网穿透"
   * Add push.sh
@@ -71,7 +77,7 @@ v2016-02-19
   * Add recent visitors on about page
 
 v2016-02-18.2
-  * Modify "About"
+  * Modify page "About"
 
 v2016-02-18
   * Add categories for posts
