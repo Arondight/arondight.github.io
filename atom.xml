@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-04-20T11:33:46.078Z</updated>
+  <updated>2016-04-21T11:59:20.636Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/"/>
     <id>https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</id>
     <published>2016-04-17T06:16:53.000Z</published>
-    <updated>2016-04-20T11:33:46.078Z</updated>
+    <updated>2016-04-21T11:59:20.636Z</updated>
     
     <content type="html">&lt;h1 id=&quot;GPG-是什么&quot;&gt;&lt;a href=&quot;#GPG-是什么&quot; class=&quot;headerlink&quot; title=&quot;GPG 是什么&quot;&gt;&lt;/a&gt;GPG 是什么&lt;/h1&gt;&lt;p&gt;提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。&lt;/p&gt;
 &lt;p&gt;GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥对，其中公钥单独可完成签名和验证，加密和解密则需要分别使用公钥和私钥来完成。&lt;/p&gt;
@@ -41,7 +41,7 @@
 &lt;p&gt;根据用户名和邮箱，找到你之前生成的那个密钥。其中&lt;code&gt;pub&lt;/code&gt; 代表公钥，&lt;code&gt;sub&lt;/code&gt; 则是私钥。下面是一个样例输出。&lt;/p&gt;
 &lt;figure class=&quot;highlight accesslog&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;pub   rsa4096/B66CC194 &lt;span class=&quot;number&quot;&gt;2016&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;04&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;[SC]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;uid         &lt;span class=&quot;string&quot;&gt;[ 绝对 ]&lt;/span&gt; Arondight &amp;lt;shell_way@foxmail.com&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sub   rsa4096/F96E3CB7 &lt;span class=&quot;number&quot;&gt;2016&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;04&lt;/span&gt;-&lt;span class=&quot;number&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;[E]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;可以看到一个算法为RSA、长度为4096、钥匙号（key ID）为&lt;code&gt;B66CC194&lt;/code&gt; 的公钥。找出公钥后，就可以上传这个公钥到GPG 服务器了。&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg --keyserver subkeys.pgp.net --send-keys &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg --keyserver keys.gnupg.net --send-keys &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;上传公钥到GitHub&quot;&gt;&lt;a href=&quot;#上传公钥到GitHub&quot; class=&quot;headerlink&quot; title=&quot;上传公钥到GitHub&quot;&gt;&lt;/a&gt;上传公钥到GitHub&lt;/h2&gt;&lt;p&gt;GitHub 刚刚发布了支持GPG 签名的消息，所以你可以选择使用GitHub 托管你的仓库。首先你需要以文本形式导出你的公钥。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg &lt;span class=&quot;_&quot;&gt;-a&lt;/span&gt; -o gnupg.pub --export &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后打开你的GitHub &lt;a href=&quot;https://github.com/settings/keys&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;密钥管理&lt;/a&gt;界面，根据文件&lt;code&gt;gnupg.pub&lt;/code&gt; 为你的GitHub 账户配置公钥。&lt;/p&gt;
@@ -62,7 +62,7 @@
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git tag &lt;span class=&quot;_&quot;&gt;-s&lt;/span&gt; &amp;lt;tag&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;关于私钥&quot;&gt;&lt;a href=&quot;#关于私钥&quot; class=&quot;headerlink&quot; title=&quot;关于私钥&quot;&gt;&lt;/a&gt;关于私钥&lt;/h2&gt;&lt;p&gt;你可能注意到了，整个过程中我们都没有使用到私钥。之前也提到过，GPG 签名和验证的过程不需要私钥，私钥在解密过程中使用的。所以如果你生成了一个包含私钥的密钥对，任何情况向下都不要把私钥泄露给除了你之外的任何人。如果需要向对方发送加密信息，请让对方提供指纹，导入对方的公钥进行加密，而不要用自己的公钥加密后再把自己的私钥发送过去。&lt;/p&gt;
 &lt;h1 id=&quot;验证&quot;&gt;&lt;a href=&quot;#验证&quot; class=&quot;headerlink&quot; title=&quot;验证&quot;&gt;&lt;/a&gt;验证&lt;/h1&gt;&lt;h2 id=&quot;获得公钥&quot;&gt;&lt;a href=&quot;#获得公钥&quot; class=&quot;headerlink&quot; title=&quot;获得公钥&quot;&gt;&lt;/a&gt;获得公钥&lt;/h2&gt;&lt;p&gt;你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹，然后根据指纹到服务器上查找公钥。&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg --keyserver subkeys.pgp.net --search-keys &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg --keyserver keys.gnupg.net --search-keys &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;选择对应的编号，会自动下载并导入该公钥。&lt;/p&gt;
 &lt;h2 id=&quot;设置信任&quot;&gt;&lt;a href=&quot;#设置信任&quot; class=&quot;headerlink&quot; title=&quot;设置信任&quot;&gt;&lt;/a&gt;设置信任&lt;/h2&gt;&lt;p&gt;导入后的公钥需要设置信任度才能使用该公钥进行验证，你可以通过类似下面的指令编辑该公钥的信息。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gpg --edit-key &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -72,7 +72,7 @@
 &lt;h2 id=&quot;验证签名&quot;&gt;&lt;a href=&quot;#验证签名&quot; class=&quot;headerlink&quot; title=&quot;验证签名&quot;&gt;&lt;/a&gt;验证签名&lt;/h2&gt;&lt;p&gt;现在你可以用导入的公钥来验证你&lt;code&gt;git clone&lt;/code&gt; 下来的仓库的提交和标签了，同样你需要首先告诉Git 应该使用哪个公钥对这个仓库进行验证。一般来说不同作者的项目公钥都不同，建议不要将用于验证的公钥设置为全局。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git config user.signingkey &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后可以像下面这样验证一个提交。&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git verify-commit HEAD&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git verify-commit &amp;lt;commit ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;或者验证一个标签。&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git tag -v &amp;lt;tag&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h1 id=&quot;扩展阅读&quot;&gt;&lt;a href=&quot;#扩展阅读&quot; class=&quot;headerlink&quot; title=&quot;扩展阅读&quot;&gt;&lt;/a&gt;扩展阅读&lt;/h1&gt;&lt;h2 id=&quot;签名和验证&quot;&gt;&lt;a href=&quot;#签名和验证&quot; class=&quot;headerlink&quot; title=&quot;签名和验证&quot;&gt;&lt;/a&gt;签名和验证&lt;/h2&gt;&lt;table&gt;
@@ -85,23 +85,23 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;二进制方式签名文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;gpg -u &amp;lt;key ID&amp;gt; -s file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gpg -u &amp;lt;key ID&amp;gt; -s &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;纯文本方式签名文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;gpg -u &amp;lt;key ID&amp;gt; --clearsign file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gpg -u &amp;lt;key ID&amp;gt; --clearsign &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;签名文件并独立存放签名&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;gpg -u &amp;lt;key ID&amp;gt; --detach-sign file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gpg -u &amp;lt;key ID&amp;gt; --detach-sign &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;验证文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;gpg --verify-files file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gpg --verify-files &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;通过独立的签名文件验证文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;gpg --verify-files file.sig file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gpg --verify-files file.sig &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -115,15 +115,15 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;二进制方式加密文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;gpg -r &amp;lt;key ID&amp;gt; -e file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gpg -r &amp;lt;key ID&amp;gt; -e &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;纯文本方式加密文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;gpg -r &amp;lt;key ID&amp;gt; -a -e file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gpg -r &amp;lt;key ID&amp;gt; -a -e &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;解密文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;gpg file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gpg &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -248,7 +248,7 @@
     <link href="https://arondight.github.io/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     <id>https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</id>
     <published>2016-02-17T10:09:57.000Z</published>
-    <updated>2016-04-19T12:48:28.308Z</updated>
+    <updated>2016-04-21T12:00:02.743Z</updated>
     
     <content type="html">&lt;h1 id=&quot;对应的情况&quot;&gt;&lt;a href=&quot;#对应的情况&quot; class=&quot;headerlink&quot; title=&quot;对应的情况&quot;&gt;&lt;/a&gt;对应的情况&lt;/h1&gt;&lt;p&gt;这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。&lt;/p&gt;
 &lt;p&gt;假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用&lt;strong&gt;公网IP + 端口&lt;/strong&gt; 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。&lt;/p&gt;
@@ -329,7 +329,7 @@
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ su - autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh-keygen -t &lt;span class=&quot;string&quot;&gt;&#39;rsa&#39;&lt;/span&gt; -C &lt;span class=&quot;string&quot;&gt;&#39;autossh@b.localhost&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh-copy-id usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;注意该&lt;strong&gt;密钥不要设置密码&lt;/strong&gt;，也就是运行&lt;code&gt;ssh-keygen&lt;/code&gt; 指令时尽管一路回车，不要输入额外的字符。&lt;/p&gt;
 &lt;p&gt;然后在&lt;strong&gt;B&lt;/strong&gt; 上创建以&lt;em&gt;autossh&lt;/em&gt; 用户权限调用&lt;code&gt;autossh&lt;/code&gt; 的service 文件。将下面文本写入到文件&lt;code&gt;/lib/systemd/system/autossh.service&lt;/code&gt;，并设置权限为644：&lt;/p&gt;
-&lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;[Unit]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Description&lt;/span&gt;=Auto SSH Tunnel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;After&lt;/span&gt;=network-&lt;span class=&quot;literal&quot;&gt;on&lt;/span&gt;line.target&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Service]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;User&lt;/span&gt;=autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Type&lt;/span&gt;=simple&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;ExecStart&lt;/span&gt;=/bin/autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; -M &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:b.localhost:22&#39;&lt;/span&gt; usera@a.site -i /home/autossh/.ssh/id_rsa&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;ExecReload&lt;/span&gt;=/bin/kill -HUP &lt;span class=&quot;variable&quot;&gt;$MAINPID&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;KillMode&lt;/span&gt;=process&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Restart&lt;/span&gt;=always&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Install]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;WantedBy&lt;/span&gt;=multi-user.target&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;WantedBy&lt;/span&gt;=graphical.target&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;[Unit]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Description&lt;/span&gt;=Auto SSH Tunnel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;After&lt;/span&gt;=network-&lt;span class=&quot;literal&quot;&gt;on&lt;/span&gt;line.target&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Service]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;User&lt;/span&gt;=autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Type&lt;/span&gt;=simple&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;ExecStart&lt;/span&gt;=/bin/autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; -M &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:127.0.0.1:22&#39;&lt;/span&gt; usera@a.site -i /home/autossh/.ssh/id_rsa&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;ExecReload&lt;/span&gt;=/bin/kill -HUP &lt;span class=&quot;variable&quot;&gt;$MAINPID&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;KillMode&lt;/span&gt;=process&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Restart&lt;/span&gt;=always&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Install]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;WantedBy&lt;/span&gt;=multi-user.target&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;WantedBy&lt;/span&gt;=graphical.target&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;在&lt;strong&gt;B&lt;/strong&gt; 上设置该服务自动启动：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ sudo systemctl &lt;span class=&quot;built_in&quot;&gt;enable&lt;/span&gt; autossh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;如果你愿意，在这之后可以立刻启动它：&lt;/p&gt;
