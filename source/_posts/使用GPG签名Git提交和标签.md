@@ -58,7 +58,7 @@ sub   rsa4096/F96E3CB7 2016-04-15 [E]
 可以看到一个算法为RSA、长度为4096、钥匙号（key ID）为`B66CC194` 的公钥。找出公钥后，就可以上传这个公钥到GPG 服务器了。
 
 ```bash
-gpg --keyserver subkeys.pgp.net --send-keys <key ID>
+gpg --keyserver keys.gnupg.net --send-keys <key ID>
 ```
 
 ## 上传公钥到GitHub
@@ -116,7 +116,7 @@ git tag -s <tag>
 你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹，然后根据指纹到服务器上查找公钥。
 
 ```bash
-gpg --keyserver subkeys.pgp.net --search-keys <key ID>
+gpg --keyserver keys.gnupg.net --search-keys <key ID>
 ```
 
 选择对应的编号，会自动下载并导入该公钥。
@@ -161,7 +161,7 @@ git config user.signingkey <key ID>
 然后可以像下面这样验证一个提交。
 
 ```bash
-git verify-commit HEAD
+git verify-commit <commit ID>
 ```
 
 或者验证一个标签。
@@ -176,19 +176,19 @@ git tag -v <tag>
 
 | 动作 | 指令 |
 | --- | --- |
-| 二进制方式签名文件 | `gpg -u <key ID> -s file` |
-| 纯文本方式签名文件 | `gpg -u <key ID> --clearsign file` |
-| 签名文件并独立存放签名 | `gpg -u <key ID> --detach-sign file` |
-| 验证文件 | `gpg --verify-files file` |
-| 通过独立的签名文件验证文件 | `gpg --verify-files file.sig file` |
+| 二进制方式签名文件 | `gpg -u <key ID> -s <file>` |
+| 纯文本方式签名文件 | `gpg -u <key ID> --clearsign <file>` |
+| 签名文件并独立存放签名 | `gpg -u <key ID> --detach-sign <file>` |
+| 验证文件 | `gpg --verify-files <file>` |
+| 通过独立的签名文件验证文件 | `gpg --verify-files file.sig <file>` |
 
 ## 加密和解密
 
 | 动作 | 指令 |
 | --- | --- |
-| 二进制方式加密文件 | `gpg -r <key ID> -e file` |
-| 纯文本方式加密文件 | `gpg -r <key ID> -a -e file` |
-| 解密文件 | `gpg file` |
+| 二进制方式加密文件 | `gpg -r <key ID> -e <file>` |
+| 纯文本方式加密文件 | `gpg -r <key ID> -a -e <file>` |
+| 解密文件 | `gpg <file>` |
 
 > 如果你想在加密的同时签名文件，在加密指令中额外指定一个`-s` 选项。
 

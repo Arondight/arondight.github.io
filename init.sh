@@ -16,7 +16,7 @@ function doInit
 
   cd $C_DIR
 
-  if [[ -d $C_DIR/.deploy_git ]]
+  if [[ -d ${C_DIR}/.deploy_git && -d ${C_DIR}/node_modules ]]
   then
     echo "warn: it seems this repo has been initialized, do nothing."
     return 0

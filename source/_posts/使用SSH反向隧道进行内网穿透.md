@@ -141,7 +141,7 @@ After=network-online.target
 [Service]
 User=autossh
 Type=simple
-ExecStart=/bin/autossh -p 22 -M 6777 -NR '*:6766:b.localhost:22' usera@a.site -i /home/autossh/.ssh/id_rsa
+ExecStart=/bin/autossh -p 22 -M 6777 -NR '*:6766:127.0.0.1:22' usera@a.site -i /home/autossh/.ssh/id_rsa
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 Restart=always
