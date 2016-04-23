@@ -3,7 +3,7 @@
 # Init It!
 # ==============================================================================
 
-function doInit
+function doInit ()
 {
   local NPM_CMD=''
   local C_DIR=$(dirname $(readlink -f $0))

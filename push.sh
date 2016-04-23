@@ -7,7 +7,7 @@
 BRANCH='source'
 # }
 
-function doPush
+function doPush ()
 {
   local C_DIR=$(dirname $(readlink -f $0))
   local T_DIR=$(pwd)

@@ -3,7 +3,8 @@
 # Init Themes!
 # ==============================================================================
 
-function initTheme {
+function _hexo_theme_yelee ()
+{
   [[ -z $THEME_DIR ]] && local THEME_DIR=$(dirname $(readlink -f $0))
   local BACKGROUND_DIR=${THEME_DIR}/hexo-theme-yelee/source/background
 
@@ -11,6 +12,13 @@ function initTheme {
   then
     rm -rvf ${BACKGROUND_DIR}/*
   fi
+
+  return $?
+}
+
+function initTheme ()
+{
+  _hexo_theme_yelee
 
   return $?
 }

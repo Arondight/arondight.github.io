@@ -3,7 +3,7 @@
 # Generate It!
 # ==============================================================================
 
-function doGenerate
+function doGenerate ()
 {
   local C_DIR=$(dirname $(readlink -f $0))
   local BUILD_SH=$C_DIR/build.sh

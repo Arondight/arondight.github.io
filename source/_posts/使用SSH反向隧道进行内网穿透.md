@@ -21,8 +21,8 @@ tags:
 | 机器代号 | 机器位置 | 地址 | 账户 | ssh/sshd 端口 | 是否需要运行sshd |
 | --- | --- | --- | --- | --- | --- |
 | A | 位于公网 | a.site | usera | 22 | 是 |
-| B | 位于NAT 之后 | b.localhost | userb | 22 | 是 |
-| C | 位于NAT 之后 | c.localhost | userc | 22 | 否 |
+| B | 位于NAT 之后 | 127.0.0.1 | userb | 22 | 是 |
+| C | 位于NAT 之后 | 127.0.0.1 | userc | 22 | 否 |
 
 <!-- more -->
 
@@ -35,7 +35,7 @@ tags:
 首先在**B** 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：
 
 ```bash
-B $ ssh -p 22 -qngfNTR 6766:b.localhost:22 usera@a.site
+B $ ssh -p 22 -qngfNTR 6766:127.0.0.1:22 usera@a.site
 ```
 
 然后在**A** 上利用6766 端口反向SSH 到B：
@@ -61,7 +61,7 @@ $ sudo pacman -S autossh
 下面在**B** 上做之前类似的事情，不同的是该隧道会由`autossh` 来维持：
 
 ```bash
-B $ autossh -p 22 -M 6777 -NR 6766:b.localhost:22 usera@a.site
+B $ autossh -p 22 -M 6777 -NR 6766:127.0.0.1:22 usera@a.site
 ```
 
 `-M` 参数指定的端口用来监听隧道的状态，与端口转发无关。
@@ -97,7 +97,7 @@ A $ sudo systemctl restart sshd
 然后在**B** 上对之前用到的`autossh` 指令略加修改：
 
 ```bash
-B $ autossh -p 22 -M 6777 -NR '*:6766:b.localhost:22' usera@a.site
+B $ autossh -p 22 -M 6777 -NR '*:6766:127.0.0.1:22' usera@a.site
 ```
 
 之后在**C** 上利用**A** 的6766 端口SSH 连接到**B**：
@@ -125,7 +125,7 @@ B $ sudo passwd autossh
 
 ```bash
 B $ su - autossh
-B $ ssh-keygen -t 'rsa' -C 'autossh@b.localhost'
+B $ ssh-keygen -t 'rsa' -C 'autossh@B'
 B $ ssh-copy-id usera@a.site
 ```
 

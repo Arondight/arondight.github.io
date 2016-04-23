@@ -3,7 +3,7 @@
 # Build It!
 # ==============================================================================
 
-function doBuild
+function doBuild ()
 {
   local C_DIR=$(dirname $(readlink -f $0))
   local MY_DIR=${C_DIR}/my

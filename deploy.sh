@@ -3,7 +3,7 @@
 # Deploy It!
 # ==============================================================================
 
-function doDeploy
+function doDeploy ()
 {
   local C_DIR=$(dirname $(readlink -f $0))
   local GENERATE_SH=${C_DIR}/generate.sh

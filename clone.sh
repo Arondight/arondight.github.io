@@ -3,7 +3,7 @@
 # Clone It!
 # ==============================================================================
 
-function doClone
+function doClone ()
 {
   local C_DIR=$(dirname $(readlink -f $0))
   local GIT_DIR=${C_DIR}/.deploy_git
