@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-04-22T15:15:20.954Z</updated>
+  <updated>2016-04-23T05:39:14.319Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,18 +20,18 @@
     <link href="https://arondight.github.io/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/"/>
     <id>https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</id>
     <published>2016-04-17T06:16:53.000Z</published>
-    <updated>2016-04-22T15:15:20.954Z</updated>
+    <updated>2016-04-23T05:39:14.319Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Pretty-Good-Privacy&quot;&gt;&lt;a href=&quot;#Pretty-Good-Privacy&quot; class=&quot;headerlink&quot; title=&quot;Pretty Good Privacy&quot;&gt;&lt;/a&gt;Pretty Good Privacy&lt;/h1&gt;&lt;h2 id=&quot;GPG-是什么&quot;&gt;&lt;a href=&quot;#GPG-是什么&quot; class=&quot;headerlink&quot; title=&quot;GPG 是什么&quot;&gt;&lt;/a&gt;GPG 是什么&lt;/h2&gt;&lt;p&gt;提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，中文直译为“完美隐私”，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。&lt;/p&gt;
 &lt;p&gt;GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥环，GPG 使用私钥和公钥分别完成签名和加密，对应地验证和解密由公钥和私钥完成。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;主钥、从钥、公钥和私钥&quot;&gt;&lt;a href=&quot;#主钥、从钥、公钥和私钥&quot; class=&quot;headerlink&quot; title=&quot;主钥、从钥、公钥和私钥&quot;&gt;&lt;/a&gt;主钥、从钥、公钥和私钥&lt;/h2&gt;&lt;p&gt;然而GPG 密钥环并不只有一对公钥和私钥，如果称公钥和其对应的私钥为一个密钥对的话，那么一个GPG 密钥环可以拥有很多个密钥对，每一个密钥对都由一个钥匙号（key ID）标识，被称为钥匙。其中有一个钥匙拥有签名其他钥匙的功能（可以在密钥环中创建钥匙），这个钥匙被称为主钥，其他的钥匙则被称为从钥。&lt;/p&gt;
+&lt;h2 id=&quot;主钥、从钥、公钥、私钥&quot;&gt;&lt;a href=&quot;#主钥、从钥、公钥、私钥&quot; class=&quot;headerlink&quot; title=&quot;主钥、从钥、公钥、私钥&quot;&gt;&lt;/a&gt;主钥、从钥、公钥、私钥&lt;/h2&gt;&lt;p&gt;然而GPG 密钥环并不只有一对公钥和私钥，如果称公钥和其对应的私钥为一个密钥对的话，那么一个GPG 密钥环可以拥有很多个密钥对，每一个密钥对都由一个钥匙号（key ID）标识，被称为钥匙。其中有一个钥匙拥有签名其他钥匙的功能（可以在密钥环中创建钥匙），这个钥匙被称为主钥，其他的钥匙则被称为从钥。&lt;/p&gt;
 &lt;p&gt;下面列出了我在使用的一个密钥环，首先是公钥。&lt;/p&gt;
 &lt;figure class=&quot;highlight asciidoc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ gpg --list-keys&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;/home/&amp;lt;user&amp;gt;/.gnupg/pubring.kbx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;---------------------------------&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;pub   rsa4096/B66CC194 2016-04-15 [SC]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;uid         [ 绝对 ] Arondight &amp;lt;shell&lt;span class=&quot;emphasis&quot;&gt;_way@foxmail.com&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sub   rsa4096/F96E3CB7 2016-04-15 [E]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后是私钥。&lt;/p&gt;
 &lt;figure class=&quot;highlight asciidoc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ gpg --list-secret-keys&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;/home/&amp;lt;user&amp;gt;/.gnupg/pubring.kbx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;---------------------------------&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sec   rsa4096/B66CC194 2016-04-15 [SC]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;uid         [ 绝对 ] Arondight &amp;lt;shell&lt;span class=&quot;emphasis&quot;&gt;_way@foxmail.com&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ssb   rsa4096/F96E3CB7 2016-04-15 [E]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;GPG 列出的每个密钥环第一行一定是主钥，其余的则为从钥，可以看到上面的密钥环中只有一个主钥和一个从钥。每个密钥后面有许多信息描述它的属性，例如&lt;code&gt;sec   rsa4096/B66CC194 2016-04-15 [SC]&lt;/code&gt; 代表这是一个主钥的私钥，加密算法为rsa，长度4096 位，主钥的钥匙号为&lt;code&gt;B66CC194&lt;/code&gt;，创建于2016 年4 月15 日，功能为&lt;code&gt;SC&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;不难看出一个GPG 密钥环一共有四种类型的钥匙，如果按照上面指令的样例输出来看的话则如下表。&lt;/p&gt;
+&lt;p&gt;不难看出一个GPG 密钥环一共有四种类型的密钥，如果按照上面指令的样例输出来看的话则如下表。&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -329,7 +329,7 @@
     <link href="https://arondight.github.io/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     <id>https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</id>
     <published>2016-02-17T10:09:57.000Z</published>
-    <updated>2016-04-21T12:00:02.743Z</updated>
+    <updated>2016-04-23T04:23:45.075Z</updated>
     
     <content type="html">&lt;h1 id=&quot;对应的情况&quot;&gt;&lt;a href=&quot;#对应的情况&quot; class=&quot;headerlink&quot; title=&quot;对应的情况&quot;&gt;&lt;/a&gt;对应的情况&lt;/h1&gt;&lt;p&gt;这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。&lt;/p&gt;
 &lt;p&gt;假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用&lt;strong&gt;公网IP + 端口&lt;/strong&gt; 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。&lt;/p&gt;
@@ -357,7 +357,7 @@
 &lt;tr&gt;
 &lt;td&gt;B&lt;/td&gt;
 &lt;td&gt;位于NAT 之后&lt;/td&gt;
-&lt;td&gt;b.localhost&lt;/td&gt;
+&lt;td&gt;127.0.0.1&lt;/td&gt;
 &lt;td&gt;userb&lt;/td&gt;
 &lt;td&gt;22&lt;/td&gt;
 &lt;td&gt;是&lt;/td&gt;
@@ -365,7 +365,7 @@
 &lt;tr&gt;
 &lt;td&gt;C&lt;/td&gt;
 &lt;td&gt;位于NAT 之后&lt;/td&gt;
-&lt;td&gt;c.localhost&lt;/td&gt;
+&lt;td&gt;127.0.0.1&lt;/td&gt;
 &lt;td&gt;userc&lt;/td&gt;
 &lt;td&gt;22&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
@@ -378,7 +378,7 @@
 &lt;/blockquote&gt;
 &lt;h1 id=&quot;SSH-反向隧道&quot;&gt;&lt;a href=&quot;#SSH-反向隧道&quot; class=&quot;headerlink&quot; title=&quot;SSH 反向隧道&quot;&gt;&lt;/a&gt;SSH 反向隧道&lt;/h1&gt;&lt;p&gt;这种手段实质上是由B 向A 主动地建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上，只要这条隧道不关闭，这个转发就是有效的。有了这个端口转发，只需要访问A 的6766 端口反向连接B 即可。&lt;/p&gt;
 &lt;p&gt;首先在&lt;strong&gt;B&lt;/strong&gt; 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh -p 22 -qngfNTR 6766:b.localhost:22 usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh -p 22 -qngfNTR 6766:127.0.0.1:22 usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后在&lt;strong&gt;A&lt;/strong&gt; 上利用6766 端口反向SSH 到B：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p 6766 userb@127.0.0.1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;要做的事情其实就是这么简单。&lt;/p&gt;
@@ -386,7 +386,7 @@
 &lt;p&gt;一个最简单的方法就是&lt;code&gt;autossh&lt;/code&gt;，这个软件会在超时之后自动重新建立SSH 隧道，这样就解决了隧道的稳定性问题，如果你使用&lt;a href=&quot;https://www.archlinux.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Arch Linux&lt;/a&gt;，你可以这样获得它：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo pacman -S autossh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;下面在&lt;strong&gt;B&lt;/strong&gt; 上做之前类似的事情，不同的是该隧道会由&lt;code&gt;autossh&lt;/code&gt; 来维持：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p 22 -M 6777 -NR 6766:b.localhost:22 usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p 22 -M 6777 -NR 6766:127.0.0.1:22 usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;code&gt;-M&lt;/code&gt; 参数指定的端口用来监听隧道的状态，与端口转发无关。&lt;/p&gt;
 &lt;p&gt;之后你可以在A 上通过6766 端口访问B 了：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ ssh -p 6766 userb@127.0.0.1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -398,7 +398,7 @@
 &lt;p&gt;然后重启&lt;code&gt;sshd&lt;/code&gt;：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;A $ sudo systemctl restart sshd&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后在&lt;strong&gt;B&lt;/strong&gt; 上对之前用到的&lt;code&gt;autossh&lt;/code&gt; 指令略加修改：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p 22 -M 6777 -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:b.localhost:22&#39;&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ autossh -p 22 -M 6777 -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:127.0.0.1:22&#39;&lt;/span&gt; usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;之后在&lt;strong&gt;C&lt;/strong&gt; 上利用&lt;strong&gt;A&lt;/strong&gt; 的6766 端口SSH 连接到&lt;strong&gt;B&lt;/strong&gt;：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;C $ ssh -p 6766 userb@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;至此你已经轻而易举的穿透了两层NAT。&lt;/p&gt;
@@ -407,7 +407,7 @@
 &lt;p&gt;然后在&lt;strong&gt;B&lt;/strong&gt; 上新建一个用户&lt;em&gt;autossh&lt;/em&gt;，根据权限最小化思想，B 上的&lt;code&gt;autossh&lt;/code&gt; 服务将以&lt;em&gt;autossh&lt;/em&gt; 用户的身份运行，以尽大可能避免出现安全问题：&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ sudo useradd -m autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ sudo passwd autossh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;紧接着在&lt;strong&gt;B&lt;/strong&gt; 上为&lt;em&gt;autossh&lt;/em&gt; 用户创建SSH 密钥，并上传到A：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ su - autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh-keygen -t &lt;span class=&quot;string&quot;&gt;&#39;rsa&#39;&lt;/span&gt; -C &lt;span class=&quot;string&quot;&gt;&#39;autossh@b.localhost&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh-copy-id usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;B $ su - autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh-keygen -t &lt;span class=&quot;string&quot;&gt;&#39;rsa&#39;&lt;/span&gt; -C &lt;span class=&quot;string&quot;&gt;&#39;autossh@B&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B $ ssh-copy-id usera@a.site&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;注意该&lt;strong&gt;密钥不要设置密码&lt;/strong&gt;，也就是运行&lt;code&gt;ssh-keygen&lt;/code&gt; 指令时尽管一路回车，不要输入额外的字符。&lt;/p&gt;
 &lt;p&gt;然后在&lt;strong&gt;B&lt;/strong&gt; 上创建以&lt;em&gt;autossh&lt;/em&gt; 用户权限调用&lt;code&gt;autossh&lt;/code&gt; 的service 文件。将下面文本写入到文件&lt;code&gt;/lib/systemd/system/autossh.service&lt;/code&gt;，并设置权限为644：&lt;/p&gt;
 &lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;[Unit]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Description&lt;/span&gt;=Auto SSH Tunnel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;After&lt;/span&gt;=network-&lt;span class=&quot;literal&quot;&gt;on&lt;/span&gt;line.target&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Service]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;User&lt;/span&gt;=autossh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Type&lt;/span&gt;=simple&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;ExecStart&lt;/span&gt;=/bin/autossh -p &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; -M &lt;span class=&quot;number&quot;&gt;6777&lt;/span&gt; -NR &lt;span class=&quot;string&quot;&gt;&#39;*:6766:127.0.0.1:22&#39;&lt;/span&gt; usera@a.site -i /home/autossh/.ssh/id_rsa&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;ExecReload&lt;/span&gt;=/bin/kill -HUP &lt;span class=&quot;variable&quot;&gt;$MAINPID&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;KillMode&lt;/span&gt;=process&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;Restart&lt;/span&gt;=always&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Install]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;WantedBy&lt;/span&gt;=multi-user.target&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;WantedBy&lt;/span&gt;=graphical.target&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -452,7 +452,7 @@
 &lt;tr&gt;
 &lt;td&gt;B&lt;/td&gt;
 &lt;td&gt;位于NAT 之后&lt;/td&gt;
-&lt;td&gt;b.localhost&lt;/td&gt;
+&lt;td&gt;127.0.0.1&lt;/td&gt;
 &lt;td&gt;userb&lt;/td&gt;
 &lt;td&gt;22&lt;/td&gt;
 &lt;td&gt;是&lt;/td&gt;
@@ -460,7 +460,7 @@
 &lt;tr&gt;
 &lt;td&gt;C&lt;/td&gt;
 &lt;td&gt;位于NAT 之后&lt;/td&gt;
-&lt;td&gt;c.localhost&lt;/td&gt;
+&lt;td&gt;127.0.0.1&lt;/td&gt;
 &lt;td&gt;userc&lt;/td&gt;
 &lt;td&gt;22&lt;/td&gt;
 &lt;td&gt;否&lt;/td&gt;
