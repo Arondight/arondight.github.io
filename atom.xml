@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-04-23T05:39:14.319Z</updated>
+  <updated>2016-04-23T09:34:57.584Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/"/>
     <id>https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</id>
     <published>2016-04-17T06:16:53.000Z</published>
-    <updated>2016-04-23T05:39:14.319Z</updated>
+    <updated>2016-04-23T09:34:57.584Z</updated>
     
     <content type="html">&lt;h1 id=&quot;Pretty-Good-Privacy&quot;&gt;&lt;a href=&quot;#Pretty-Good-Privacy&quot; class=&quot;headerlink&quot; title=&quot;Pretty Good Privacy&quot;&gt;&lt;/a&gt;Pretty Good Privacy&lt;/h1&gt;&lt;h2 id=&quot;GPG-是什么&quot;&gt;&lt;a href=&quot;#GPG-是什么&quot; class=&quot;headerlink&quot; title=&quot;GPG 是什么&quot;&gt;&lt;/a&gt;GPG 是什么&lt;/h2&gt;&lt;p&gt;提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，中文直译为“完美隐私”，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。&lt;/p&gt;
 &lt;p&gt;GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥环，GPG 使用私钥和公钥分别完成签名和加密，对应地验证和解密由公钥和私钥完成。&lt;/p&gt;
@@ -176,7 +176,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;通过独立的签名文件验证文件&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;gpg --verify-files file.sig &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gpg --verify-files &amp;lt;file_sig&amp;gt; &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
