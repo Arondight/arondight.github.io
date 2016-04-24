@@ -239,7 +239,7 @@ $ git tag -v <tag>
 | 纯文本方式签名文件 | `gpg -u <key ID> --clearsign <file>` |
 | 签名文件并独立存放签名 | `gpg -u <key ID> --detach-sign <file>` |
 | 验证文件 | `gpg --verify-files <file>` |
-| 通过独立的签名文件验证文件 | `gpg --verify-files file.sig <file>` |
+| 通过独立的签名文件验证文件 | `gpg --verify-files <file_sig> <file>` |
 
 > 如果不指定`-u` 选项，会使用第一个密钥环中主钥的私钥进行签名。
 
