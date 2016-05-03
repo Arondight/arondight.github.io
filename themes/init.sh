@@ -2,11 +2,11 @@
 # ==============================================================================
 # Init Themes!
 # ==============================================================================
+THEME_DIR=${THEME_DIR:-$(dirname $(readlink -f $0))}
 
 function _hexo_theme_yelee ()
 {
-  [[ -z $THEME_DIR ]] && local THEME_DIR=$(dirname $(readlink -f $0))
-  local BACKGROUND_DIR=${THEME_DIR}/hexo-theme-yelee/source/background
+  local BACKGROUND_DIR="${THEME_DIR}/hexo-theme-yelee/source/background"
 
   if [[ -d $BACKGROUND_DIR ]]
   then
