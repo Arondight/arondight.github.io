@@ -1359,6 +1359,13 @@ body .ui-tooltip {
 .article-entry blockquote blockquote {
   border-left: none;
 }
+.article-entry blockquote footer {
+  font-style: italic;
+}
+.article-entry blockquote footer cite::before {
+  content: "—";
+  padding: 0 0.3em;
+}
 .article-entry a:hover {
   text-decoration: underline;
   color: #9c9;
@@ -1399,6 +1406,12 @@ body .ui-tooltip {
 .article-entry li ol li:before {
   content: "";
   background: #dedede;
+}
+.article-entry li.task-list {
+  list-style: none;
+}
+.article-entry li.task-list::before {
+  display: none;
 }
 .article-entry h1 {
   margin-top: 30px;
