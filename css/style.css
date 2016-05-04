@@ -831,12 +831,37 @@ a {
   -moz-background-size: 82%;
   background-size: 82%;
 }
+#header .header-nav .social .CSDN {
+  background: url("/img/CSDN.png") center no-repeat #f00;
+  -webkit-background-size: 82%;
+  -moz-background-size: 82%;
+  background-size: 82%;
+}
+#header .header-nav .social .博客园 {
+  background: url("/img/博客园.png") center no-repeat #217ed4;
+  -webkit-background-size: 95%;
+  -moz-background-size: 95%;
+  background-size: 95%;
+}
+#header .header-nav .social .Plunker {
+  background: url("/img/Plunker.png") center no-repeat #000;
+  -webkit-background-size: 90%;
+  -moz-background-size: 90%;
+  background-size: 90%;
+}
 #header .header-nav .social .GitHub {
   background: url("//cdn.bootcss.com/logos/0.2.0/github-octocat.svg") no-repeat #fff;
   -webkit-background-size: 90%;
   -moz-background-size: 90%;
   background-size: 90%;
   background-position: 50% 100%;
+}
+#header .header-nav .social .CodePen {
+  background: url("//cdn.bootcss.com/logos/0.2.0/codepen-icon.svg") no-repeat #000;
+  -webkit-background-size: 70%;
+  -moz-background-size: 70%;
+  background-size: 70%;
+  background-position: 50% 50%;
 }
 #header .header-nav .social .RSS {
   background: #ef7522;

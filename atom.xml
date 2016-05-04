@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-05-03T17:44:01.331Z</updated>
+  <updated>2016-05-04T11:59:26.320Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,30 +20,30 @@
     <link href="https://arondight.github.io/2016/05/03/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84%E4%B8%96%E7%95%8C%E7%8C%AE%E4%B8%8A%E7%A5%9D%E7%A6%8F/"/>
     <id>https://arondight.github.io/2016/05/03/为美好的世界献上祝福/</id>
     <published>2016-05-03T15:10:45.000Z</published>
-    <updated>2016-05-03T17:44:01.331Z</updated>
+    <updated>2016-05-04T11:59:26.320Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;A&quot;&gt;&lt;a href=&quot;#A&quot; class=&quot;headerlink&quot; title=&quot;A&quot;&gt;&lt;/a&gt;A&lt;/h1&gt;&lt;p&gt;首先说一下最近发生的两件事吧。&lt;/p&gt;
-&lt;h2 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h2&gt;&lt;p&gt;第一件事是在Github 上找到了自己三年前用的配置文件，于是晚上本地拉了一个&lt;a href=&quot;https://github.com/Arondight/profile/tree/old&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;分支&lt;/a&gt;fetch 下来后push 了上去。因为整套配置文件都是用软连接分发的，而目录架构又三年多没有变过，所以当想用Vim 打开里面的配置看看当时写的什么样子的时候，却发现自己正在使用一个配色很陌生的Vim。因为仓库检出到了三年前的分支，所以我看到了三年前自己使用的Vim。&lt;/p&gt;
+    <content type="html">&lt;h1 id=&quot;一&quot;&gt;&lt;a href=&quot;#一&quot; class=&quot;headerlink&quot; title=&quot;一&quot;&gt;&lt;/a&gt;一&lt;/h1&gt;&lt;p&gt;说一下最近发生的两件事吧。&lt;/p&gt;
+&lt;h2 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h2&gt;&lt;p&gt;第一件事是在Github 上找到了自己三年前用的一些配置文件，于是晚上本地拉了一个&lt;a href=&quot;https://github.com/Arondight/profile/tree/old&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;分支&lt;/a&gt;fetch 下来后push 了上去。因为整套配置文件都是用软连接分发的，而目录架构又三年多没有变过，所以当想用Vim 打开里面的配置看看当时写成什么样子的时候，却看到了一个很陌生的界面。因为仓库检出到了三年前的分支，所以我看到了三年前自己使用的Vim。&lt;/p&gt;
 &lt;p&gt;三年前我用着这个配置写过什么东西，最后那些事情也构成了现在的我。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;2&quot;&gt;&lt;a href=&quot;#2&quot; class=&quot;headerlink&quot; title=&quot;2&quot;&gt;&lt;/a&gt;2&lt;/h2&gt;&lt;p&gt;第二件事是感觉越来越看不清未来的大致轮廓了，将来会做什么行业，会在哪个城市，一切都变得模糊了起来。很多周围的事物，包括以前认为理所当然的事情都变得不确定。“自己以后肯定会继续写程序吧”，“肯定会选择留在北京吧”，“肯定会在技术上有所发展吧”，然而这些“理所当然”的事情自己越发都觉得难以相信。&lt;/p&gt;
 &lt;p&gt;较之于爱好和方向，最重要的问题已经变成了如何更好地生活，其余的只是生活的手段，包括曾经自己坚持的东西。&lt;/p&gt;
-&lt;h1 id=&quot;B&quot;&gt;&lt;a href=&quot;#B&quot; class=&quot;headerlink&quot; title=&quot;B&quot;&gt;&lt;/a&gt;B&lt;/h1&gt;&lt;p&gt;说一下这个行业吧，不只是程序员这一行，而是IT 这个行业，例如程序员、运维、测试之类的。&lt;/p&gt;
+&lt;h1 id=&quot;二&quot;&gt;&lt;a href=&quot;#二&quot; class=&quot;headerlink&quot; title=&quot;二&quot;&gt;&lt;/a&gt;二&lt;/h1&gt;&lt;p&gt;说一下这个行业吧，不只是程序员这一行，而是IT 这个行业，例如程序员、运维、测试之类的。&lt;/p&gt;
 &lt;h2 id=&quot;1-1&quot;&gt;&lt;a href=&quot;#1-1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h2&gt;&lt;p&gt;大学里我对IT 的印象，编程几乎占了所有的比重。虽然和有的人说大学想学医却最终学了计算机，其实一半是撒谎，能够写程序也是高中时期我的梦想之一。所以从某些意义上来说，我也算选对了一个大学。所以从这个意义上，我也理所当然的毕业后成了一个程序员。虽然毕业之前很长时间都在踹踹不安，是不是应该考研，万一毕业后生活在社会最底层怎么办，以后应该向哪个领域发展……然而毕业后就发现曾经的不安并没有什么实际的意义，只有去工作才有工资，不管方向是不是很合口，你总得找一份。&lt;/p&gt;
-&lt;p&gt;第一家公司是一个做手机操作系统的公司，说实话并没写多少代码，基本都是二次开发，晚上经常八点多才下班。现在的公司是做服务器操作系统的，编程的工作也不是很多，较之深度反而更加看重广度，好在一般不到六点就走人了。&lt;/p&gt;
+&lt;p&gt;第一家公司是一个做手机操作系统的公司，说实话并没写多少代码，基本都是二次开发，晚上经常八点才下班。现在的公司是做电脑操作系统的，编程的工作也不是很多，较之深度反而更加看重广度，好在一般不到六点就走人了。&lt;/p&gt;
 &lt;p&gt;然而无论如何，就结果而言我并没有像学生时代设想的那样成为一个100% 的程序员。&lt;/p&gt;
-&lt;h2 id=&quot;2-1&quot;&gt;&lt;a href=&quot;#2-1&quot; class=&quot;headerlink&quot; title=&quot;2&quot;&gt;&lt;/a&gt;2&lt;/h2&gt;&lt;p&gt;也是一半撒谎，有时我会和别人说，有点后悔当初没有按照父母的安排在家乡进事业单位，否则就能过上安安稳稳的生活了，然而其实我半点不曾后悔过。毕业后跟我去了同一个大学的两个兄弟留在在家乡，那里物价不贵，房租便宜，生活节奏很慢，晚上从七点开始，冬天六点多下班公交可能就停了。而我只身来了北京，一个晚上从九点开始的城市，物价很贵，房租普遍一个月一千五，房价高的几乎没有留下的可能性。&lt;/p&gt;
+&lt;h2 id=&quot;2-1&quot;&gt;&lt;a href=&quot;#2-1&quot; class=&quot;headerlink&quot; title=&quot;2&quot;&gt;&lt;/a&gt;2&lt;/h2&gt;&lt;p&gt;也是一半撒谎，有时我会和别人说，有点后悔当初没有按照父母的安排在家乡进事业单位，否则就能过上安安稳稳的生活了，然而至少就现在而言我半点不曾后悔过。毕业后跟我去了同一个大学的两个兄弟留在了家乡，那里物价不贵，房租便宜，生活节奏很慢，晚上从七点开始，冬天六点多下班公交可能就停了。而我只身来了北京，一个晚上从九点开始的城市，物价很贵，房租普遍一个月一千五，房价高的几乎没有留下的可能性。&lt;/p&gt;
 &lt;p&gt;然而将安稳的生活和四倍的工资相比，我选择了后者，纵使代价是只能在一个远离家乡的地方漂着。&lt;/p&gt;
-&lt;h2 id=&quot;3&quot;&gt;&lt;a href=&quot;#3&quot; class=&quot;headerlink&quot; title=&quot;3&quot;&gt;&lt;/a&gt;3&lt;/h2&gt;&lt;p&gt;好几次我妈给我打电话，说北京干够了就回家吧。挂上电话想想自己是不是真的能回去呢，多半已经回不去了吧。IT 是一个很矛盾的行业，相对于传统行业好混一点，但是只有一线城市才有更多的机会。相较于在一个金钱贬值的地方多赚一点，似乎在三线城市开个奶茶店也挺不错吧。然而无论混的好坏，很少见到一个做IT 的出来几年就回去的。如果真的回了家乡，那么敲键盘就很难赚到钱了，除了敲键盘，你还有什么吃饭的技能呢。&lt;/p&gt;
+&lt;h2 id=&quot;3&quot;&gt;&lt;a href=&quot;#3&quot; class=&quot;headerlink&quot; title=&quot;3&quot;&gt;&lt;/a&gt;3&lt;/h2&gt;&lt;p&gt;好几次我妈给我打电话，说北京干够了就回家吧。挂上电话想想自己是不是真的能回去呢。IT 是一个很矛盾的行业，相对于传统行业好混一点，但是只有一线城市才有更多的机会。相较于在一个金钱贬值的地方多赚一点，似乎在三线城市有一份收入不高但安稳的工作也挺不错吧。然而无论混的好坏，很少见到一个做IT 的出来几年就回去的。如果真的回了家乡，那么敲键盘就很难赚到钱了，除了敲键盘，你还有什么吃饭的技能呢。&lt;/p&gt;
 &lt;p&gt;你只能在一个自我价值贬值的地方才能够提升自身的存在价值，我觉得对于不少人而言做IT 就是这么个东西，至少对于现在的我而言是这样的。&lt;/p&gt;
-&lt;h1 id=&quot;C&quot;&gt;&lt;a href=&quot;#C&quot; class=&quot;headerlink&quot; title=&quot;C&quot;&gt;&lt;/a&gt;C&lt;/h1&gt;&lt;p&gt;说一些其他的事情吧。&lt;/p&gt;
-&lt;h2 id=&quot;1-2&quot;&gt;&lt;a href=&quot;#1-2&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h2&gt;&lt;p&gt;最近开始变得越来越懒了，下班回来以后在群里扯扯淡，去B 站追追番，然后发呆一会儿，就到了睡觉的时间。然而就在两三个月前的时候还经常晚上在电脑前敲代码很久，那个时期我真的会去认认真真的画上业余时间去学一些东西。现在也想学一些其他的东西，想学安卓开发，想学服务器端程序，想学NodeJS，有一段时间还曾经想学Common Lisp，然而这些东西我都没有认真的去开始学过。有时候也在想，以后转行该怎么办，总得有一门拿得出手的手艺，所以总得有一个确定而且熟悉的方向。然而又转念一想，以后做什么还都是未知，也没有必要非得这么着急去学精一门技能吧。&lt;/p&gt;
+&lt;h1 id=&quot;三&quot;&gt;&lt;a href=&quot;#三&quot; class=&quot;headerlink&quot; title=&quot;三&quot;&gt;&lt;/a&gt;三&lt;/h1&gt;&lt;p&gt;说一些其他的事情吧。&lt;/p&gt;
+&lt;h2 id=&quot;1-2&quot;&gt;&lt;a href=&quot;#1-2&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h2&gt;&lt;p&gt;最近开始变得越来越懒了，下班回来以后在群里扯扯淡，打开哔哩哔哩追追番，然后发呆一会儿，就到了睡觉的时间。然而就在三四个月前的时候还经常晚上在电脑前敲代码很久，那个时期我真的会去认认真真的花上业余时间去学一些东西。当然现在也想学一些东西，例如Java，例如服务器端开发，例如NodeJS，有一段时间还曾经想学Common Lisp，然而这些东西我都没有认真的开始学过。有时候也在想，以后转行该怎么办，总得有一门拿得出手的手艺，所以总得有一个确定而且熟悉的方向。然而又转念一想，以后做什么还都是未知，也没有必要非得这么着急去学精一门技能吧。&lt;/p&gt;
 &lt;p&gt;我说不好这中间到底有什么改变了，然而相对于学习新的知识，能够生活的轻松一点成了我当下切实的愿望。&lt;/p&gt;
 &lt;h2 id=&quot;2-2&quot;&gt;&lt;a href=&quot;#2-2&quot; class=&quot;headerlink&quot; title=&quot;2&quot;&gt;&lt;/a&gt;2&lt;/h2&gt;&lt;p&gt;最近看了两部很喜欢的动画，一部是《为美好的世界献上祝福》，另一部是《Re：从零开始的异世界生活》，两部动画都是发生在异世界的故事。在异世界中认识各式各样的人，发生各种各样的故事，因为不同的目的开始旅行，因为不同的目的停止旅行。大概我很喜欢这种浪漫主义的故事，所以这样的作品对我有着致命的诱惑力。然而如果真的说给我一次去异世界的机会，恐怕我不会踏上那段旅程吧。相对于一段全新的生活，现代科技和文明带来的生活保障恐怕重要的多。然而我还是无法抵挡任何“异世界中踏上旅途”的设定，这种作品对我而言可以说是精神鸦片一样的存在。&lt;/p&gt;
 &lt;p&gt;大约我的生活太缺少这样非日常的元素了。&lt;/p&gt;
-&lt;h1 id=&quot;D&quot;&gt;&lt;a href=&quot;#D&quot; class=&quot;headerlink&quot; title=&quot;D&quot;&gt;&lt;/a&gt;D&lt;/h1&gt;&lt;p&gt;最后说一下现在吧。&lt;/p&gt;
-&lt;p&gt;在学生时代我大约会很喜欢说自己的现在，然而此时此刻却写不出什么东西——现在就那样，没啥好说的。&lt;/p&gt;
-&lt;p&gt;然而无论自己觉得现在的生活是否有意义，我所做的琐事也会一点点构建自身，像开头说的那样，三年后这些琐事也会构建了我的一部分吧。说来也巧，也正是三年前我开始尝试着去看动漫，此后一发不可收拾。当时很喜欢的一部作品是奈绪蘑菇的《空之境界》，这部作品本篇一共三本小说，后来蘑菇又写了《空之境界 未来福音》作为故事的补充，《未来福音》的画廊中讲了干也和式在《矛盾螺旋》之后的新年里去神社做参拜的故事，在面对式“肯定是世界和平”的玩笑时，干也让人很舒服的笑了一下，然后一句画外音让我至今难忘。&lt;/p&gt;
+&lt;h1 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h1&gt;&lt;p&gt;说一下现在吧。&lt;/p&gt;
+&lt;p&gt;在学生时代我大约会很喜欢说自己的现在，然而此时此刻却写不出什么东西——现在就那样，没啥好说的。然而无论自己觉得现在的生活是否有意义，我所做的琐事也会一点点构建自身，像开头说的那样，三年后这些琐事也会构成我的一部分吧。&lt;/p&gt;
+&lt;p&gt;说来也巧，也正是三年前我开始尝试着去看动漫，此后一发不可收拾。当时很喜欢的一部作品是奈绪蘑菇的《空之境界》，这部作品本篇一共三本小说，后来蘑菇又写了《空之境界 未来福音》作为故事的补完。《未来福音》的画廊中讲了式和干也在《矛盾螺旋》之后的新年里去神社做参拜的故事，在矛盾螺旋事件结束后，式和干也在新年参拜中各自许下自己的新年愿望。当面对式“肯定又是类似世界和平之类”的玩笑时，干也让人很舒服的笑着说“嘛，差不多吧”，然后一句画外音让我至今难忘。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;惟愿你与围绕你的这个世界，未来也能一直幸福下去。&lt;/p&gt;
 &lt;p&gt;祈愿中满溢着来自未来的福音。&lt;/p&gt;
@@ -52,8 +52,8 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;A&quot;&gt;&lt;a href=&quot;#A&quot; class=&quot;headerlink&quot; title=&quot;A&quot;&gt;&lt;/a&gt;A&lt;/h1&gt;&lt;p&gt;首先说一下最近发生的两件事吧。&lt;/p&gt;
-&lt;h2 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h2&gt;&lt;p&gt;第一件事是在Github 上找到了自己三年前用的配置文件，于是晚上本地拉了一个&lt;a href=&quot;https://github.com/Arondight/profile/tree/old&quot;&gt;分支&lt;/a&gt;fetch 下来后push 了上去。因为整套配置文件都是用软连接分发的，而目录架构又三年多没有变过，所以当想用Vim 打开里面的配置看看当时写的什么样子的时候，却发现自己正在使用一个配色很陌生的Vim。因为仓库检出到了三年前的分支，所以我看到了三年前自己使用的Vim。&lt;/p&gt;
+      &lt;h1 id=&quot;一&quot;&gt;&lt;a href=&quot;#一&quot; class=&quot;headerlink&quot; title=&quot;一&quot;&gt;&lt;/a&gt;一&lt;/h1&gt;&lt;p&gt;说一下最近发生的两件事吧。&lt;/p&gt;
+&lt;h2 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h2&gt;&lt;p&gt;第一件事是在Github 上找到了自己三年前用的一些配置文件，于是晚上本地拉了一个&lt;a href=&quot;https://github.com/Arondight/profile/tree/old&quot;&gt;分支&lt;/a&gt;fetch 下来后push 了上去。因为整套配置文件都是用软连接分发的，而目录架构又三年多没有变过，所以当想用Vim 打开里面的配置看看当时写成什么样子的时候，却看到了一个很陌生的界面。因为仓库检出到了三年前的分支，所以我看到了三年前自己使用的Vim。&lt;/p&gt;
 &lt;p&gt;三年前我用着这个配置写过什么东西，最后那些事情也构成了现在的我。&lt;/p&gt;
     
     </summary>
