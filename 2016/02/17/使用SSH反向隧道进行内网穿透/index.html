@@ -25,7 +25,7 @@
 
 机器代号
 机">
-<meta property="og:updated_time" content="2016-04-23T04:23:45.075Z">
+<meta property="og:updated_time" content="2016-05-09T14:46:40.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用SSH反向隧道进行内网穿透">
 <meta name="twitter:description" content="对应的情况这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。
@@ -188,7 +188,7 @@
                             
                                 <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
                             
-                                <a class="fa Email" target="_blank" href="mailto:mail@arondight.me" title="Email"></a>
+                                <a class="fa Email" target="_blank" href="mailto:&#115;&#104;&#101;&#108;&#108;&#95;&#119;&#97;&#121;&#64;&#102;&#111;&#120;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;" title="Email"></a>
                             
                         </ul>
                     </nav>
@@ -232,7 +232,7 @@
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="https://etula.me">Мвудаг/Этура Яннъ</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://alleysakura.com">蔓舞寻樱的博客</a>
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hto.io">蔓舞寻樱的博客</a>
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog-netarmy.rhcloud.com">中土國民會全球資訊網</a>
                     
@@ -298,7 +298,7 @@
                             
                                 <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
                             
-                                <a class="fa Email" target="_blank" href="mailto:mail@arondight.me" title="Email"></a>
+                                <a class="fa Email" target="_blank" href="mailto:&#115;&#104;&#101;&#108;&#108;&#95;&#119;&#97;&#121;&#64;&#102;&#111;&#120;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;" title="Email"></a>
                             
                         </ul>
             </nav>
@@ -348,7 +348,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="对应的情况"><a href="#对应的情况" class="headerlink" title="对应的情况"></a>对应的情况</h1><p>这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。</p>
+        <h2 id="对应的情况"><a href="#对应的情况" class="headerlink" title="对应的情况"></a>对应的情况</h2><p>这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。</p>
 <p>假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用<strong>公网IP + 端口</strong> 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。</p>
 <p>首先有如下约定，因为很重要所以放在前面：</p>
 <table>
@@ -393,13 +393,13 @@
 <blockquote>
 <p>这里默认你的系统init 程序为<code>systemd</code>，如果你使用其他的init 程序，如果没有特殊理由还是换到一个现代化的GNU/Linux 系统吧……</p>
 </blockquote>
-<h1 id="SSH-反向隧道"><a href="#SSH-反向隧道" class="headerlink" title="SSH 反向隧道"></a>SSH 反向隧道</h1><p>这种手段实质上是由B 向A 主动地建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上，只要这条隧道不关闭，这个转发就是有效的。有了这个端口转发，只需要访问A 的6766 端口反向连接B 即可。</p>
+<h2 id="SSH-反向隧道"><a href="#SSH-反向隧道" class="headerlink" title="SSH 反向隧道"></a>SSH 反向隧道</h2><p>这种手段实质上是由B 向A 主动地建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上，只要这条隧道不关闭，这个转发就是有效的。有了这个端口转发，只需要访问A 的6766 端口反向连接B 即可。</p>
 <p>首先在<strong>B</strong> 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B $ ssh -p 22 -qngfNTR 6766:127.0.0.1:22 usera@a.site</span><br></pre></td></tr></table></figure>
 <p>然后在<strong>A</strong> 上利用6766 端口反向SSH 到B：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p 6766 userb@127.0.0.1</span><br></pre></td></tr></table></figure>
 <p>要做的事情其实就是这么简单。</p>
-<h1 id="隧道的维持"><a href="#隧道的维持" class="headerlink" title="隧道的维持"></a>隧道的维持</h1><h2 id="稳定性维持"><a href="#稳定性维持" class="headerlink" title="稳定性维持"></a>稳定性维持</h2><p>然而不幸的是SSH 连接是会超时关闭的，如果连接关闭，隧道无法维持，那么A 就无法利用反向隧道穿透B 所在的NAT 了，为此我们需要一种方案来提供一条稳定的SSH 反向隧道。</p>
+<h2 id="隧道的维持"><a href="#隧道的维持" class="headerlink" title="隧道的维持"></a>隧道的维持</h2><h3 id="稳定性维持"><a href="#稳定性维持" class="headerlink" title="稳定性维持"></a>稳定性维持</h3><p>然而不幸的是SSH 连接是会超时关闭的，如果连接关闭，隧道无法维持，那么A 就无法利用反向隧道穿透B 所在的NAT 了，为此我们需要一种方案来提供一条稳定的SSH 反向隧道。</p>
 <p>一个最简单的方法就是<code>autossh</code>，这个软件会在超时之后自动重新建立SSH 隧道，这样就解决了隧道的稳定性问题，如果你使用<a href="https://www.archlinux.org" target="_blank" rel="external">Arch Linux</a>，你可以这样获得它：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S autossh</span><br></pre></td></tr></table></figure>
 <p>下面在<strong>B</strong> 上做之前类似的事情，不同的是该隧道会由<code>autossh</code> 来维持：</p>
@@ -407,8 +407,8 @@
 <p><code>-M</code> 参数指定的端口用来监听隧道的状态，与端口转发无关。</p>
 <p>之后你可以在A 上通过6766 端口访问B 了：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A $ ssh -p 6766 userb@127.0.0.1</span><br></pre></td></tr></table></figure>
-<h2 id="隧道的自动建立"><a href="#隧道的自动建立" class="headerlink" title="隧道的自动建立"></a>隧道的自动建立</h2><p>然而这又有了另外一个问题，如果B 重启隧道就会消失。那么需要有一种手段在B 每次启动时使用<code>autossh</code> 来建立SSH 隧道。很自然的一个想法就是做成服务，之后会给出在<code>systemd</code> 下的一种解决方案。</p>
-<h1 id="“打洞”"><a href="#“打洞”" class="headerlink" title="“打洞”"></a>“打洞”</h1><p>之所以标题这么起，是因为自己觉得这件事情有点类似于UDP 打洞，即通过一台在公网的机器，让两台分别位于各自NAT 之后的机器可以建立SSH 连接。</p>
+<h3 id="隧道的自动建立"><a href="#隧道的自动建立" class="headerlink" title="隧道的自动建立"></a>隧道的自动建立</h3><p>然而这又有了另外一个问题，如果B 重启隧道就会消失。那么需要有一种手段在B 每次启动时使用<code>autossh</code> 来建立SSH 隧道。很自然的一个想法就是做成服务，之后会给出在<code>systemd</code> 下的一种解决方案。</p>
+<h2 id="“打洞”"><a href="#“打洞”" class="headerlink" title="“打洞”"></a>“打洞”</h2><p>之所以标题这么起，是因为自己觉得这件事情有点类似于UDP 打洞，即通过一台在公网的机器，让两台分别位于各自NAT 之后的机器可以建立SSH 连接。</p>
 <p>下面演示如何使用SSH 反向隧道，让C 连接到B。</p>
 <p>首先在<strong>A</strong> 上编辑<code>sshd</code> 的配置文件<code>/etc/ssh/sshd_config</code>，将<code>GatewayPorts</code> 开关打开：</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">GatewayPorts</span> <span class="literal">yes</span></span><br></pre></td></tr></table></figure>
@@ -419,7 +419,7 @@
 <p>之后在<strong>C</strong> 上利用<strong>A</strong> 的6766 端口SSH 连接到<strong>B</strong>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C $ ssh -p 6766 userb@a.site</span><br></pre></td></tr></table></figure>
 <p>至此你已经轻而易举的穿透了两层NAT。</p>
-<h1 id="最终的解决方案"><a href="#最终的解决方案" class="headerlink" title="最终的解决方案"></a>最终的解决方案</h1><p>整合一下前面提到的，最终的解决方案如下：</p>
+<h2 id="最终的解决方案"><a href="#最终的解决方案" class="headerlink" title="最终的解决方案"></a>最终的解决方案</h2><p>整合一下前面提到的，最终的解决方案如下：</p>
 <p>首先打开<strong>A</strong> 上<code>sshd</code> 的<code>GatewayPorts</code> 开关，并重启<code>sshd</code>（如有需要）。</p>
 <p>然后在<strong>B</strong> 上新建一个用户<em>autossh</em>，根据权限最小化思想，B 上的<code>autossh</code> 服务将以<em>autossh</em> 用户的身份运行，以尽大可能避免出现安全问题：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B $ sudo useradd -m autossh</span><br><span class="line">B $ sudo passwd autossh</span><br></pre></td></tr></table></figure>
@@ -450,7 +450,7 @@
         <p><span>本文标题:</span><a href="/2016/02/17/使用SSH反向隧道进行内网穿透/">使用SSH反向隧道进行内网穿透</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">愛と奇跡の物語</a></p>
         <p><span>发布时间:</span>2016-02-17, 18:09:57</p>
-        <p><span>最后更新:</span>2016-04-23, 12:23:45</p>
+        <p><span>最后更新:</span>2016-05-09, 22:46:40</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/02/17/使用SSH反向隧道进行内网穿透/" title="使用SSH反向隧道进行内网穿透">https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/　　作者: 愛と奇跡の物語" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -485,7 +485,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#对应的情况"><span class="toc-number">1.</span> <span class="toc-text">对应的情况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH-反向隧道"><span class="toc-number">2.</span> <span class="toc-text">SSH 反向隧道</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#隧道的维持"><span class="toc-number">3.</span> <span class="toc-text">隧道的维持</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#稳定性维持"><span class="toc-number">3.1.</span> <span class="toc-text">稳定性维持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隧道的自动建立"><span class="toc-number">3.2.</span> <span class="toc-text">隧道的自动建立</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#“打洞”"><span class="toc-number">4.</span> <span class="toc-text">“打洞”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#最终的解决方案"><span class="toc-number">5.</span> <span class="toc-text">最终的解决方案</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对应的情况"><span class="toc-number">1.</span> <span class="toc-text">对应的情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSH-反向隧道"><span class="toc-number">2.</span> <span class="toc-text">SSH 反向隧道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隧道的维持"><span class="toc-number">3.</span> <span class="toc-text">隧道的维持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#稳定性维持"><span class="toc-number">3.1.</span> <span class="toc-text">稳定性维持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隧道的自动建立"><span class="toc-number">3.2.</span> <span class="toc-text">隧道的自动建立</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#“打洞”"><span class="toc-number">4.</span> <span class="toc-text">“打洞”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最终的解决方案"><span class="toc-number">5.</span> <span class="toc-text">最终的解决方案</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
