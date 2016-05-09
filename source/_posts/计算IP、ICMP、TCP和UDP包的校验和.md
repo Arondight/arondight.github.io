@@ -12,7 +12,7 @@ tags:
   - 校验和
 ---
 
-# 校验和算法
+## 校验和算法
 
 校验和的计算方法在文档[RFC 1071][ID_IFC_1071] 中有如下说明：
 
@@ -71,7 +71,7 @@ GetChecksum (const void * const addr, const size_t bytes)
 
 [ID_IFC_1071]: https://tools.ietf.org/html/rfc1071
 
-# IP 包校验和的计算
+## IP 包校验和的计算
 
 IP 包校验和的计算范围在[RFC 791][ID_RFC_791] 中有如下说明：
 
@@ -97,7 +97,7 @@ IP 包校验和的计算范围在[RFC 791][ID_RFC_791] 中有如下说明：
 
 [ID_RFC_791]: https://tools.ietf.org/html/rfc791
 
-# ICMP 包校验和的计算
+## ICMP 包校验和的计算
 
 ICMP 包校验和的计算范围在[RFC 792][ID_RFC_792] 中有如下说明：
 
@@ -125,9 +125,9 @@ ICMP 包校验和的计算范围在[RFC 792][ID_RFC_792] 中有如下说明：
 
 [ID_RFC_792]: https://tools.ietf.org/html/rfc792
 
-# TCP 和UDP 包校验和的计算
+## TCP 和UDP 包校验和的计算
 
-## 伪首部
+### 伪首部
 
 TCP 和UDP 校验和的计算要稍微麻烦一些，因为需要引入一个伪首部（pseudo header），伪首部的结构在[RFC 768][ID_RFC_768] 中有如下说明：
 
@@ -160,7 +160,7 @@ typedef struct pseudohdr
 } pseudohdr_t;
 ```
 
-## TCP 包校验和的计算
+### TCP 包校验和的计算
 
 TCP 包校验和的计算方法在[RFC 793][ID_RFC_793] 中有如下说明：
 
@@ -211,7 +211,7 @@ TCP 包校验和的计算方法在[RFC 793][ID_RFC_793] 中有如下说明：
   tcpsumblock = NULL;
 ```
 
-## UDP 包校验和的计算
+### UDP 包校验和的计算
 
 UDP 包校验和的计算方法在[RFC 768][ID_RFC_768] 中有如下说明：
 
