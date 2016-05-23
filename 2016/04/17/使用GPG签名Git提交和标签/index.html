@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
+  
   <meta charset="utf-8">
   
   <title>使用GPG签名Git提交和标签 | 河 的 第 三 条 岸</title>
@@ -13,7 +14,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <meta property="og:site_name" content="河 的 第 三 条 岸">
 <meta property="og:description" content="Pretty Good PrivacyGPG 是什么提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，中文直译为“完美隐私”，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。
 GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于">
-<meta property="og:updated_time" content="2016-05-09T14:46:21.236Z">
+<meta property="og:updated_time" content="2016-05-18T11:38:17.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用GPG签名Git提交和标签">
 <meta name="twitter:description" content="Pretty Good PrivacyGPG 是什么提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，中文直译为“完美隐私”，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。
@@ -407,7 +408,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <h2 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h2><h3 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h3><p>首先需要生成一个GPG 密钥环，GPG 在生成密钥的时候会使用一个根据你的操作生成的随机数，所以你可以在GPG 生成密钥的时候多做一些操作，例如点鼠标、敲键盘、复制文件等等。你可以利用<code>dd</code> 指令在生成密钥的期间做一些读写操作以让随机数字发生器获得足够的熵数。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dd <span class="keyword">if</span>=<span class="regexp">/dev/</span>random <span class="keyword">of</span>=<span class="regexp">/dev/</span><span class="literal">null</span> bs=<span class="number">4</span>M</span><br></pre></td></tr></table></figure>
 <p>然后可以生成GPG 密钥环，推荐使用<code>--full-gen-key</code> 选项来启用所有的功能。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg <span class="comment">--full-gen-key</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg <span class="comment">--full-gen-key</span></span><br></pre></td></tr></table></figure>
 <p>其中需要注意的事情有以下几项：</p>
 <ol>
 <li>密钥种类：形如<code>method1 and method2</code> 的选项是生成主钥和一个从钥，默认可以用于签名和加密，形如<code>method</code> 的选项只生成主钥，默认只能用于签名。</li>
@@ -418,7 +419,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <h3 id="上传公钥到服务器"><a href="#上传公钥到服务器" class="headerlink" title="上传公钥到服务器"></a>上传公钥到服务器</h3><p>现在你可以将你的公钥上传到任意GPG 服务器上了，这可以方便他人导入公钥以验证你的签名。通过服务器的交换机制，全球所有的GPG 服务器都会得到你的公钥。你可以列出你现在所拥有的公钥。</p>
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --list-keys</span><br><span class="line"><span class="section">/home/&lt;user&gt;/.gnupg/pubring.kbx</span><br><span class="line">---------------------------------</span></span><br><span class="line">pub   rsa4096/B66CC194 2016-04-15 [SC]</span><br><span class="line">uid         [ 绝对 ] Arondight &lt;shell<span class="emphasis">_way@foxmail.com&gt;</span><br><span class="line">sub   rsa4096/F96E3CB7 2016-04-15 [E]</span></span><br></pre></td></tr></table></figure>
 <p>可以看到两个公钥，分别属于主钥<code>B66CC194</code> 和从钥<code>F96E3CB7</code>。上传时指定主钥的钥匙号（key ID）即可，GPG 会将密钥环中的公钥上传到指定的服务器。</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --keyserver <span class="keyword">keys</span>.gnupg.net --<span class="keyword">send</span>-<span class="keyword">keys</span> &lt;key ID&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --keyserver <span class="built_in">keys</span>.gnupg.net --send-<span class="built_in">keys</span> &lt;<span class="built_in">key</span> ID&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="上传公钥到GitHub"><a href="#上传公钥到GitHub" class="headerlink" title="上传公钥到GitHub"></a>上传公钥到GitHub</h3><p>GitHub 刚刚发布了支持GPG 签名的消息，所以你可以选择使用GitHub 托管你的仓库。首先你需要以文本形式导出你主钥的公钥。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg -<span class="selector-tag">a</span> -o gnupg<span class="selector-class">.pub</span> --export &lt;key ID&gt;</span><br></pre></td></tr></table></figure>
 <p>然后打开你的GitHub <a href="https://github.com/settings/keys" target="_blank" rel="external">密钥管理</a>界面，根据文件<code>gnupg.pub</code> 为你的GitHub 账户配置用于验证签名的公钥。</p>
@@ -427,7 +428,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 </blockquote>
 <h3 id="导出指纹"><a href="#导出指纹" class="headerlink" title="导出指纹"></a>导出指纹</h3><p>然而不幸的是，任何人都可以冒充你的名义上传公钥到GPG 服务器，所以对方搜到以你的名义发布的公钥，不一定真的是你发布的。为了避免这个问题，你需要公布主钥的指纹。GPG 导入公钥后需要手动设置信任度。这时候对方就可以通过对比计算得到的主钥指纹和你提供的主钥指纹，来确定导入的主钥的合法性。</p>
 <p>你可以像下面一样导出指纹。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ LANG=en_US gpg <span class="comment">--fingerprint &lt;key ID&gt; &gt;fingerprint</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ LANG=en_US gpg <span class="comment">--fingerprint &lt;key ID&gt; &gt;fingerprint</span></span><br></pre></td></tr></table></figure>
 <p>然后将<code>fingerprint</code> 文件提交到你的项目仓库中，或者公布在网络的其他位置。</p>
 <blockquote>
 <ol>
@@ -530,7 +531,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
         <p><span>本文标题:</span><a href="/2016/04/17/使用GPG签名Git提交和标签/">使用GPG签名Git提交和标签</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">愛と奇跡の物語</a></p>
         <p><span>发布时间:</span>2016-04-17, 14:16:53</p>
-        <p><span>最后更新:</span>2016-05-09, 22:46:21</p>
+        <p><span>最后更新:</span>2016-05-18, 19:38:17</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/17/使用GPG签名Git提交和标签/" title="使用GPG签名Git提交和标签">https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/　　作者: 愛と奇跡の物語" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -669,7 +670,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
                 2016 愛と奇跡の物語
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         

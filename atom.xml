@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-05-08T05:23:31.719Z</updated>
+  <updated>2016-05-18T11:38:17.964Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/05/03/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84%E4%B8%96%E7%95%8C%E7%8C%AE%E4%B8%8A%E7%A5%9D%E7%A6%8F/"/>
     <id>https://arondight.github.io/2016/05/03/为美好的世界献上祝福/</id>
     <published>2016-05-03T15:10:45.000Z</published>
-    <updated>2016-05-08T05:23:31.719Z</updated>
+    <updated>2016-05-18T11:38:17.964Z</updated>
     
     <content type="html">&lt;h2 id=&quot;一&quot;&gt;&lt;a href=&quot;#一&quot; class=&quot;headerlink&quot; title=&quot;一&quot;&gt;&lt;/a&gt;一&lt;/h2&gt;&lt;p&gt;说一下最近发生的两件事吧。&lt;/p&gt;
 &lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h3&gt;&lt;p&gt;第一件事是在Github 上找到了自己三年前用的一些配置文件，于是晚上本地拉了一个空分支fetch 下来后push 了上去。因为整套配置文件都是用软连接分发的，而目录架构又三年多没有变过，所以当想用Vim 打开里面的配置看看当时写成什么样子的时候，却看到了一个很陌生的界面。因为仓库检出到了三年前的分支，所以我看到了三年前自己使用的Vim。&lt;/p&gt;
@@ -70,7 +70,7 @@
     <link href="https://arondight.github.io/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/"/>
     <id>https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</id>
     <published>2016-04-17T06:16:53.000Z</published>
-    <updated>2016-05-09T14:46:21.236Z</updated>
+    <updated>2016-05-18T11:38:17.964Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Pretty-Good-Privacy&quot;&gt;&lt;a href=&quot;#Pretty-Good-Privacy&quot; class=&quot;headerlink&quot; title=&quot;Pretty Good Privacy&quot;&gt;&lt;/a&gt;Pretty Good Privacy&lt;/h2&gt;&lt;h3 id=&quot;GPG-是什么&quot;&gt;&lt;a href=&quot;#GPG-是什么&quot; class=&quot;headerlink&quot; title=&quot;GPG 是什么&quot;&gt;&lt;/a&gt;GPG 是什么&lt;/h3&gt;&lt;p&gt;提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，中文直译为“完美隐私”，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。&lt;/p&gt;
 &lt;p&gt;GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥环，GPG 使用私钥和公钥分别完成签名和加密，对应地验证和解密由公钥和私钥完成。&lt;/p&gt;
@@ -149,7 +149,7 @@
 &lt;h2 id=&quot;签名&quot;&gt;&lt;a href=&quot;#签名&quot; class=&quot;headerlink&quot; title=&quot;签名&quot;&gt;&lt;/a&gt;签名&lt;/h2&gt;&lt;h3 id=&quot;生成密钥&quot;&gt;&lt;a href=&quot;#生成密钥&quot; class=&quot;headerlink&quot; title=&quot;生成密钥&quot;&gt;&lt;/a&gt;生成密钥&lt;/h3&gt;&lt;p&gt;首先需要生成一个GPG 密钥环，GPG 在生成密钥的时候会使用一个根据你的操作生成的随机数，所以你可以在GPG 生成密钥的时候多做一些操作，例如点鼠标、敲键盘、复制文件等等。你可以利用&lt;code&gt;dd&lt;/code&gt; 指令在生成密钥的期间做一些读写操作以让随机数字发生器获得足够的熵数。&lt;/p&gt;
 &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo dd &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;=&lt;span class=&quot;regexp&quot;&gt;/dev/&lt;/span&gt;random &lt;span class=&quot;keyword&quot;&gt;of&lt;/span&gt;=&lt;span class=&quot;regexp&quot;&gt;/dev/&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt; bs=&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;M&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后可以生成GPG 密钥环，推荐使用&lt;code&gt;--full-gen-key&lt;/code&gt; 选项来启用所有的功能。&lt;/p&gt;
-&lt;figure class=&quot;highlight applescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ gpg &lt;span class=&quot;comment&quot;&gt;--full-gen-key&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight ada&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ gpg &lt;span class=&quot;comment&quot;&gt;--full-gen-key&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;其中需要注意的事情有以下几项：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;密钥种类：形如&lt;code&gt;method1 and method2&lt;/code&gt; 的选项是生成主钥和一个从钥，默认可以用于签名和加密，形如&lt;code&gt;method&lt;/code&gt; 的选项只生成主钥，默认只能用于签名。&lt;/li&gt;
@@ -160,7 +160,7 @@
 &lt;h3 id=&quot;上传公钥到服务器&quot;&gt;&lt;a href=&quot;#上传公钥到服务器&quot; class=&quot;headerlink&quot; title=&quot;上传公钥到服务器&quot;&gt;&lt;/a&gt;上传公钥到服务器&lt;/h3&gt;&lt;p&gt;现在你可以将你的公钥上传到任意GPG 服务器上了，这可以方便他人导入公钥以验证你的签名。通过服务器的交换机制，全球所有的GPG 服务器都会得到你的公钥。你可以列出你现在所拥有的公钥。&lt;/p&gt;
 &lt;figure class=&quot;highlight asciidoc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ gpg --list-keys&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;/home/&amp;lt;user&amp;gt;/.gnupg/pubring.kbx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;---------------------------------&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;pub   rsa4096/B66CC194 2016-04-15 [SC]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;uid         [ 绝对 ] Arondight &amp;lt;shell&lt;span class=&quot;emphasis&quot;&gt;_way@foxmail.com&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sub   rsa4096/F96E3CB7 2016-04-15 [E]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;可以看到两个公钥，分别属于主钥&lt;code&gt;B66CC194&lt;/code&gt; 和从钥&lt;code&gt;F96E3CB7&lt;/code&gt;。上传时指定主钥的钥匙号（key ID）即可，GPG 会将密钥环中的公钥上传到指定的服务器。&lt;/p&gt;
-&lt;figure class=&quot;highlight perl&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ gpg --keyserver &lt;span class=&quot;keyword&quot;&gt;keys&lt;/span&gt;.gnupg.net --&lt;span class=&quot;keyword&quot;&gt;send&lt;/span&gt;-&lt;span class=&quot;keyword&quot;&gt;keys&lt;/span&gt; &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight q&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ gpg --keyserver &lt;span class=&quot;built_in&quot;&gt;keys&lt;/span&gt;.gnupg.net --send-&lt;span class=&quot;built_in&quot;&gt;keys&lt;/span&gt; &amp;lt;&lt;span class=&quot;built_in&quot;&gt;key&lt;/span&gt; ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h3 id=&quot;上传公钥到GitHub&quot;&gt;&lt;a href=&quot;#上传公钥到GitHub&quot; class=&quot;headerlink&quot; title=&quot;上传公钥到GitHub&quot;&gt;&lt;/a&gt;上传公钥到GitHub&lt;/h3&gt;&lt;p&gt;GitHub 刚刚发布了支持GPG 签名的消息，所以你可以选择使用GitHub 托管你的仓库。首先你需要以文本形式导出你主钥的公钥。&lt;/p&gt;
 &lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ gpg -&lt;span class=&quot;selector-tag&quot;&gt;a&lt;/span&gt; -o gnupg&lt;span class=&quot;selector-class&quot;&gt;.pub&lt;/span&gt; --export &amp;lt;key ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后打开你的GitHub &lt;a href=&quot;https://github.com/settings/keys&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;密钥管理&lt;/a&gt;界面，根据文件&lt;code&gt;gnupg.pub&lt;/code&gt; 为你的GitHub 账户配置用于验证签名的公钥。&lt;/p&gt;
@@ -169,7 +169,7 @@
 &lt;/blockquote&gt;
 &lt;h3 id=&quot;导出指纹&quot;&gt;&lt;a href=&quot;#导出指纹&quot; class=&quot;headerlink&quot; title=&quot;导出指纹&quot;&gt;&lt;/a&gt;导出指纹&lt;/h3&gt;&lt;p&gt;然而不幸的是，任何人都可以冒充你的名义上传公钥到GPG 服务器，所以对方搜到以你的名义发布的公钥，不一定真的是你发布的。为了避免这个问题，你需要公布主钥的指纹。GPG 导入公钥后需要手动设置信任度。这时候对方就可以通过对比计算得到的主钥指纹和你提供的主钥指纹，来确定导入的主钥的合法性。&lt;/p&gt;
 &lt;p&gt;你可以像下面一样导出指纹。&lt;/p&gt;
-&lt;figure class=&quot;highlight applescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ LANG=en_US gpg &lt;span class=&quot;comment&quot;&gt;--fingerprint &amp;lt;key ID&amp;gt; &amp;gt;fingerprint&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight ada&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ LANG=en_US gpg &lt;span class=&quot;comment&quot;&gt;--fingerprint &amp;lt;key ID&amp;gt; &amp;gt;fingerprint&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后将&lt;code&gt;fingerprint&lt;/code&gt; 文件提交到你的项目仓库中，或者公布在网络的其他位置。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ol&gt;
@@ -286,7 +286,7 @@
     <link href="https://arondight.github.io/2016/03/22/%E8%AE%A1%E7%AE%97IP%E3%80%81ICMP%E3%80%81TCP%E5%92%8CUDP%E5%8C%85%E7%9A%84%E6%A0%A1%E9%AA%8C%E5%92%8C/"/>
     <id>https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/</id>
     <published>2016-03-22T12:06:40.000Z</published>
-    <updated>2016-05-09T14:46:11.779Z</updated>
+    <updated>2016-05-18T11:38:17.964Z</updated>
     
     <content type="html">&lt;h2 id=&quot;校验和算法&quot;&gt;&lt;a href=&quot;#校验和算法&quot; class=&quot;headerlink&quot; title=&quot;校验和算法&quot;&gt;&lt;/a&gt;校验和算法&lt;/h2&gt;&lt;p&gt;校验和的计算方法在文档&lt;a href=&quot;https://tools.ietf.org/html/rfc1071&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RFC 1071&lt;/a&gt; 中有如下说明：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -379,7 +379,7 @@
     <link href="https://arondight.github.io/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     <id>https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</id>
     <published>2016-02-17T10:09:57.000Z</published>
-    <updated>2016-05-09T14:46:40.416Z</updated>
+    <updated>2016-05-18T11:38:17.964Z</updated>
     
     <content type="html">&lt;h2 id=&quot;对应的情况&quot;&gt;&lt;a href=&quot;#对应的情况&quot; class=&quot;headerlink&quot; title=&quot;对应的情况&quot;&gt;&lt;/a&gt;对应的情况&lt;/h2&gt;&lt;p&gt;这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。&lt;/p&gt;
 &lt;p&gt;假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用&lt;strong&gt;公网IP + 端口&lt;/strong&gt; 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。&lt;/p&gt;
@@ -538,7 +538,7 @@
     <link href="https://arondight.github.io/2016/02/08/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/"/>
     <id>https://arondight.github.io/2016/02/08/新年快乐/</id>
     <published>2016-02-07T16:00:00.000Z</published>
-    <updated>2016-04-14T17:34:48.240Z</updated>
+    <updated>2016-05-18T11:38:17.964Z</updated>
     
     <content type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# For Linux 4.0+ x86_64&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cat &amp;lt;&amp;lt;&lt;span class=&quot;string&quot;&gt;&#39;By_Arondight&#39;&lt;/span&gt; | env gcc -xc -o .\ - - \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;/dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&amp;amp; ./.\ - &amp;amp;&amp;amp; env rm .\ -&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;char _[]=&lt;span class=&quot;string&quot;&gt;&quot;\xe6\x96\xb0\xe5\xb9\xb4\xe5\xbf\xab\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\xe4\xb9\x90\xef\xbc\x81\x0a&quot;&lt;/span&gt;;____(___)&amp;lt;%putchar&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;((___++)[_])&amp;amp;&amp;amp;____(___);_&lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt;(0);%&amp;gt;main()&amp;lt;%long&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;__=____;*(&amp;amp;__+2)=__;__asm__(&lt;span class=&quot;string&quot;&gt;&quot;\x78\x6f\x72\x71\x20\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\x25\x72\x64\x69\x2c\x20\x25\x72\x64\x69\xa\x0&quot;&lt;/span&gt;);%&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;By_Arondight&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;惟愿可以遇到美好的人和事。&lt;/p&gt;
@@ -572,7 +572,7 @@
     <link href="https://arondight.github.io/2016/01/03/%E9%9A%8F%E4%BE%BF%E5%86%99%E4%B8%80%E7%82%B9%E4%B8%9C%E8%A5%BF/"/>
     <id>https://arondight.github.io/2016/01/03/随便写一点东西/</id>
     <published>2016-01-03T07:34:18.000Z</published>
-    <updated>2016-04-14T17:34:48.240Z</updated>
+    <updated>2016-05-18T11:38:17.964Z</updated>
     
     <content type="html">&lt;p&gt;下午慢慢折腾了一下Hexo，然后成果就是这个博客。老实说我也不太清楚以后究竟在这上面会写点什么，多半会是所处的日常吧。&lt;/p&gt;
 &lt;p&gt;折腾完大约是下午接近4 点的样子，足足搞了快5 个小时。透过窄窄的窗子所看到的已经是很惨淡的阳光了。回过神来今天已经是公历新年后的第3 天了，或许因为最近1 个半月想了很多的事情，不知不觉已经将一年最后的时间消耗殆尽，不难过也不开心。&lt;/p&gt;

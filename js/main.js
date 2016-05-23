@@ -47,10 +47,19 @@ require([], function (){
         }
     });
 
-    if(browser.versions.mobile === true || $(window).width() < 700){
+    if(browser.versions.mobile === true || $(window).width() < 800){
         loadMobile();
     }else{
         loadPC();
+    }
+
+    resetTags = function(){
+        var tags = $(".tagcloud a");
+        for(var i = 0; i < tags.length; i++){
+            var num = Math.floor(Math.random()*7);
+            tags.eq(i).addClass("color" + num);
+        };
+        $(".article-category a:nth-child(-n+2)").attr("class", "color0");
     }
 
     //是否使用fancybox
