@@ -1,3 +1,5 @@
+# Theme Version | 当前版本
+Yelee: "3.0"
 
 # >>> Basic Setup | 基础设置 <<<
 
@@ -129,8 +131,12 @@ blockquote_style:
   blockquote: 1  # Value: 0 - 7 可选
   # 自定义文章「引用部分」的样式
 
+# Headings Style | 标题风格
+## 0-Yelee, 1-Yilia, 2-GitHub
+heading_style: 0 # Value: 0 - 2
+
 ## List style type (ul) | 无序列表项标记样式
-list_style: 0  # value: 0 - 12 可选
+list_style: 2  # value: 0 - 12 可选（0/2/9/10）
 
 # 左边栏宽度 px
 left_col_width: 300
@@ -192,6 +198,14 @@ open_in_new: false
 
 # Customize feed link 自定义订阅地址
 rss: /atom.xml
+
+# Update Reminder for IE6/7/8
+# 针对 IE6/7/8 的升级浏览器提示
+ie_updater:
+  on: false
+  link: //outdatedbrowser.com/
+  ## http://browsehappy.com/
+  ## http://outdatedbrowser.com/
 
 
 # >>> Vendors | 第三方工具 & 服务 <<<
