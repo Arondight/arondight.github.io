@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-05-18T11:38:17.964Z</updated>
+  <updated>2016-05-23T15:28:56.310Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/05/03/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84%E4%B8%96%E7%95%8C%E7%8C%AE%E4%B8%8A%E7%A5%9D%E7%A6%8F/"/>
     <id>https://arondight.github.io/2016/05/03/为美好的世界献上祝福/</id>
     <published>2016-05-03T15:10:45.000Z</published>
-    <updated>2016-05-18T11:38:17.964Z</updated>
+    <updated>2016-05-23T15:28:56.310Z</updated>
     
     <content type="html">&lt;h2 id=&quot;一&quot;&gt;&lt;a href=&quot;#一&quot; class=&quot;headerlink&quot; title=&quot;一&quot;&gt;&lt;/a&gt;一&lt;/h2&gt;&lt;p&gt;说一下最近发生的两件事吧。&lt;/p&gt;
 &lt;h3 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h3&gt;&lt;p&gt;第一件事是在Github 上找到了自己三年前用的一些配置文件，于是晚上本地拉了一个空分支fetch 下来后push 了上去。因为整套配置文件都是用软连接分发的，而目录架构又三年多没有变过，所以当想用Vim 打开里面的配置看看当时写成什么样子的时候，却看到了一个很陌生的界面。因为仓库检出到了三年前的分支，所以我看到了三年前自己使用的Vim。&lt;/p&gt;
@@ -70,7 +70,7 @@
     <link href="https://arondight.github.io/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/"/>
     <id>https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</id>
     <published>2016-04-17T06:16:53.000Z</published>
-    <updated>2016-05-18T11:38:17.964Z</updated>
+    <updated>2016-05-23T15:28:56.310Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Pretty-Good-Privacy&quot;&gt;&lt;a href=&quot;#Pretty-Good-Privacy&quot; class=&quot;headerlink&quot; title=&quot;Pretty Good Privacy&quot;&gt;&lt;/a&gt;Pretty Good Privacy&lt;/h2&gt;&lt;h3 id=&quot;GPG-是什么&quot;&gt;&lt;a href=&quot;#GPG-是什么&quot; class=&quot;headerlink&quot; title=&quot;GPG 是什么&quot;&gt;&lt;/a&gt;GPG 是什么&lt;/h3&gt;&lt;p&gt;提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，中文直译为“完美隐私”，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。&lt;/p&gt;
 &lt;p&gt;GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥环，GPG 使用私钥和公钥分别完成签名和加密，对应地验证和解密由公钥和私钥完成。&lt;/p&gt;
@@ -286,7 +286,7 @@
     <link href="https://arondight.github.io/2016/03/22/%E8%AE%A1%E7%AE%97IP%E3%80%81ICMP%E3%80%81TCP%E5%92%8CUDP%E5%8C%85%E7%9A%84%E6%A0%A1%E9%AA%8C%E5%92%8C/"/>
     <id>https://arondight.github.io/2016/03/22/计算IP、ICMP、TCP和UDP包的校验和/</id>
     <published>2016-03-22T12:06:40.000Z</published>
-    <updated>2016-05-18T11:38:17.964Z</updated>
+    <updated>2016-05-23T15:28:56.310Z</updated>
     
     <content type="html">&lt;h2 id=&quot;校验和算法&quot;&gt;&lt;a href=&quot;#校验和算法&quot; class=&quot;headerlink&quot; title=&quot;校验和算法&quot;&gt;&lt;/a&gt;校验和算法&lt;/h2&gt;&lt;p&gt;校验和的计算方法在文档&lt;a href=&quot;https://tools.ietf.org/html/rfc1071&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RFC 1071&lt;/a&gt; 中有如下说明：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -379,7 +379,7 @@
     <link href="https://arondight.github.io/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     <id>https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/</id>
     <published>2016-02-17T10:09:57.000Z</published>
-    <updated>2016-05-18T11:38:17.964Z</updated>
+    <updated>2016-05-23T15:28:56.310Z</updated>
     
     <content type="html">&lt;h2 id=&quot;对应的情况&quot;&gt;&lt;a href=&quot;#对应的情况&quot; class=&quot;headerlink&quot; title=&quot;对应的情况&quot;&gt;&lt;/a&gt;对应的情况&lt;/h2&gt;&lt;p&gt;这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。&lt;/p&gt;
 &lt;p&gt;假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用&lt;strong&gt;公网IP + 端口&lt;/strong&gt; 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。&lt;/p&gt;
@@ -538,7 +538,7 @@
     <link href="https://arondight.github.io/2016/02/08/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/"/>
     <id>https://arondight.github.io/2016/02/08/新年快乐/</id>
     <published>2016-02-07T16:00:00.000Z</published>
-    <updated>2016-05-18T11:38:17.964Z</updated>
+    <updated>2016-05-23T15:28:56.310Z</updated>
     
     <content type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# For Linux 4.0+ x86_64&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cat &amp;lt;&amp;lt;&lt;span class=&quot;string&quot;&gt;&#39;By_Arondight&#39;&lt;/span&gt; | env gcc -xc -o .\ - - \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;/dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&amp;amp; ./.\ - &amp;amp;&amp;amp; env rm .\ -&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;char _[]=&lt;span class=&quot;string&quot;&gt;&quot;\xe6\x96\xb0\xe5\xb9\xb4\xe5\xbf\xab\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\xe4\xb9\x90\xef\xbc\x81\x0a&quot;&lt;/span&gt;;____(___)&amp;lt;%putchar&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;((___++)[_])&amp;amp;&amp;amp;____(___);_&lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt;(0);%&amp;gt;main()&amp;lt;%long&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;__=____;*(&amp;amp;__+2)=__;__asm__(&lt;span class=&quot;string&quot;&gt;&quot;\x78\x6f\x72\x71\x20\&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;\x25\x72\x64\x69\x2c\x20\x25\x72\x64\x69\xa\x0&quot;&lt;/span&gt;);%&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;By_Arondight&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;惟愿可以遇到美好的人和事。&lt;/p&gt;
@@ -572,7 +572,7 @@
     <link href="https://arondight.github.io/2016/01/03/%E9%9A%8F%E4%BE%BF%E5%86%99%E4%B8%80%E7%82%B9%E4%B8%9C%E8%A5%BF/"/>
     <id>https://arondight.github.io/2016/01/03/随便写一点东西/</id>
     <published>2016-01-03T07:34:18.000Z</published>
-    <updated>2016-05-18T11:38:17.964Z</updated>
+    <updated>2016-05-23T15:28:56.310Z</updated>
     
     <content type="html">&lt;p&gt;下午慢慢折腾了一下Hexo，然后成果就是这个博客。老实说我也不太清楚以后究竟在这上面会写点什么，多半会是所处的日常吧。&lt;/p&gt;
 &lt;p&gt;折腾完大约是下午接近4 点的样子，足足搞了快5 个小时。透过窄窄的窗子所看到的已经是很惨淡的阳光了。回过神来今天已经是公历新年后的第3 天了，或许因为最近1 个半月想了很多的事情，不知不觉已经将一年最后的时间消耗殆尽，不难过也不开心。&lt;/p&gt;

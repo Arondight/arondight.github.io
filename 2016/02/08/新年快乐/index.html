@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://arondight.github.io/2016/02/08/新年快乐/index.html">
 <meta property="og:site_name" content="河 的 第 三 条 岸">
 <meta property="og:description" content="12345678910#!/usr/bin/env bash# For Linux 4.0+ x86_64cat &amp;lt;&amp;lt;&apos;By_Arondight&apos; | env gcc -xc -o .\ - - \&amp;gt;/dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&amp;amp; ./.\ - &amp;amp;&amp;amp; env rm .\ -char _[]=&quot;\xe6\x96\xb0\xe5\xb">
-<meta property="og:updated_time" content="2016-05-18T11:38:17.964Z">
+<meta property="og:updated_time" content="2016-05-23T15:28:56.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="新年快乐">
 <meta name="twitter:description" content="12345678910#!/usr/bin/env bash# For Linux 4.0+ x86_64cat &amp;lt;&amp;lt;&apos;By_Arondight&apos; | env gcc -xc -o .\ - - \&amp;gt;/dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&amp;amp; ./.\ - &amp;amp;&amp;amp; env rm .\ -char _[]=&quot;\xe6\x96\xb0\xe5\xb">
@@ -23,10 +23,7 @@
     <link rel="icon" href="/img/avatar.jpg">
   
   
-      <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
-  
-  
-      <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
+      <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
   
   
       <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
@@ -34,14 +31,14 @@
   
   <link rel="stylesheet" href="/css/style.css">
   
-  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
       <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
   
-  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
   <script>
       var yiliaConfig = {
           fancybox: true,
@@ -53,9 +50,16 @@
           isCategory: false,
           open_in_new: false,
           fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js"
+          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+          search: true
       }
   </script>
+
+  
+      <script>
+          yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+      </script>
+  
 
   
       <script>
@@ -92,7 +96,15 @@
         
         <p class="header-subtitle">A Blog About Me</p>
         
-                
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
 
 
         
@@ -341,7 +353,7 @@
         <p><span>本文标题:</span><a href="/2016/02/08/新年快乐/">新年快乐</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">愛と奇跡の物語</a></p>
         <p><span>发布时间:</span>2016-02-08, 00:00:00</p>
-        <p><span>最后更新:</span>2016-05-18, 19:38:17</p>
+        <p><span>最后更新:</span>2016-05-23, 23:28:56</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/02/08/新年快乐/" title="新年快乐">https://arondight.github.io/2016/02/08/新年快乐/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/02/08/新年快乐/　　作者: 愛と奇跡の物語" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -510,7 +522,7 @@
     
     <script src="/js/GithubRepoWidget.js"></script>
 
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
 
 
 <!-- Google Analytics -->
@@ -533,9 +545,6 @@ ga('send', 'pageview');
     <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
     <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
-
-    <script src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
-
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
   </div>

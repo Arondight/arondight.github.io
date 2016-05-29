@@ -16,7 +16,7 @@
 <meta property="og:description" content="下午慢慢折腾了一下Hexo，然后成果就是这个博客。老实说我也不太清楚以后究竟在这上面会写点什么，多半会是所处的日常吧。
 折腾完大约是下午接近4 点的样子，足足搞了快5 个小时。透过窄窄的窗子所看到的已经是很惨淡的阳光了。回过神来今天已经是公历新年后的第3 天了，或许因为最近1 个半月想了很多的事情，不知不觉已经将一年最后的时间消耗殆尽，不难过也不开心。
 因为搞乱了生活节奏的原因，难得的假期里并没有">
-<meta property="og:updated_time" content="2016-05-18T11:38:17.964Z">
+<meta property="og:updated_time" content="2016-05-23T15:28:56.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="随便写一点东西">
 <meta name="twitter:description" content="下午慢慢折腾了一下Hexo，然后成果就是这个博客。老实说我也不太清楚以后究竟在这上面会写点什么，多半会是所处的日常吧。
@@ -29,10 +29,7 @@
     <link rel="icon" href="/img/avatar.jpg">
   
   
-      <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
-  
-  
-      <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
+      <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
   
   
       <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
@@ -40,14 +37,14 @@
   
   <link rel="stylesheet" href="/css/style.css">
   
-  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
       <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
   
-  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
   <script>
       var yiliaConfig = {
           fancybox: true,
@@ -59,9 +56,16 @@
           isCategory: false,
           open_in_new: false,
           fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js"
+          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+          search: true
       }
   </script>
+
+  
+      <script>
+          yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+      </script>
+  
 
   
       <script>
@@ -98,7 +102,15 @@
         
         <p class="header-subtitle">A Blog About Me</p>
         
-                
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
 
 
         
@@ -348,7 +360,7 @@
         <p><span>本文标题:</span><a href="/2016/01/03/随便写一点东西/">随便写一点东西</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">愛と奇跡の物語</a></p>
         <p><span>发布时间:</span>2016-01-03, 15:34:18</p>
-        <p><span>最后更新:</span>2016-05-18, 19:38:17</p>
+        <p><span>最后更新:</span>2016-05-23, 23:28:56</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/01/03/随便写一点东西/" title="随便写一点东西">https://arondight.github.io/2016/01/03/随便写一点东西/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/01/03/随便写一点东西/　　作者: 愛と奇跡の物語" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -509,7 +521,7 @@
     
     <script src="/js/GithubRepoWidget.js"></script>
 
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
 
 
 <!-- Google Analytics -->
@@ -532,9 +544,6 @@ ga('send', 'pageview');
     <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
     <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
-
-    <script src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
-
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
   </div>
