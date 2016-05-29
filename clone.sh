@@ -6,8 +6,8 @@
 function doClone ()
 {
   local C_DIR=$(dirname $(readlink -f $0))
-  local GIT_DIR=${C_DIR}/.deploy_git
-  local CONFIG_YML=${C_DIR}/_config.yml
+  local GIT_DIR="${C_DIR}/.deploy_git"
+  local CONFIG_YML="${C_DIR}/_config.yml"
   local REG_URL='https?://(([\w\d\.-]+\.\w{2,6})|(\d{1,3}(\.\d{1,3}){3}))(:\d{1,4})*(/[\w\d\&%\./-~-]*)?'
   local REG_BRANCH='(?<=^branch:)[\w]+'
   local DEFAULT_BRANCH='master'
@@ -24,11 +24,11 @@ function doClone ()
   else
     if [[ ! -d $GIT_DIR ]]
     then
-      env rm -f $GIT_DIR
+      rm -f $GIT_DIR
 
-      DEPLOY_INFO=$(env grep -P -A 3 '^deploy:$' $CONFIG_YML)
-      REPOSITORY=$(echo $DEPLOY_INFO | env grep -oP $REG_URL)
-      BRANCH=$(echo $DEPLOY_INFO | env sed 's/[[:space:]]//g' | env grep -oP $REG_BRANCH)
+      DEPLOY_INFO=$(grep -P -A 3 '^deploy:$' $CONFIG_YML)
+      REPOSITORY=$(echo $DEPLOY_INFO | grep -oP $REG_URL)
+      BRANCH=$(echo $DEPLOY_INFO | sed 's/[[:space:]]//g' | grep -oP $REG_BRANCH)
 
       if [[ -z $REPOSITORY ]]
       then
@@ -40,7 +40,7 @@ function doClone ()
         BRANCH=$DEFAULT_BRANCH
       fi
 
-      env git clone -b $BRANCH $REPOSITORY $(basename $GIT_DIR)
+      git clone -b $BRANCH $REPOSITORY $(basename $GIT_DIR)
     fi
   fi
 

@@ -106,8 +106,9 @@ youyan:
 # >>> Style Customisation 样式自定义 <<<
 
 # Background | 背景
-## "n": /yelee/source/background/bg-n.jpg
-## "0": 灰白背景
+## "5": show images form bg-1.jpg to bg-5.jpg in `/yelee/source/background/`
+## "5": 显示`/yelee/source/background/`文件夹中 bg-1.jpg 到 bg-5.jpg 这5张图片
+## "0": white-gray background | 淳朴灰白背景
 background_image: 0
 
 # Base Font Size | 字号调节
@@ -136,7 +137,8 @@ blockquote_style:
 heading_style: 0 # Value: 0 - 2
 
 ## List style type (ul) | 无序列表项标记样式
-list_style: 2  # value: 0 - 12 可选（0/2/9/10）
+# 0/2/9/10 比较钟爱
+list_style: 2  # value: 0 - 12 可选
 
 # 左边栏宽度 px
 left_col_width: 300
@@ -150,10 +152,6 @@ toc: true
 # 目录中标题不换行
 # Keep TOC title on the same line |
 toc_nowrap: false
-
-# 是否显示边栏中的搜索框（仅样式，未添加搜索功能）
-# Search Box in left column
-search_box: false
 
 # 是否开启主页及加载头像时的动画效果
 # Animation in Homepage and Loading avatar
@@ -210,6 +208,15 @@ ie_updater:
 
 # >>> Vendors | 第三方工具 & 服务 <<<
 
+# Local Site Search | 本地站内搜索
+## Insatall below plugin to take effect | 使用搜索需先安装对应插件
+## https://github.com/PaicHyperionDev/hexo-generator-search
+search:
+  on: true
+  onload: false
+  ## true: get search.xml file when the page has loaded
+  ## false: get the file when search box gets focus
+
 # images viewer | 图片浏览器
 ## http://www.fancyapps.com/fancybox/
 fancybox: true
@@ -262,16 +269,16 @@ progressBar:
   color: green
 
 CDN:
-  jquery: //cdn.bootcss.com/jquery/1.9.1/jquery.min.js
-  require: //cdn.bootcss.com/require.js/2.1.22/require.min.js
-  fontawesome: //cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css
+  jquery: //cdn.bootcss.com/jquery/2.2.4/jquery.min.js
+  require: //cdn.bootcss.com/require.js/2.2.0/require.min.js
+  fontawesome: //cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css
   fancybox_js: //cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js
   fancybox_css: //cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css
-  animate_css: //cdn.bootcss.com/animate.css/3.5.0/animate.min.css
+  animate_css: //cdn.bootcss.com/animate.css/3.5.1/animate.min.css
   jquery_ui_js: //cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js
   jquery_ui_css: //cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css
   pace_js: //cdn.bootcss.com/pace/1.0.2/pace.min.js
-  clipboard: //cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js
+  clipboard: //cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js
   mathjax: //cdn.bootcss.com/mathjax/2.6.1/MathJax.js
-  scrollreveal: //cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js
+  scrollreveal: //cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js
 

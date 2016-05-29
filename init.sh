@@ -7,16 +7,17 @@ function doInit ()
 {
   local NPM_CMD=''
   local C_DIR=$(dirname $(readlink -f $0))
-  local MY_DIR=${C_DIR}/my
-  local THEME_DIR=${C_DIR}/themes
-  local BUILD_SH=${C_DIR}/build.sh
-  local CLONE_SH=${C_DIR}/clone.sh
-  local PACKAGE_JSON=${C_DIR}/package.json
-  local GITMODULES=${C_DIR}/.gitmodules
+  local MY_DIR="${C_DIR}/my"
+  local THEME_DIR="${C_DIR}/themes"
+  local BUILD_SH="${C_DIR}/build.sh"
+  local CLONE_SH="${C_DIR}/clone.sh"
+  local PACKAGE_JSON="${C_DIR}/package.json"
+  local GITMODULES="${C_DIR}/.gitmodules"
+  local DEPLOY_GIT="${C_DIR}/deploy_git"
 
   cd $C_DIR
 
-  if [[ -d ${C_DIR}/.deploy_git && -d ${C_DIR}/node_modules ]]
+  if [[ -d $DEPLOY_GIT && -d $GITMODULES ]]
   then
     echo "warn: it seems this repo has been initialized, do nothing."
     return 0
@@ -47,12 +48,12 @@ function doInit ()
 
   if [[ -r $GITMODULES && -d ${C_DIR}/.git ]]
   then
-    env git submodule update --init --recursive
+    git submodule update --init --recursive
   fi
 
   if [[ -r $PACKAGE_JSON ]]
   then
-    env $NPM_CMD install
+    command $NPM_CMD install
   fi
 
   if [[ -r $BUILD_SH ]]

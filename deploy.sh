@@ -6,8 +6,8 @@
 function doDeploy ()
 {
   local C_DIR=$(dirname $(readlink -f $0))
-  local GENERATE_SH=${C_DIR}/generate.sh
-  local CLONE_SH=${C_DIR}/clone.sh
+  local GENERATE_SH="${C_DIR}/generate.sh"
+  local CLONE_SH="${C_DIR}/clone.sh"
 
   if [[ -r $GENERATE_SH ]]
   then
@@ -19,7 +19,7 @@ function doDeploy ()
     source $CLONE_SH
   fi
 
-  env hexo deploy
+  hexo deploy
 
   return $?
 }
