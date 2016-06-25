@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
-  
-  <meta charset="utf-8">
-  
-  <title>使用SSH反向隧道进行内网穿透 | 河 的 第 三 条 岸</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对应的情况这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="愛と奇跡の物語" />
+
+
+
+<meta name="description" content="对应的情况这篇文章主要介绍了如何利用SSH 反向隧道穿透NAT，并演示了如何维持一条稳定的SSH 隧道。
 假设有机器A 和B，A 有公网IP，B 位于NAT 之后并无可用的端口转发，现在想由A 主动向B 发起SSH 连接。由于B 在NAT 后端，无可用公网IP + 端口 这样一个组合，所以A 无法穿透NAT，这篇文章应对的就是这种情况。
 首先有如下约定，因为很重要所以放在前面：
 
@@ -37,69 +41,81 @@
 
 机器代号
 机">
-  
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
     <link rel="alternative" href="/atom.xml" title="河 的 第 三 条 岸" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/img/avatar.jpg">
-  
-  
-      <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
-  
-  
-      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-      <link href="//cdn.bootcss.com/pace/1.0.2/themes/green/pace-theme-minimal.css" rel="stylesheet">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  
-  
-      <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-  
-  <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  <script>
-      var yiliaConfig = {
-          fancybox: true,
-          animate: true,
-          isHome: false,
-          isPost: true,
-          isArchive: false,
-          isTag: false,
-          isCategory: false,
-          open_in_new: false,
-          fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-          search: true
-      }
-  </script>
 
-  
-      <script>
-          yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
-      </script>
-  
 
-  
-      <script>
-          yiliaConfig.rootUrl = "/";
-      </script>
-  
 
-  
-  
-      <script>
-          var _hmt = _hmt || [];
-          (function() {
-              var hm = document.createElement("script");
-              hm.src = "//hm.baidu.com/hm.js?55d7496b74b59fcaa2a67bd11b36a7b6";
-              var s = document.getElementsByTagName("script")[0]; 
-              s.parentNode.insertBefore(hm, s);
-          })();
-      </script>
-  
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/green/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>使用SSH反向隧道进行内网穿透 | 河 的 第 三 条 岸</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?55d7496b74b59fcaa2a67bd11b36a7b6";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
 </head>
 <body>
   <div id="container">
@@ -193,15 +209,19 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa GitHub" target="_blank" href="https://github.com/Arondight" title="GitHub"></a>
+                                <a class="fa GitHub" href="https://github.com/Arondight" title="GitHub"></a>
                             
-                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/ispeller" title="CSDN"></a>
+                                <a class="fa CSDN" href="http://blog.csdn.net/ispeller" title="CSDN"></a>
                             
-                                <a class="fa 虾米音乐" target="_blank" href="http://www.xiami.com/u/6110365" title="虾米音乐"></a>
+                                <a class="fa 虾米音乐" href="http://www.xiami.com/u/6110365" title="虾米音乐"></a>
                             
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                                <a class="fa bilibili" href="http://space.bilibili.com/1750509" title="bilibili"></a>
                             
-                                <a class="fa Email" target="_blank" href="mailto:&#115;&#104;&#101;&#108;&#108;&#95;&#119;&#97;&#121;&#64;&#102;&#111;&#120;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;" title="Email"></a>
+                                <a class="fa LOFTER" href="http://eye.arondight.me" title="LOFTER"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa Email" href="mailto:&#115;&#104;&#101;&#108;&#108;&#95;&#119;&#97;&#121;&#64;&#102;&#111;&#120;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;" title="Email"></a>
                             
                         </ul>
                     </nav>
@@ -219,35 +239,35 @@
                 <section class="switch-part switch-part3">
                     <div id="js-friends">
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://isliberty.me">3890929</a>
+                      <a class="main-nav-link switch-friends-link" href="https://isliberty.me">3890929</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://coolrc.top">coolrc&#39;s blog</a>
+                      <a class="main-nav-link switch-friends-link" href="http://coolrc.top">coolrc&#39;s blog</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog.farkasity.me">Farkasity&#39;s Blog</a>
+                      <a class="main-nav-link switch-friends-link" href="https://blog.farkasity.me">Farkasity&#39;s Blog</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.winkidney.com">GlassGear</a>
+                      <a class="main-nav-link switch-friends-link" href="http://blog.winkidney.com">GlassGear</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.ishell.me">Kissbug8720&#39;s Blog</a>
+                      <a class="main-nav-link switch-friends-link" href="http://blog.ishell.me">Kissbug8720&#39;s Blog</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.targetlocked.xyz">Love live!</a>
+                      <a class="main-nav-link switch-friends-link" href="http://www.targetlocked.xyz">Love live!</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog.menci.moe">Menci</a>
+                      <a class="main-nav-link switch-friends-link" href="https://blog.menci.moe">Menci</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.netcan666.com">Netcan</a>
+                      <a class="main-nav-link switch-friends-link" href="http://www.netcan666.com">Netcan</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://shyling.com">Shy泠的博客</a>
+                      <a class="main-nav-link switch-friends-link" href="https://shyling.com">Shy泠的博客</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.supvesonico.moe">Sonico&#39;s Home</a>
+                      <a class="main-nav-link switch-friends-link" href="http://blog.supvesonico.moe">Sonico&#39;s Home</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://web.xwyam.info/blog">xw_y_am&#39;s blog</a>
+                      <a class="main-nav-link switch-friends-link" href="http://web.xwyam.info/blog">xw_y_am&#39;s blog</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wiki.yanhao.site">YANHAO WIKI</a>
+                      <a class="main-nav-link switch-friends-link" href="http://wiki.yanhao.site">YANHAO WIKI</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://etula.me">Мвудаг/Этура Яннъ</a>
+                      <a class="main-nav-link switch-friends-link" href="https://etula.me">Мвудаг/Этура Яннъ</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hto.io">蔓舞寻樱的博客</a>
+                      <a class="main-nav-link switch-friends-link" href="https://hto.io">蔓舞寻樱的博客</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://blog-netarmy.rhcloud.com">中土國民會全球資訊網</a>
+                      <a class="main-nav-link switch-friends-link" href="https://blog-netarmy.rhcloud.com">中土國民會全球資訊網</a>
                     
                     </div>
                 </section>
@@ -308,6 +328,10 @@
                                 <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/ispeller" title="CSDN"></a>
                             
                                 <a class="fa 虾米音乐" target="_blank" href="http://www.xiami.com/u/6110365" title="虾米音乐"></a>
+                            
+                                <a class="fa bilibili" target="_blank" href="http://space.bilibili.com/1750509" title="bilibili"></a>
+                            
+                                <a class="fa LOFTER" target="_blank" href="http://eye.arondight.me" title="LOFTER"></a>
                             
                                 <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
                             
@@ -501,43 +525,17 @@
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对应的情况"><span class="toc-number">1.</span> <span class="toc-text">对应的情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSH-反向隧道"><span class="toc-number">2.</span> <span class="toc-text">SSH 反向隧道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隧道的维持"><span class="toc-number">3.</span> <span class="toc-text">隧道的维持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#稳定性维持"><span class="toc-number">3.1.</span> <span class="toc-text">稳定性维持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隧道的自动建立"><span class="toc-number">3.2.</span> <span class="toc-text">隧道的自动建立</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#“打洞”"><span class="toc-number">4.</span> <span class="toc-text">“打洞”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最终的解决方案"><span class="toc-number">5.</span> <span class="toc-text">最终的解决方案</span></a></li></ol>
 </div>
 <style>
-    .left-col .switch-btn {
-        display: none;
-    }
+    .left-col .switch-btn,
     .left-col .switch-area {
         display: none;
     }
 </style>
 
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
 <script>
-    var valueHide = "隐藏目录";
-    var valueShow = "显示目录";
-
-    if ($(".left-col").is(":hidden")) {
-        $("#tocButton").attr("value", valueShow);
-    }
-
-    $("#tocButton").click(function() {
-        if ($("#toc").is(":hidden")) {
-            $("#tocButton").attr("value", valueHide);
-            $("#toc").slideDown(320);
-            $(".switch-btn, .switch-area").fadeOut(300);
-        }
-        else {
-            $("#tocButton").attr("value", valueShow);
-            $("#toc").slideUp(350);
-            $(".switch-btn, .switch-area").fadeIn(500);
-        }
-    })
-
-    if ($(".toc").length < 1) {
-        $("#toc, #tocButton").hide();
-        $(".switch-btn, .switch-area").show();
-    }
+    yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
 </script>
-
-
 
 
 
@@ -545,23 +543,22 @@
 
     
       <div class="duoshuo" id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/02/17/使用SSH反向隧道进行内网穿透/" data-title="使用SSH反向隧道进行内网穿透" data-url="https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:"arondight"};
-    (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';
-        ds.async = true;
-        ds.src = '/js/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0]
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/02/17/使用SSH反向隧道进行内网穿透/" data-title="使用SSH反向隧道进行内网穿透" data-url="https://arondight.github.io/2016/02/17/使用SSH反向隧道进行内网穿透/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"arondight"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = '/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
     </script>
-    <!-- 多说公共JS代码 end -->
+    
+    <script> loadComment(); </script>
+
 </div>
 
     
@@ -602,7 +599,7 @@
                 2016 愛と奇跡の物語
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
@@ -652,9 +649,30 @@ ga('send', 'pageview');
 
 <div class="scroll" id="scroll">
     <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
     <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+            
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
   </div>
