@@ -1,16 +1,14 @@
-# NAME
+# arondight.github.io
 
-arondight.github.io - A Blog About Me
-
-# SYNOPSIS
+## ABOUT
 
 This is source of [arondight.github.io][ID_SITE].
 
-[ID_SITE]: http://arondight.github.io "Visit It!"
+[ID_SITE]: http://arondight.github.io "A Blog About Me"
 
-# USAGE
+## USAGE
 
-## INIT
+### INIT
 
 ```bash
 git clone https://github.com/Arondight/arondight.github.io.git
@@ -20,7 +18,7 @@ cd arondight.github.io
 
 Only do this at the very beginning.
 
-## SERVE
+### SERVE
 
 ```bash
 ./serve.sh
@@ -28,30 +26,30 @@ Only do this at the very beginning.
 
 Then visit [127.0.0.1:4000](http://127.0.0.1:4000) in your web browser.
 
-## DEPLOY
+### DEPLOY
 
 ```bash
 ./deploy.sh
 ```
 
-## PUSH
+### PUSH
 
 ```bash
 ./push.sh
 ```
 
-# DEPENDENCIES
+## DEPENDENCIES
 
 1. bash
 * git
 * npm (also support [cnpm](https://github.com/cnpm/cnpm))
 * hexo
 
-# COPYRIGHT
+## COPYRIGHT
 
 Copyright (c) 2016 秦凡东 (Qin Fandong)
 
-# LICENSE
+## LICENSE
 
 Read [LICENSE][ID_LICENSE]
 
