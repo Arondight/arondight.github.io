@@ -1221,7 +1221,8 @@ body .ui-tooltip {
 .archive-article-inner .article-meta {
   position: relative;
   float: right;
-  margin-top: -10px;
+  margin-top: -0.277777777777778rem;
+  padding-right: 0;
   color: #555;
   background: none;
   text-align: right;
@@ -1576,13 +1577,15 @@ body .ui-tooltip {
   position: absolute;
   right: 0;
   top: 23px;
-  width: 8rem;
+  width: 9rem;
+  padding-right: 1.2rem;
   font-size: 0.875rem;
-  text-align: center;
+  text-align: right;
   z-index: 1;
 }
 .article-meta time {
   color: #aaa;
+  float: right;
 }
 .article-meta time:before {
   margin-top: 0px;
@@ -1590,6 +1593,19 @@ body .ui-tooltip {
   content: "\f073";
   font: 1em FontAwesome;
   color: #999;
+}
+.article-meta a:nth-child(2) {
+  clear: right;
+  float: right;
+  padding-top: 0.45rem;
+  color: #999;
+}
+.article-meta a:nth-child(2):hover {
+  color: #258fb8;
+  font-size: 110%;
+}
+.article-meta a:nth-child(2) i {
+  vertical-align: top;
 }
 .article-more-link {
   float: right;
@@ -2050,7 +2066,8 @@ aside.comment-bar:active {
 .archive-article-inner .article-meta {
   position: relative;
   float: right;
-  margin-top: -10px;
+  margin-top: -0.277777777777778rem;
+  padding-right: 0;
   color: #555;
   background: none;
   text-align: right;
