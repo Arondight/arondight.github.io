@@ -131,7 +131,7 @@ $ gpg -a -o gnupg.pub --export <key ID>
 你可以像下面一样导出指纹。
 
 ```
-$ LANG=en_US gpg --fingerprint <key ID> >fingerprint
+$ gpg --fingerprint <key ID> | perl -nE '$.-2 or s/^\h+// and print' | tee fingerprint
 ```
 
 然后将`fingerprint` 文件提交到你的项目仓库中，或者公布在网络的其他位置。
@@ -173,7 +173,7 @@ $ git config --global commit.gpgsign true
 
 ### 获得公钥
 
-你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹，然后根据指纹到服务器上查找钥匙号。
+你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹（后8 位数字为钥匙号），然后根据得到的钥匙号到服务器上查找钥匙。
 
 ```
 $ gpg --keyserver keys.gnupg.net --search-keys <key ID>
