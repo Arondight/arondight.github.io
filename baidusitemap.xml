@@ -3,6 +3,30 @@
 
 
     
+  <url>
+    <loc>https://arondight.github.io/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/</loc>
+    <lastmod>2016-06-28T12:53:02.363Z</lastmod>
+    <data>
+        <display>
+        <title>使用GPG签名Git提交和标签</title>
+        <pubTime>2016-04-17T06:16:53.000Z</pubTime>
+        
+        <tag>Git</tag>
+         
+        <tag>GPG</tag>
+         
+        <tag>GitHub</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="https://arondight.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://arondight.github.io/2016/05/03/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84%E4%B8%96%E7%95%8C%E7%8C%AE%E4%B8%8A%E7%A5%9D%E7%A6%8F/</loc>
@@ -48,30 +72,6 @@
            
              
               <breadCrumb title="节" url="https://arondight.github.io/categories/%E8%8A%82/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://arondight.github.io/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/</loc>
-    <lastmod>2016-05-23T15:28:56.310Z</lastmod>
-    <data>
-        <display>
-        <title>使用GPG签名Git提交和标签</title>
-        <pubTime>2016-04-17T06:16:53.000Z</pubTime>
-        
-        <tag>Git</tag>
-         
-        <tag>GPG</tag>
-         
-        <tag>GitHub</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="https://arondight.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>

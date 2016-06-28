@@ -70,7 +70,7 @@
     <link href="https://arondight.github.io/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/"/>
     <id>https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</id>
     <published>2016-04-17T06:16:53.000Z</published>
-    <updated>2016-05-23T15:28:56.310Z</updated>
+    <updated>2016-06-28T12:53:02.363Z</updated>
     
     <content type="html">&lt;h2 id=&quot;Pretty-Good-Privacy&quot;&gt;&lt;a href=&quot;#Pretty-Good-Privacy&quot; class=&quot;headerlink&quot; title=&quot;Pretty Good Privacy&quot;&gt;&lt;/a&gt;Pretty Good Privacy&lt;/h2&gt;&lt;h3 id=&quot;GPG-是什么&quot;&gt;&lt;a href=&quot;#GPG-是什么&quot; class=&quot;headerlink&quot; title=&quot;GPG 是什么&quot;&gt;&lt;/a&gt;GPG 是什么&lt;/h3&gt;&lt;p&gt;提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，中文直译为“完美隐私”，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。&lt;/p&gt;
 &lt;p&gt;GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于不安全网络上的信息传输。为此GPG 需要一个密钥环，GPG 使用私钥和公钥分别完成签名和加密，对应地验证和解密由公钥和私钥完成。&lt;/p&gt;
@@ -169,7 +169,7 @@
 &lt;/blockquote&gt;
 &lt;h3 id=&quot;导出指纹&quot;&gt;&lt;a href=&quot;#导出指纹&quot; class=&quot;headerlink&quot; title=&quot;导出指纹&quot;&gt;&lt;/a&gt;导出指纹&lt;/h3&gt;&lt;p&gt;然而不幸的是，任何人都可以冒充你的名义上传公钥到GPG 服务器，所以对方搜到以你的名义发布的公钥，不一定真的是你发布的。为了避免这个问题，你需要公布主钥的指纹。GPG 导入公钥后需要手动设置信任度。这时候对方就可以通过对比计算得到的主钥指纹和你提供的主钥指纹，来确定导入的主钥的合法性。&lt;/p&gt;
 &lt;p&gt;你可以像下面一样导出指纹。&lt;/p&gt;
-&lt;figure class=&quot;highlight ada&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ LANG=en_US gpg &lt;span class=&quot;comment&quot;&gt;--fingerprint &amp;lt;key ID&amp;gt; &amp;gt;fingerprint&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight ruby&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ gpg --fingerprint &amp;lt;key ID&amp;gt; &lt;span class=&quot;params&quot;&gt;| perl -nE &#39;$.-2 &lt;span class=&quot;keyword&quot;&gt;or&lt;/span&gt; s/^\h+// &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; print&#39; |&lt;/span&gt; tee fingerprint&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;然后将&lt;code&gt;fingerprint&lt;/code&gt; 文件提交到你的项目仓库中，或者公布在网络的其他位置。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ol&gt;
@@ -186,7 +186,7 @@
 &lt;p&gt;如果你想全局默认使用GPG 签名提交，可以全局将&lt;code&gt;commit.gpgsign&lt;/code&gt; 设置为&lt;code&gt;true&lt;/code&gt;。&lt;/p&gt;
 &lt;figure class=&quot;highlight autoit&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ git config --&lt;span class=&quot;keyword&quot;&gt;global&lt;/span&gt; commit.gpgsign &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h3 id=&quot;关于私钥&quot;&gt;&lt;a href=&quot;#关于私钥&quot; class=&quot;headerlink&quot; title=&quot;关于私钥&quot;&gt;&lt;/a&gt;关于私钥&lt;/h3&gt;&lt;p&gt;任何情况向下都不要把私钥泄露给除了你之外的任何人。如果需要向对方发送加密信息，请让对方提供指纹，导入对方的公钥进行加密，而不要用自己的公钥加密后再把自己的私钥发送过去。&lt;/p&gt;
-&lt;h2 id=&quot;验证&quot;&gt;&lt;a href=&quot;#验证&quot; class=&quot;headerlink&quot; title=&quot;验证&quot;&gt;&lt;/a&gt;验证&lt;/h2&gt;&lt;h3 id=&quot;获得公钥&quot;&gt;&lt;a href=&quot;#获得公钥&quot; class=&quot;headerlink&quot; title=&quot;获得公钥&quot;&gt;&lt;/a&gt;获得公钥&lt;/h3&gt;&lt;p&gt;你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹，然后根据指纹到服务器上查找钥匙号。&lt;/p&gt;
+&lt;h2 id=&quot;验证&quot;&gt;&lt;a href=&quot;#验证&quot; class=&quot;headerlink&quot; title=&quot;验证&quot;&gt;&lt;/a&gt;验证&lt;/h2&gt;&lt;h3 id=&quot;获得公钥&quot;&gt;&lt;a href=&quot;#获得公钥&quot; class=&quot;headerlink&quot; title=&quot;获得公钥&quot;&gt;&lt;/a&gt;获得公钥&lt;/h3&gt;&lt;p&gt;你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹（后8 位数字为钥匙号），然后根据得到的钥匙号到服务器上查找钥匙。&lt;/p&gt;
 &lt;figure class=&quot;highlight q&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ gpg --keyserver &lt;span class=&quot;built_in&quot;&gt;keys&lt;/span&gt;.gnupg.net --search-&lt;span class=&quot;built_in&quot;&gt;keys&lt;/span&gt; &amp;lt;&lt;span class=&quot;built_in&quot;&gt;key&lt;/span&gt; ID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;选择对应的编号，会自动下载并导入该公钥。你也可以根据用户名和邮箱进行查找。&lt;/p&gt;
 &lt;h3 id=&quot;设置信任&quot;&gt;&lt;a href=&quot;#设置信任&quot; class=&quot;headerlink&quot; title=&quot;设置信任&quot;&gt;&lt;/a&gt;设置信任&lt;/h3&gt;&lt;p&gt;导入后的公钥需要设置信任度才能使用该公钥进行验证，你可以通过类似下面的指令编辑该公钥的信息。&lt;/p&gt;

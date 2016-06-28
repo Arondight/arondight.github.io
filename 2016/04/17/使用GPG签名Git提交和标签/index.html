@@ -18,7 +18,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <meta property="og:site_name" content="河 的 第 三 条 岸">
 <meta property="og:description" content="Pretty Good PrivacyGPG 是什么提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，中文直译为“完美隐私”，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。
 GPG 可以提供对信息、文件的签名和验证，或者是加密和解密，主要用于">
-<meta property="og:updated_time" content="2016-05-23T15:28:56.310Z">
+<meta property="og:updated_time" content="2016-06-28T12:53:02.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用GPG签名Git提交和标签">
 <meta name="twitter:description" content="Pretty Good PrivacyGPG 是什么提GPG 之前需要提一个软件叫PGP。PGP 是“Pretty Good Privacy” 的缩写，中文直译为“完美隐私”，名字言简意赅，上来就把软件的用途拍用户脸上。然而PGP 不是自由软件，所以自由软件基金会决定开发一个替代PGP 的自由软件，于是有了GPG（GnuPG）。
@@ -468,7 +468,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 </blockquote>
 <h3 id="导出指纹"><a href="#导出指纹" class="headerlink" title="导出指纹"></a>导出指纹</h3><p>然而不幸的是，任何人都可以冒充你的名义上传公钥到GPG 服务器，所以对方搜到以你的名义发布的公钥，不一定真的是你发布的。为了避免这个问题，你需要公布主钥的指纹。GPG 导入公钥后需要手动设置信任度。这时候对方就可以通过对比计算得到的主钥指纹和你提供的主钥指纹，来确定导入的主钥的合法性。</p>
 <p>你可以像下面一样导出指纹。</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ LANG=en_US gpg <span class="comment">--fingerprint &lt;key ID&gt; &gt;fingerprint</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --fingerprint &lt;key ID&gt; <span class="params">| perl -nE '$.-2 <span class="keyword">or</span> s/^\h+// <span class="keyword">and</span> print' |</span> tee fingerprint</span><br></pre></td></tr></table></figure>
 <p>然后将<code>fingerprint</code> 文件提交到你的项目仓库中，或者公布在网络的其他位置。</p>
 <blockquote>
 <ol>
@@ -485,7 +485,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 <p>如果你想全局默认使用GPG 签名提交，可以全局将<code>commit.gpgsign</code> 设置为<code>true</code>。</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --<span class="keyword">global</span> commit.gpgsign <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <h3 id="关于私钥"><a href="#关于私钥" class="headerlink" title="关于私钥"></a>关于私钥</h3><p>任何情况向下都不要把私钥泄露给除了你之外的任何人。如果需要向对方发送加密信息，请让对方提供指纹，导入对方的公钥进行加密，而不要用自己的公钥加密后再把自己的私钥发送过去。</p>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><h3 id="获得公钥"><a href="#获得公钥" class="headerlink" title="获得公钥"></a>获得公钥</h3><p>你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹，然后根据指纹到服务器上查找钥匙号。</p>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><h3 id="获得公钥"><a href="#获得公钥" class="headerlink" title="获得公钥"></a>获得公钥</h3><p>你可以根据你得到的信息在任何GPG 服务器上查找对应的公钥，典型的例如查看指纹（后8 位数字为钥匙号），然后根据得到的钥匙号到服务器上查找钥匙。</p>
 <figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --keyserver <span class="built_in">keys</span>.gnupg.net --search-<span class="built_in">keys</span> &lt;<span class="built_in">key</span> ID&gt;</span><br></pre></td></tr></table></figure>
 <p>选择对应的编号，会自动下载并导入该公钥。你也可以根据用户名和邮箱进行查找。</p>
 <h3 id="设置信任"><a href="#设置信任" class="headerlink" title="设置信任"></a>设置信任</h3><p>导入后的公钥需要设置信任度才能使用该公钥进行验证，你可以通过类似下面的指令编辑该公钥的信息。</p>
@@ -571,7 +571,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
         <p><span>本文标题:</span><a href="/2016/04/17/使用GPG签名Git提交和标签/">使用GPG签名Git提交和标签</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">愛と奇跡の物語</a></p>
         <p><span>发布时间:</span>2016-04-17, 14:16:53</p>
-        <p><span>最后更新:</span>2016-05-23, 23:28:56</p>
+        <p><span>最后更新:</span>2016-06-28, 20:53:02</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/04/17/使用GPG签名Git提交和标签/" title="使用GPG签名Git提交和标签">https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/04/17/使用GPG签名Git提交和标签/　　作者: 愛と奇跡の物語" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
