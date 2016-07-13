@@ -163,11 +163,11 @@ left_col_width: 300
 copyright: true
 
 # Table of contents | 文章目录
-toc: true
-
-# 目录中标题不换行
-# Keep TOC title on the same line |
-toc_nowrap: false
+toc:
+  on: true
+  list_number: true # 目录序号
+  max_depth: 3  # 1 - 6 (h1-h6) 目录最大级数
+  nowrap: false # Keep title on same line | 目录标题不换行
 
 # 是否开启主页及加载头像时的动画效果
 # Animation in Homepage and Loading avatar
@@ -200,7 +200,7 @@ friends:
   xw_y_am's blog: http://web.xwyam.info/blog
   YANHAO WIKI: http://wiki.yanhao.site
   Мвудаг/Этура Яннъ: https://etula.me
-  蔓舞寻樱的博客: https://hto.io
+  蔓舞寻樱的博客: https://emiria.io
   中土國民會全球資訊網: https://blog-netarmy.rhcloud.com
 
 #是否开启“关于我”。
@@ -234,6 +234,12 @@ ie_updater:
   ## http://browsehappy.com/
   ## http://outdatedbrowser.com/
 
+# Tab Title Change | 标签页标题切换
+tab_title_change:
+  on: true
+  left_tab_title: '|･ω･` )、'
+  return_tab_title: '✧*｡٩(ˊωˋ*)و✧*｡'
+
 
 # >>> Vendors | 第三方工具 & 服务 <<<
 
@@ -262,7 +268,6 @@ share:
   addthis_pubid: ""
   ## Go to www.addthis.com/dashboard to get your pubid (in src of Code)
   ## and customize AddThis share buttons
-
 
 # 百度、谷歌站长验证。填写 HTML 标签 content
 # Site Verification for Google and Baidu. HTML label content.
