@@ -249,7 +249,7 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
                     
                       <a class="main-nav-link switch-friends-link" href="https://etula.me">Мвудаг/Этура Яннъ</a>
                     
-                      <a class="main-nav-link switch-friends-link" href="https://hto.io">蔓舞寻樱的博客</a>
+                      <a class="main-nav-link switch-friends-link" href="https://emiria.io">蔓舞寻樱的博客</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://blog-netarmy.rhcloud.com">中土國民會全球資訊網</a>
                     
@@ -605,21 +605,27 @@ GPG 可以提供对信息、文件的签名和验证，或者是加密和解密�
 </article>
 
     <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pretty-Good-Privacy"><span class="toc-number">1.</span> <span class="toc-text">Pretty Good Privacy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GPG-是什么"><span class="toc-number">1.1.</span> <span class="toc-text">GPG 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主钥、从钥、公钥、私钥"><span class="toc-number">1.2.</span> <span class="toc-text">主钥、从钥、公钥、私钥</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#签名"><span class="toc-number">2.</span> <span class="toc-text">签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#生成密钥"><span class="toc-number">2.1.</span> <span class="toc-text">生成密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传公钥到服务器"><span class="toc-number">2.2.</span> <span class="toc-text">上传公钥到服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传公钥到GitHub"><span class="toc-number">2.3.</span> <span class="toc-text">上传公钥到GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导出指纹"><span class="toc-number">2.4.</span> <span class="toc-text">导出指纹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#签名提交和标签"><span class="toc-number">2.5.</span> <span class="toc-text">签名提交和标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于私钥"><span class="toc-number">2.6.</span> <span class="toc-text">关于私钥</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证"><span class="toc-number">3.</span> <span class="toc-text">验证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获得公钥"><span class="toc-number">3.1.</span> <span class="toc-text">获得公钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置信任"><span class="toc-number">3.2.</span> <span class="toc-text">设置信任</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证签名"><span class="toc-number">3.3.</span> <span class="toc-text">验证签名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展阅读"><span class="toc-number">4.</span> <span class="toc-text">扩展阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签名和验证"><span class="toc-number">4.1.</span> <span class="toc-text">签名和验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加密和解密"><span class="toc-number">4.2.</span> <span class="toc-text">加密和解密</span></a></li></ol></li></ol>
-</div>
-<style>
-    .left-col .switch-btn,
-    .left-col .switch-area {
-        display: none;
-    }
-</style>
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pretty-Good-Privacy"><span class="toc-number">1.</span> <span class="toc-text">Pretty Good Privacy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GPG-是什么"><span class="toc-number">1.1.</span> <span class="toc-text">GPG 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主钥、从钥、公钥、私钥"><span class="toc-number">1.2.</span> <span class="toc-text">主钥、从钥、公钥、私钥</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#签名"><span class="toc-number">2.</span> <span class="toc-text">签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#生成密钥"><span class="toc-number">2.1.</span> <span class="toc-text">生成密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传公钥到服务器"><span class="toc-number">2.2.</span> <span class="toc-text">上传公钥到服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传公钥到GitHub"><span class="toc-number">2.3.</span> <span class="toc-text">上传公钥到GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导出指纹"><span class="toc-number">2.4.</span> <span class="toc-text">导出指纹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#签名提交和标签"><span class="toc-number">2.5.</span> <span class="toc-text">签名提交和标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于私钥"><span class="toc-number">2.6.</span> <span class="toc-text">关于私钥</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证"><span class="toc-number">3.</span> <span class="toc-text">验证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获得公钥"><span class="toc-number">3.1.</span> <span class="toc-text">获得公钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置信任"><span class="toc-number">3.2.</span> <span class="toc-text">设置信任</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证签名"><span class="toc-number">3.3.</span> <span class="toc-text">验证签名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展阅读"><span class="toc-number">4.</span> <span class="toc-text">扩展阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签名和验证"><span class="toc-number">4.1.</span> <span class="toc-text">签名和验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加密和解密"><span class="toc-number">4.2.</span> <span class="toc-text">加密和解密</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
 
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
-<script>
-    yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-</script>
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
 
@@ -758,6 +764,24 @@ ga('send', 'pageview');
         }
     
 </script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "|･ω･` )、" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "✧*｡٩(ˊωˋ*)و✧*｡" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
   </div>

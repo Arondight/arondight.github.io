@@ -270,7 +270,7 @@
                     
                       <a class="main-nav-link switch-friends-link" href="https://etula.me">Мвудаг/Этура Яннъ</a>
                     
-                      <a class="main-nav-link switch-friends-link" href="https://hto.io">蔓舞寻樱的博客</a>
+                      <a class="main-nav-link switch-friends-link" href="https://emiria.io">蔓舞寻樱的博客</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://blog-netarmy.rhcloud.com">中土國民會全球資訊網</a>
                     
@@ -598,6 +598,24 @@ ga('send', 'pageview');
         }
     
 </script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "|･ω･` )、" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "✧*｡٩(ˊωˋ*)و✧*｡" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
   </div>

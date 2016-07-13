@@ -252,7 +252,7 @@
                     
                       <a class="main-nav-link switch-friends-link" href="https://etula.me">Мвудаг/Этура Яннъ</a>
                     
-                      <a class="main-nav-link switch-friends-link" href="https://hto.io">蔓舞寻樱的博客</a>
+                      <a class="main-nav-link switch-friends-link" href="https://emiria.io">蔓舞寻樱的博客</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://blog-netarmy.rhcloud.com">中土國民會全球資訊網</a>
                     
@@ -439,21 +439,27 @@
 </article>
 
     <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一"><span class="toc-number">1.</span> <span class="toc-text">一</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1"><span class="toc-number">1.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2"><span class="toc-number">1.2.</span> <span class="toc-text">2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二"><span class="toc-number">2.</span> <span class="toc-text">二</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1"><span class="toc-number">2.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1"><span class="toc-number">2.2.</span> <span class="toc-text">2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3"><span class="toc-number">2.3.</span> <span class="toc-text">3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三"><span class="toc-number">3.</span> <span class="toc-text">三</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2"><span class="toc-number">3.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2"><span class="toc-number">3.2.</span> <span class="toc-text">2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序"><span class="toc-number">4.</span> <span class="toc-text">序</span></a></li></ol>
-</div>
-<style>
-    .left-col .switch-btn,
-    .left-col .switch-area {
-        display: none;
-    }
-</style>
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一"><span class="toc-number">1.</span> <span class="toc-text">一</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1"><span class="toc-number">1.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2"><span class="toc-number">1.2.</span> <span class="toc-text">2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二"><span class="toc-number">2.</span> <span class="toc-text">二</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1"><span class="toc-number">2.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1"><span class="toc-number">2.2.</span> <span class="toc-text">2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3"><span class="toc-number">2.3.</span> <span class="toc-text">3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三"><span class="toc-number">3.</span> <span class="toc-text">三</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2"><span class="toc-number">3.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2"><span class="toc-number">3.2.</span> <span class="toc-text">2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序"><span class="toc-number">4.</span> <span class="toc-text">序</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
 
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
-<script>
-    yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-</script>
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
 
@@ -590,6 +596,24 @@ ga('send', 'pageview');
         }
     
 </script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "|･ω･` )、" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "✧*｡٩(ˊωˋ*)و✧*｡" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
   </div>
