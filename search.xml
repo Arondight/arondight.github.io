@@ -4,6 +4,80 @@
   
     
     <entry>
+      <title><![CDATA[GTK事件及信号机制]]></title>
+      <url>https://arondight.github.io/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/</url>
+      <content type="html"><![CDATA[<p>最近在给公司重写一版用Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用GTK 重写界面和功能。之前接触的都是Qt，对GTK 了解不多。个人觉得跟Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的GTK 信号回调机制。</p>
+<h2 id="事件和信号"><a href="#事件和信号" class="headerlink" title="事件和信号"></a>事件和信号</h2><p>GTK 是一个基于<strong>事件</strong>驱动的框架，就是说GTK 程序会一直循环在<code>gtk_main</code> 函数中，直至一个事件发生，然后跳转到对应的事件处理函数中，执行完毕后再次回到<code>gtk_main</code> 的循环。这听起来很符合逻辑，但是GTK 中除了事件外，还有一个概念是<strong>信号</strong>，特别是当你写几个GTK 程序后就会发现你处理的几乎都是信号。</p>
+<p>典型的例如。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g_signal_connect (G_OBJECT (mainWindow), <span class="string">"delete_event"</span>, G_CALLBACK (gtk_main_quit), <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+<p>那么<code>&quot;delete_event&quot;</code> 到底是事件还是信号——它被用于<code>g_signal_connect</code> 中，但是名字带有<code>event</code> 字样。</p>
+<a id="more"></a>
+<p>在GTK 中，事件是X11 中发生的，GTK 通过GDK 将X11 中的<code>XEvent</code> 转化为<code>GdkEvent</code>，其类型<code>GdkEventType</code> 定义在头文件<code>gdk/gdkevents.h</code> 中。</p>
+<blockquote>
+<p>GDK 是Xlib 的一个封装。</p>
+</blockquote>
+<p>而信号与事件不同，是GTK 本身的概念。在GTK 中，一个事件发生之后，会通过函数<code>gtk_widget_event</code> 将事件转化为信号，并通过函数<code>g_signal_emit</code> 将信号发射出去，如果有回调和该信号绑定，那么这个回调<strong>有可能</strong>被执行。</p>
+<p>举例来说，当<code>GtkButton</code> 上发生了鼠标点击的动作时，默认地事件和信号的顺序如下。</p>
+<ol>
+<li><code>GDK_BUTTON_PRESS</code> 事件产生</li>
+<li>调用GDK 中针对该事件的回调</li>
+<li><code>&quot;button_press_event&quot;</code> 信号发射</li>
+<li>调用GTK 中针对该信号的回调</li>
+<li><code>&quot;clicked&quot;</code> 信号发射</li>
+<li>调用GTK 中针对该信号的回调</li>
+</ol>
+<p>那么<code>&quot;delete_event&quot;</code> 到底是事件还是信号？它是一个信号，但是只有在事件<code>GDK_DELETE</code> 发生后才会被发射出去，所以它也代表一个事件。</p>
+<p>这也是GTK 一个稍微有点混乱的地方——<strong>事件的发生是通过信号的发射反应的</strong>。所以你如果想在GTK 中处理事件，你需要处理信号。</p>
+<h2 id="回调机制"><a href="#回调机制" class="headerlink" title="回调机制"></a>回调机制</h2><h3 id="回调的绑定"><a href="#回调的绑定" class="headerlink" title="回调的绑定"></a>回调的绑定</h3><p>和Qt 的信号-槽机制不同，GTK 中采用回调机制来处理信号。GTK 中为信号绑定回调的方式都通过同一个函数<code>g_signal_connect_data</code> 完成，其原形定义在头文件<code>gobject/gsignal.h</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">gulong</span><br><span class="line"><span class="title">g_signal_connect_data</span> <span class="params">(gpointer instance, <span class="keyword">const</span> gchar *detailed_signal, GCallback c_handler,</span><br><span class="line">                       gpointer data, GClosureNotify destroy_data, GConnectFlags connect_flags)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>因为信号处理在Glib 而非GTK 中，所以函数名以<code>g_</code> 而非<code>gtk_</code> 开头。</p>
+</blockquote>
+<p>但是更加常用的是在其上封装的三个宏，与<code>g_signal_connect_data</code> 定义在同一个头文件中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> g_signal_connect(instance, detailed_signal, c_handler, data) \</span><br><span class="line">  g_signal_connect_data ((instance), (detailed_signal), (c_handler), (data), NULL, (GConnectFlags) 0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> g_signal_connect_after(instance, detailed_signal, c_handler, data) \</span><br><span class="line">  g_signal_connect_data ((instance), (detailed_signal), (c_handler), (data), NULL, G_CONNECT_AFTER)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> g_signal_connect_swapped(instance, detailed_signal, c_handler, data) \</span><br><span class="line">  g_signal_connect_data ((instance), (detailed_signal), (c_handler), (data), NULL, G_CONNECT_SWAPPED)</span></span><br></pre></td></tr></table></figure>
+<p>其中。</p>
+<ul>
+<li><code>g_signal_connect</code>： 为信号绑定一个回调函数，该回调将先于默认回调执行。</li>
+<li><code>g_signal_connect_after</code>： 和<code>g_singal_connect</code> 类似，但是该回调将在默认回调之后执行。</li>
+<li><code>g_signal_connect_swapped</code>：回调先于默认回调执行，但是回调的参数位置应该和前两个绑定函数的回调参数位置交换。</li>
+</ul>
+<p><code>g_signal_connect_swapped</code> 中<code>swapped</code> 的效果如下。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span></span><br><span class="line"><span class="title">handler</span> <span class="params">(GtkWidget *widget, gpointer data)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span></span><br><span class="line"><span class="title">handlerSwapped</span> <span class="params">(gpointer data, GtkWidget *widget)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>个人觉得<code>g_signal_connect_swapped</code> 最好少用，它只会把水搅浑。</p>
+</blockquote>
+<h3 id="回调的形式"><a href="#回调的形式" class="headerlink" title="回调的形式"></a>回调的形式</h3><p>在Gtk 中，回调的形式有两种，在反应事件的信号回调中，handler 需要额外增加一个<code>GdkEvent *</code> 参数，用来传入发生的事件。</p>
+<p>这两种回调之间的区别如下（假设使用<code>g_signal_connect</code> 绑定）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span></span><br><span class="line"><span class="title">buttonClickedHandler</span> <span class="params">(GtkWidget *button, gpointer data)</span></span>;</span><br><span class="line"><span class="function">gboolean</span><br><span class="line"><span class="title">keyPressEventHandler</span> <span class="params">(GtkWidget *button, GdkEvent *event, gpointer data)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="回调函数之间的流程控制"><a href="#回调函数之间的流程控制" class="headerlink" title="回调函数之间的流程控制"></a>回调函数之间的流程控制</h2><h3 id="相较默认回调"><a href="#相较默认回调" class="headerlink" title="相较默认回调"></a>相较默认回调</h3><p>信号可以绑定多个回调，至于自定义回调是否先于默认回调执行，参见上节关于<code>g_signal_connect_after</code> 的说明。</p>
+<h3 id="终止处理过程"><a href="#终止处理过程" class="headerlink" title="终止处理过程"></a>终止处理过程</h3><p>除了增加了<code>GdkEvent *</code> 作为参数外，处理事件的回调函数还有<code>gboolean</code> 类型的返回值，这个返回值用于控制该事件处理过程是否继续。</p>
+<p>返回值的情况如下。</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TRUE</code></td>
+<td>该事件已经处理完毕，不再继续调用其他和该事件绑定的回调</td>
+</tr>
+<tr>
+<td><code>FALSE</code></td>
+<td>需要继续执行其他与该事件绑定的回调函数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="信号发射顺序"><a href="#信号发射顺序" class="headerlink" title="信号发射顺序"></a>信号发射顺序</h3><p>因为GTK 先捕获事件再转化为信号，所以直接反应事件的信号在其他信号之前被发射，所以同一个<code>GtkWidget</code> 上处理事件的回调总在其他信号回调之前被执行。</p>
+<blockquote>
+<p>所以上一节的最后一段代码片中，假设<code>buttonClickedHandler</code> 和<code>keyPressEventHandler</code>  分别被绑定到一个<code>GtkButton</code> 的<code>&quot;event&quot;</code> 和<code>&quot;clicked&quot;</code> 信号上，如果<code>keyPressEventHandler</code> 返回<code>TRUE</code>，那么<code>buttonClickedHandler</code> 将不会被执行。</p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[为美好的世界献上祝福]]></title>
       <url>https://arondight.github.io/2016/05/03/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84%E4%B8%96%E7%95%8C%E7%8C%AE%E4%B8%8A%E7%A5%9D%E7%A6%8F/</url>
       <content type="html"><![CDATA[<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>说一下最近发生的两件事吧。</p>

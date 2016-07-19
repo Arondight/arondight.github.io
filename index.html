@@ -213,7 +213,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPG/">GPG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICMP/">ICMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/">IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网穿透/">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开始/">开始</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新年/">新年</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈帧/">栈帧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/校验和/">校验和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/溢出/">溢出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTK/">CTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Callback/">Callback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Event/">Event</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDK/">GDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPG/">GPG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICMP/">ICMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/">IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Singal/">Singal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网穿透/">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开始/">开始</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新年/">新年</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈帧/">栈帧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/校验和/">校验和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/溢出/">溢出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隧道/">隧道</a></li></ul>
                     </div>
                 </section>
                 
@@ -329,6 +329,87 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-GTK事件及信号机制" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/19/GTK事件及信号机制/" class="article-date">
+      <time datetime="2016-07-19T12:37:56.000Z" itemprop="datePublished">2016-07-19</time>
+</a>
+
+ 
+    <a href="/2016/07/19/GTK事件及信号机制/#comments" title="查看评论">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span class="count-comment"></span>
+        
+            <span class="ds-thread-count"  data-thread-key="2016/07/19/GTK事件及信号机制/" ></span>
+        
+        
+    </a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/19/GTK事件及信号机制/">GTK事件及信号机制</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>最近在给公司重写一版用Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用GTK 重写界面和功能。之前接触的都是Qt，对GTK 了解不多。个人觉得跟Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的GTK 信号回调机制。</p>
+<h2 id="事件和信号"><a href="#事件和信号" class="headerlink" title="事件和信号"></a>事件和信号</h2><p>GTK 是一个基于<strong>事件</strong>驱动的框架，就是说GTK 程序会一直循环在<code>gtk_main</code> 函数中，直至一个事件发生，然后跳转到对应的事件处理函数中，执行完毕后再次回到<code>gtk_main</code> 的循环。这听起来很符合逻辑，但是GTK 中除了事件外，还有一个概念是<strong>信号</strong>，特别是当你写几个GTK 程序后就会发现你处理的几乎都是信号。</p>
+<p>典型的例如。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g_signal_connect (G_OBJECT (mainWindow), <span class="string">"delete_event"</span>, G_CALLBACK (gtk_main_quit), <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+<p>那么<code>&quot;delete_event&quot;</code> 到底是事件还是信号——它被用于<code>g_signal_connect</code> 中，但是名字带有<code>event</code> 字样。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTK/">CTK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Callback/">Callback</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Event/">Event</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GDK/">GDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Singal/">Singal</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/07/19/GTK事件及信号机制/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-为美好的世界献上祝福" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -851,18 +932,16 @@
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
                 
-                    <span>, </span>
+                    <span>| </span>
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
-                            <span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
