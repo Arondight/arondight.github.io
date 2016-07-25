@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://arondight.github.io/"/>
-  <updated>2016-07-19T17:34:02.417Z</updated>
+  <updated>2016-07-25T13:25:04.704Z</updated>
   <id>https://arondight.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://arondight.github.io/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/"/>
     <id>https://arondight.github.io/2016/07/19/GTK事件及信号机制/</id>
     <published>2016-07-19T12:37:56.000Z</published>
-    <updated>2016-07-19T17:34:02.417Z</updated>
+    <updated>2016-07-25T13:25:04.704Z</updated>
     
     <content type="html">&lt;p&gt;最近在给公司重写一版用Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用GTK 重写界面和功能。之前接触的都是Qt，对GTK 了解不多。个人觉得跟Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的GTK 信号回调机制。&lt;/p&gt;
 &lt;h2 id=&quot;事件和信号&quot;&gt;&lt;a href=&quot;#事件和信号&quot; class=&quot;headerlink&quot; title=&quot;事件和信号&quot;&gt;&lt;/a&gt;事件和信号&lt;/h2&gt;&lt;p&gt;GTK 是一个基于&lt;strong&gt;事件&lt;/strong&gt;驱动的框架，就是说GTK 程序会一直循环在&lt;code&gt;gtk_main&lt;/code&gt; 函数中，直至一个事件发生，然后跳转到对应的事件处理函数中，执行完毕后再次回到&lt;code&gt;gtk_main&lt;/code&gt; 的循环。这听起来很符合逻辑，但是GTK 中除了事件外，还有一个概念是&lt;strong&gt;信号&lt;/strong&gt;，特别是当你写几个GTK 程序后就会发现你处理的几乎都是信号。&lt;/p&gt;
@@ -35,17 +35,14 @@
 &lt;p&gt;而信号与事件不同，是GTK 本身的概念。在GTK 中，一个事件发生之后，会通过函数&lt;code&gt;gtk_widget_event&lt;/code&gt; 将事件转化为信号，并通过函数&lt;code&gt;g_signal_emit&lt;/code&gt; 将信号发射出去，如果有回调和该信号绑定，那么这个回调&lt;strong&gt;有可能&lt;/strong&gt;被执行。&lt;/p&gt;
 &lt;p&gt;举例来说，当&lt;code&gt;GtkButton&lt;/code&gt; 上发生了鼠标点击的动作时，默认地事件和信号的顺序如下。&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;code&gt;GDK_BUTTON_PRESS&lt;/code&gt; 事件产生&lt;/li&gt;
-&lt;li&gt;调用GDK 中针对该事件的回调&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;quot;button_press_event&amp;quot;&lt;/code&gt; 信号发射&lt;/li&gt;
-&lt;li&gt;调用GTK 中针对该信号的回调&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;quot;clicked&amp;quot;&lt;/code&gt; 信号发射&lt;/li&gt;
-&lt;li&gt;调用GTK 中针对该信号的回调&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GDK_BUTTON_PRESS&lt;/code&gt; 事件产生 -&amp;gt; 调用GDK 中针对该事件的回调&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;button_press_event&amp;quot;&lt;/code&gt; 信号发射 -&amp;gt; 调用GTK 中针对该信号的回调&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;clicked&amp;quot;&lt;/code&gt; 信号发射 -&amp;gt; 调用GTK 中针对该信号的回调&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;那么&lt;code&gt;&amp;quot;delete_event&amp;quot;&lt;/code&gt; 到底是事件还是信号？它是一个信号，但是只有在事件&lt;code&gt;GDK_DELETE&lt;/code&gt; 发生后才会被发射出去，所以它也代表一个事件。&lt;/p&gt;
 &lt;p&gt;这也是GTK 一个稍微有点混乱的地方——&lt;strong&gt;事件的发生是通过信号的发射反应的&lt;/strong&gt;。所以你如果想在GTK 中处理事件，你需要处理信号。&lt;/p&gt;
 &lt;h2 id=&quot;回调机制&quot;&gt;&lt;a href=&quot;#回调机制&quot; class=&quot;headerlink&quot; title=&quot;回调机制&quot;&gt;&lt;/a&gt;回调机制&lt;/h2&gt;&lt;h3 id=&quot;回调的绑定&quot;&gt;&lt;a href=&quot;#回调的绑定&quot; class=&quot;headerlink&quot; title=&quot;回调的绑定&quot;&gt;&lt;/a&gt;回调的绑定&lt;/h3&gt;&lt;p&gt;和Qt 的信号-槽机制不同，GTK 中采用回调机制来处理信号。GTK 中为信号绑定回调的方式都通过同一个函数&lt;code&gt;g_signal_connect_data&lt;/code&gt; 完成，其原形定义在头文件&lt;code&gt;gobject/gsignal.h&lt;/code&gt;。&lt;/p&gt;
-&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;gulong&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;g_signal_connect_data&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(gpointer instance, &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; gchar *detailed_signal, GCallback c_handler,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                       gpointer data, GClosureNotify destroy_data, GConnectFlags connect_flags)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;gulong &lt;span class=&quot;title&quot;&gt;g_signal_connect_data&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(gpointer instance, &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; gchar *detailed_signal,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                              GCallback c_handler, gpointer data,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                              GClosureNotify destroy_data, GConnectFlags connect_flags)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;blockquote&gt;
 &lt;p&gt;因为信号处理在Glib 而非GTK 中，所以函数名以&lt;code&gt;g_&lt;/code&gt; 而非&lt;code&gt;gtk_&lt;/code&gt; 开头。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -58,15 +55,15 @@
 &lt;li&gt;&lt;code&gt;g_signal_connect_swapped&lt;/code&gt;：回调先于默认回调执行，但是回调的参数位置应该和前两个绑定函数的回调参数位置交换。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;g_signal_connect_swapped&lt;/code&gt; 中&lt;code&gt;swapped&lt;/code&gt; 的效果如下。&lt;/p&gt;
-&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;handler&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(GtkWidget *widget, gpointer data)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;handlerSwapped&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(gpointer data, GtkWidget *widget)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;handler&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(GtkWidget *widget, gpointer data)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;handlerSwapped&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(gpointer data, GtkWidget *widget)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;blockquote&gt;
 &lt;p&gt;个人觉得&lt;code&gt;g_signal_connect_swapped&lt;/code&gt; 最好少用，它只会把水搅浑。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&quot;回调的形式&quot;&gt;&lt;a href=&quot;#回调的形式&quot; class=&quot;headerlink&quot; title=&quot;回调的形式&quot;&gt;&lt;/a&gt;回调的形式&lt;/h3&gt;&lt;p&gt;在Gtk 中，回调的形式有两种，在反应事件的信号回调中，handler 需要额外增加一个&lt;code&gt;GdkEvent *&lt;/code&gt; 参数，用来传入发生的事件。&lt;/p&gt;
 &lt;p&gt;这两种回调之间的区别如下（假设使用&lt;code&gt;g_signal_connect&lt;/code&gt; 绑定）。&lt;/p&gt;
-&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;buttonClickedHandler&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(GtkWidget *button, gpointer data)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;gboolean&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;title&quot;&gt;keyPressEventHandler&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(GtkWidget *button, GdkEvent *event, gpointer data)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;回调函数之间的流程控制&quot;&gt;&lt;a href=&quot;#回调函数之间的流程控制&quot; class=&quot;headerlink&quot; title=&quot;回调函数之间的流程控制&quot;&gt;&lt;/a&gt;回调函数之间的流程控制&lt;/h2&gt;&lt;h3 id=&quot;相较默认回调&quot;&gt;&lt;a href=&quot;#相较默认回调&quot; class=&quot;headerlink&quot; title=&quot;相较默认回调&quot;&gt;&lt;/a&gt;相较默认回调&lt;/h3&gt;&lt;p&gt;信号可以绑定多个回调，至于自定义回调是否先于默认回调执行，参见上节关于&lt;code&gt;g_signal_connect_after&lt;/code&gt; 的说明。&lt;/p&gt;
-&lt;h3 id=&quot;终止处理过程&quot;&gt;&lt;a href=&quot;#终止处理过程&quot; class=&quot;headerlink&quot; title=&quot;终止处理过程&quot;&gt;&lt;/a&gt;终止处理过程&lt;/h3&gt;&lt;p&gt;除了增加了&lt;code&gt;GdkEvent *&lt;/code&gt; 作为参数外，处理事件的回调函数还有&lt;code&gt;gboolean&lt;/code&gt; 类型的返回值，这个返回值用于控制该事件处理过程是否继续。&lt;/p&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;buttonClickedHandler&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(GtkWidget *button, gpointer data)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;gboolean &lt;span class=&quot;title&quot;&gt;keyPressEventHandler&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(GtkWidget *button, GdkEvent *event, gpointer data)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;回调的流程&quot;&gt;&lt;a href=&quot;#回调的流程&quot; class=&quot;headerlink&quot; title=&quot;回调的流程&quot;&gt;&lt;/a&gt;回调的流程&lt;/h3&gt;&lt;h4 id=&quot;相较默认回调&quot;&gt;&lt;a href=&quot;#相较默认回调&quot; class=&quot;headerlink&quot; title=&quot;相较默认回调&quot;&gt;&lt;/a&gt;相较默认回调&lt;/h4&gt;&lt;p&gt;信号可以绑定多个回调，至于自定义回调是否先于默认回调执行，参见上节关于&lt;code&gt;g_signal_connect_after&lt;/code&gt; 的说明。&lt;/p&gt;
+&lt;h4 id=&quot;终止处理过程&quot;&gt;&lt;a href=&quot;#终止处理过程&quot; class=&quot;headerlink&quot; title=&quot;终止处理过程&quot;&gt;&lt;/a&gt;终止处理过程&lt;/h4&gt;&lt;p&gt;除了增加了&lt;code&gt;GdkEvent *&lt;/code&gt; 作为参数外，处理事件的回调函数还有&lt;code&gt;gboolean&lt;/code&gt; 类型的返回值，这个返回值用于控制该事件处理过程是否继续。&lt;/p&gt;
 &lt;p&gt;返回值的情况如下。&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -86,10 +83,8 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&quot;信号发射顺序&quot;&gt;&lt;a href=&quot;#信号发射顺序&quot; class=&quot;headerlink&quot; title=&quot;信号发射顺序&quot;&gt;&lt;/a&gt;信号发射顺序&lt;/h3&gt;&lt;p&gt;因为GTK 先捕获事件再转化为信号，所以直接反应事件的信号在其他信号之前被发射，所以同一个&lt;code&gt;GtkWidget&lt;/code&gt; 上处理事件的回调总在其他信号回调之前被执行。&lt;/p&gt;
-&lt;blockquote&gt;
+&lt;h4 id=&quot;信号发射顺序&quot;&gt;&lt;a href=&quot;#信号发射顺序&quot; class=&quot;headerlink&quot; title=&quot;信号发射顺序&quot;&gt;&lt;/a&gt;信号发射顺序&lt;/h4&gt;&lt;p&gt;因为GTK 先捕获事件再转化为信号，所以直接反应事件的信号在其他信号之前被发射，所以同一个&lt;code&gt;GtkWidget&lt;/code&gt; 上处理事件的回调总在其他信号回调之前被执行。&lt;/p&gt;
 &lt;p&gt;所以上一节的最后一段代码片中，假设&lt;code&gt;buttonClickedHandler&lt;/code&gt; 和&lt;code&gt;keyPressEventHandler&lt;/code&gt;  分别被绑定到一个&lt;code&gt;GtkButton&lt;/code&gt; 的&lt;code&gt;&amp;quot;event&amp;quot;&lt;/code&gt; 和&lt;code&gt;&amp;quot;clicked&amp;quot;&lt;/code&gt; 信号上，如果&lt;code&gt;keyPressEventHandler&lt;/code&gt; 返回&lt;code&gt;TRUE&lt;/code&gt;，那么&lt;code&gt;buttonClickedHandler&lt;/code&gt; 将不会被执行。&lt;/p&gt;
-&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
