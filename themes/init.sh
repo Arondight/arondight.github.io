@@ -2,7 +2,9 @@
 # ==============================================================================
 # Init Themes!
 # ==============================================================================
-THEME_DIR=${THEME_DIR:-$(dirname $(readlink -f $0))}
+set -e
+
+THEME_DIR=$(dirname $(readlink -f $0))
 
 function _hexo_theme_yelee ()
 {

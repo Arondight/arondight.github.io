@@ -94,15 +94,9 @@ void buttonClickedHandler (GtkWidget *button, gpointer data);
 gboolean keyPressEventHandler (GtkWidget *button, GdkEvent *event, gpointer data);
 ```
 
-### 回调的流程
+### 回调的返回值
 
-#### 相较默认回调
-
-信号可以绑定多个回调，至于自定义回调是否先于默认回调执行，参见上节关于`g_signal_connect_after` 的说明。
-
-#### 终止处理过程
-
-除了增加了`GdkEvent *` 作为参数外，处理事件的回调函数还有`gboolean` 类型的返回值，这个返回值用于控制该事件处理过程是否继续。
+除了增加了`GdkEvent *` 作为参数外，处理事件的回调函数多了一个`gboolean` 类型的返回值，这个返回值用于控制该事件处理过程是否继续。
 
 返回值的情况如下。
 
@@ -111,9 +105,9 @@ gboolean keyPressEventHandler (GtkWidget *button, GdkEvent *event, gpointer data
 | `TRUE` | 该事件已经处理完毕，不再继续调用其他和该事件绑定的回调 |
 | `FALSE` | 需要继续执行其他与该事件绑定的回调函数 |
 
-#### 信号发射顺序
+### 回调的调用顺序
 
 因为GTK 先捕获事件再转化为信号，所以直接反应事件的信号在其他信号之前被发射，所以同一个`GtkWidget` 上处理事件的回调总在其他信号回调之前被执行。
 
-所以上一节的最后一段代码片中，假设`buttonClickedHandler` 和`keyPressEventHandler`  分别被绑定到一个`GtkButton` 的`"event"` 和`"clicked"` 信号上，如果`keyPressEventHandler` 返回`TRUE`，那么`buttonClickedHandler` 将不会被执行。
+所以上一节的最后一段代码片中，假设`buttonClickedHandler` 和`keyPressEventHandler`  分别被绑定到一个`GtkButton` 的`"event"` 和`"clicked"` 信号上，如果`keyPressEventHandler` 返回`TRUE`，那么`buttonClickedHandler` 将不会被调用。
 

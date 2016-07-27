@@ -243,7 +243,7 @@ ie_updater:
 tab_title_change:
   on: true
   left_tab_title: '|･ω･` )、'
-  return_tab_title: '✧*｡٩(ˊωˋ*)و✧*｡'
+  return_tab_title:
 
 
 # >>> Vendors | 第三方工具 & 服务 <<<
