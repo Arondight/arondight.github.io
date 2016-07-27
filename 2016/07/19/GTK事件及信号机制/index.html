@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="河 的 第 三 条 岸">
 <meta property="og:description" content="最近在给公司重写一版用Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用GTK 重写界面和功能。之前接触的都是Qt，对GTK 了解不多。个人觉得跟Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的GTK 信号回调机制。
 事件和信号GTK 是一个基于事件驱动的框架，就是说GTK 程序会一直循环在gtk_main 函数中，直至一个事件发生，然后跳转到对应">
-<meta property="og:updated_time" content="2016-07-25T13:25:04.704Z">
+<meta property="og:updated_time" content="2016-07-27T15:28:09.589Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GTK事件及信号机制">
 <meta name="twitter:description" content="最近在给公司重写一版用Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用GTK 重写界面和功能。之前接触的都是Qt，对GTK 了解不多。个人觉得跟Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的GTK 信号回调机制。
@@ -411,8 +411,7 @@
 <h3 id="回调的形式"><a href="#回调的形式" class="headerlink" title="回调的形式"></a>回调的形式</h3><p>在Gtk 中，回调的形式有两种，在反应事件的信号回调中，handler 需要额外增加一个<code>GdkEvent *</code> 参数，用来传入发生的事件。</p>
 <p>这两种回调之间的区别如下（假设使用<code>g_signal_connect</code> 绑定）。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buttonClickedHandler</span> <span class="params">(GtkWidget *button, gpointer data)</span></span>;</span><br><span class="line"><span class="function">gboolean <span class="title">keyPressEventHandler</span> <span class="params">(GtkWidget *button, GdkEvent *event, gpointer data)</span></span>;</span><br></pre></td></tr></table></figure>
-<h3 id="回调的流程"><a href="#回调的流程" class="headerlink" title="回调的流程"></a>回调的流程</h3><h4 id="相较默认回调"><a href="#相较默认回调" class="headerlink" title="相较默认回调"></a>相较默认回调</h4><p>信号可以绑定多个回调，至于自定义回调是否先于默认回调执行，参见上节关于<code>g_signal_connect_after</code> 的说明。</p>
-<h4 id="终止处理过程"><a href="#终止处理过程" class="headerlink" title="终止处理过程"></a>终止处理过程</h4><p>除了增加了<code>GdkEvent *</code> 作为参数外，处理事件的回调函数还有<code>gboolean</code> 类型的返回值，这个返回值用于控制该事件处理过程是否继续。</p>
+<h3 id="回调的返回值"><a href="#回调的返回值" class="headerlink" title="回调的返回值"></a>回调的返回值</h3><p>除了增加了<code>GdkEvent *</code> 作为参数外，处理事件的回调函数多了一个<code>gboolean</code> 类型的返回值，这个返回值用于控制该事件处理过程是否继续。</p>
 <p>返回值的情况如下。</p>
 <table>
 <thead>
@@ -432,8 +431,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="信号发射顺序"><a href="#信号发射顺序" class="headerlink" title="信号发射顺序"></a>信号发射顺序</h4><p>因为GTK 先捕获事件再转化为信号，所以直接反应事件的信号在其他信号之前被发射，所以同一个<code>GtkWidget</code> 上处理事件的回调总在其他信号回调之前被执行。</p>
-<p>所以上一节的最后一段代码片中，假设<code>buttonClickedHandler</code> 和<code>keyPressEventHandler</code>  分别被绑定到一个<code>GtkButton</code> 的<code>&quot;event&quot;</code> 和<code>&quot;clicked&quot;</code> 信号上，如果<code>keyPressEventHandler</code> 返回<code>TRUE</code>，那么<code>buttonClickedHandler</code> 将不会被执行。</p>
+<h3 id="回调的调用顺序"><a href="#回调的调用顺序" class="headerlink" title="回调的调用顺序"></a>回调的调用顺序</h3><p>因为GTK 先捕获事件再转化为信号，所以直接反应事件的信号在其他信号之前被发射，所以同一个<code>GtkWidget</code> 上处理事件的回调总在其他信号回调之前被执行。</p>
+<p>所以上一节的最后一段代码片中，假设<code>buttonClickedHandler</code> 和<code>keyPressEventHandler</code>  分别被绑定到一个<code>GtkButton</code> 的<code>&quot;event&quot;</code> 和<code>&quot;clicked&quot;</code> 信号上，如果<code>keyPressEventHandler</code> 返回<code>TRUE</code>，那么<code>buttonClickedHandler</code> 将不会被调用。</p>
 
       
     </div>
@@ -445,7 +444,7 @@
         <p><span>本文标题:</span><a href="/2016/07/19/GTK事件及信号机制/">GTK事件及信号机制</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">愛と奇跡の物語</a></p>
         <p><span>发布时间:</span>2016-07-19, 20:37:56</p>
-        <p><span>最后更新:</span>2016-07-25, 21:25:04</p>
+        <p><span>最后更新:</span>2016-07-27, 23:28:09</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/07/19/GTK事件及信号机制/" title="GTK事件及信号机制">https://arondight.github.io/2016/07/19/GTK事件及信号机制/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/07/19/GTK事件及信号机制/　　作者: 愛と奇跡の物語" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -475,7 +474,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件和信号"><span class="toc-number">1.</span> <span class="toc-text">事件和信号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回调机制"><span class="toc-number">2.</span> <span class="toc-text">回调机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#回调的绑定"><span class="toc-number">2.1.</span> <span class="toc-text">回调的绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回调的形式"><span class="toc-number">2.2.</span> <span class="toc-text">回调的形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回调的流程"><span class="toc-number">2.3.</span> <span class="toc-text">回调的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#相较默认回调"><span class="toc-number">2.3.1.</span> <span class="toc-text">相较默认回调</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#终止处理过程"><span class="toc-number">2.3.2.</span> <span class="toc-text">终止处理过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信号发射顺序"><span class="toc-number">2.3.3.</span> <span class="toc-text">信号发射顺序</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件和信号"><span class="toc-number">1.</span> <span class="toc-text">事件和信号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回调机制"><span class="toc-number">2.</span> <span class="toc-text">回调机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#回调的绑定"><span class="toc-number">2.1.</span> <span class="toc-text">回调的绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回调的形式"><span class="toc-number">2.2.</span> <span class="toc-text">回调的形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回调的返回值"><span class="toc-number">2.3.</span> <span class="toc-text">回调的返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回调的调用顺序"><span class="toc-number">2.4.</span> <span class="toc-text">回调的调用顺序</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -638,7 +637,7 @@ ga('send', 'pageview');
                 clearTimeout(titleTime);
             }
             else {
-                document.title = "✧*｡٩(ˊωˋ*)و✧*｡" + originTitle;
+                document.title = "" + originTitle;
                 titleTime = setTimeout(function() {
                     document.title = originTitle;
                 }, 2000);
