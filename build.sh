@@ -12,7 +12,7 @@ function doBuild ()
 
   if [[ -d $THEME_DIR && -x ${THEME_DIR}/init.sh ]]
   then
-    source "${THEME_DIR}/init.sh"
+    command "${THEME_DIR}/init.sh"
   fi
 
   if [[ ! -d $MY_DIR ]]
