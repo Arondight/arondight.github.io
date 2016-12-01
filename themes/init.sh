@@ -2,7 +2,7 @@
 # ==============================================================================
 # Init Themes!
 # ==============================================================================
-set -e
+set -ex
 
 THEME_DIR=$(dirname $(readlink -f $0))
 
@@ -12,7 +12,8 @@ function _hexo_theme_yelee ()
 
   if [[ -d $BACKGROUND_DIR ]]
   then
-    rm -rvf ${BACKGROUND_DIR}/*
+    rm -rf ${BACKGROUND_DIR}
+    mkdir -p ${BACKGROUND_DIR}
   fi
 
   return $?

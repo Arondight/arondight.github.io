@@ -2,11 +2,12 @@
 # ==============================================================================
 # Build It!
 # ==============================================================================
-set -e
+set -ex
 
 function doBuild ()
 {
   local C_DIR=$(dirname $(readlink -f $0))
+  local PUBLIC_DIR="${C_DIR}/public"
   local MY_DIR="${C_DIR}/my"
   local THEME_DIR="${C_DIR}/themes"
 
@@ -20,12 +21,18 @@ function doBuild ()
     return 0
   fi
 
+  if [[ -d $PUBLIC_DIR ]]
+  then
+    rm -rf $PUBLIC_DIR
+    mkdir -p $PUBLIC_DIR
+  fi
+
   if type rsync >/dev/null 2>&1
   then
-    rsync -aP "${MY_DIR}/" "$C_DIR/"
+    rsync -a "${MY_DIR}/" "$C_DIR/"
   elif type cp >/dev/null 2>&1
   then
-    cp -rvf ${MY_DIR}/* $C_DIR
+    cp -rf ${MY_DIR}/* $C_DIR
   else
     return 1
   fi

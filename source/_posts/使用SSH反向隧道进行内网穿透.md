@@ -21,8 +21,8 @@ tags:
 | 机器代号 | 机器位置 | 地址 | 账户 | ssh/sshd 端口 | 是否需要运行sshd |
 | --- | --- | --- | --- | --- | --- |
 | A | 位于公网 | a.site | usera | 22 | 是 |
-| B | 位于NAT 之后 | 127.0.0.1 | userb | 22 | 是 |
-| C | 位于NAT 之后 | 127.0.0.1 | userc | 22 | 否 |
+| B | 位于NAT 之后 | localhost | userb | 22 | 是 |
+| C | 位于NAT 之后 | localhost | userc | 22 | 否 |
 
 <!-- more -->
 
@@ -34,14 +34,14 @@ tags:
 
 首先在**B** 上建立一个SSH 隧道，将A 的6766 端口转发到B 的22 端口上：
 
-```bash
-B $ ssh -p 22 -qngfNTR 6766:127.0.0.1:22 usera@a.site
+```
+B $ ssh -p 22 -qngfNTR 6766:localhost:22 usera@a.site
 ```
 
 然后在**A** 上利用6766 端口反向SSH 到B：
 
-```bash
-A $ ssh -p 6766 userb@127.0.0.1
+```
+A $ ssh -p 6766 userb@localhost
 ```
 
 要做的事情其实就是这么简单。
@@ -54,22 +54,22 @@ A $ ssh -p 6766 userb@127.0.0.1
 
 一个最简单的方法就是`autossh`，这个软件会在超时之后自动重新建立SSH 隧道，这样就解决了隧道的稳定性问题，如果你使用[Arch Linux](https://www.archlinux.org)，你可以这样获得它：
 
-```bash
+```
 $ sudo pacman -S autossh
 ```
 
 下面在**B** 上做之前类似的事情，不同的是该隧道会由`autossh` 来维持：
 
-```bash
-B $ autossh -p 22 -M 6777 -NR 6766:127.0.0.1:22 usera@a.site
+```
+B $ autossh -p 22 -M 6777 -NR 6766:localhost:22 usera@a.site
 ```
 
 `-M` 参数指定的端口用来监听隧道的状态，与端口转发无关。
 
 之后你可以在A 上通过6766 端口访问B 了：
 
-```bash
-A $ ssh -p 6766 userb@127.0.0.1
+```
+A $ ssh -p 6766 userb@localhost
 ```
 
 ### 隧道的自动建立
@@ -90,19 +90,19 @@ GatewayPorts yes
 
 然后重启`sshd`：
 
-```bash
+```
 A $ sudo systemctl restart sshd
 ```
 
 然后在**B** 上对之前用到的`autossh` 指令略加修改：
 
-```bash
-B $ autossh -p 22 -M 6777 -NR '*:6766:127.0.0.1:22' usera@a.site
+```
+B $ autossh -p 22 -M 6777 -NR '*:6766:localhost:22' usera@a.site
 ```
 
 之后在**C** 上利用**A** 的6766 端口SSH 连接到**B**：
 
-```bash
+```
 C $ ssh -p 6766 userb@a.site
 ```
 
@@ -116,14 +116,14 @@ C $ ssh -p 6766 userb@a.site
 
 然后在**B** 上新建一个用户*autossh*，根据权限最小化思想，B 上的`autossh` 服务将以*autossh* 用户的身份运行，以尽大可能避免出现安全问题：
 
-```bash
+```
 B $ sudo useradd -m autossh
 B $ sudo passwd autossh
 ```
 
 紧接着在**B** 上为*autossh* 用户创建SSH 密钥，并上传到A：
 
-```bash
+```
 B $ su - autossh
 B $ ssh-keygen -t 'rsa' -C 'autossh@B'
 B $ ssh-copy-id usera@a.site
@@ -141,7 +141,7 @@ After=network-online.target
 [Service]
 User=autossh
 Type=simple
-ExecStart=/bin/autossh -p 22 -M 6777 -NR '*:6766:127.0.0.1:22' usera@a.site -i /home/autossh/.ssh/id_rsa
+ExecStart=/bin/autossh -p 22 -M 6777 -NR '*:6766:localhost:22' usera@a.site -i /home/autossh/.ssh/id_rsa
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 Restart=always
@@ -150,36 +150,43 @@ Restart=always
 WantedBy=multi-user.target
 WantedBy=graphical.target
 ```
+在B 上让`network-online.target` 生效：
 
-在**B** 上设置该服务自动启动：
+```
+B $ systemctl enable NetworkManager-wait-online
+```
 
-```bash
+> 如果你使用`systemd-networkd`，你需要启用的服务则应当是`systemd-networkd-wait-online` 。
+
+然后设置该服务自动启动：
+
+```
 B $ sudo systemctl enable autossh
 ```
 
 如果你愿意，在这之后可以立刻启动它：
 
-```bash
+```
 B $ sudo systemctl start autossh
 ```
 
 然后你可以在**A** 上使用这条反向隧道穿透B 所在的NAT SSH 连接到B：
 
-```bash
-A $ ssh -p 6766 userb@127.0.0.1
+```
+A $ ssh -p 6766 userb@localhost
 ```
 
 或者是在**C** 上直接穿透两层NAT SSH 连接到B：
 
-```bash
+```
 C $ ssh -p 6766 userb@a.site
 ```
 
 如果你对SSH 足够熟悉，你可以利用这条隧道做更多的事情，例如你可以在反向连接时指定动态端口转发：
 
-```bash
+```
 C $ ssh -p 6766 -qngfNTD 7677 userb@a.site
 ```
 
-假设**C** 是你家中的电脑，**A** 是你的VPS，**B** 是你公司的电脑。如果你这样做了，那么为浏览器设置端口为`7677` 的`sock4` 本地（127.0.0.1）代理后，你就可以在家里的浏览器上看到公司内网的网页。
+假设**C** 是你家中的电脑，**A** 是你的VPS，**B** 是你公司的电脑。如果你这样做了，那么为浏览器设置端口为`7677` 的`sock4` 本地（localhost）代理后，你就可以在家里的浏览器上看到公司内网的网页。
 

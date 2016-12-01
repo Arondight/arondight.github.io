@@ -109,5 +109,5 @@ gboolean keyPressEventHandler (GtkWidget *button, GdkEvent *event, gpointer data
 
 因为GTK 先捕获事件再转化为信号，所以直接反应事件的信号在其他信号之前被发射，所以同一个`GtkWidget` 上处理事件的回调总在其他信号回调之前被执行。
 
-所以上一节的最后一段代码片中，假设`buttonClickedHandler` 和`keyPressEventHandler`  分别被绑定到一个`GtkButton` 的`"event"` 和`"clicked"` 信号上，如果`keyPressEventHandler` 返回`TRUE`，那么`buttonClickedHandler` 将不会被调用。
+所以“回调的形式”一节的代码片中，假设`buttonClickedHandler` 和`keyPressEventHandler`  分别被绑定到一个`GtkButton` 的`"event"` 和`"clicked"` 信号上，如果`keyPressEventHandler` 返回`TRUE`，那么`buttonClickedHandler` 将不会被调用。
 

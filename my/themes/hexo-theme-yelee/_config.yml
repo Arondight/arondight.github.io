@@ -45,7 +45,7 @@ subnav:
   CSDN: "http://blog.csdn.net/ispeller"
   虾米音乐: "http://www.xiami.com/u/6110365"
   bilibili: "http://space.bilibili.com/1750509"
-  LOFTER: "http://eye.arondight.me"
+  LOFTER: "http://ispeller.lofter.com"
   RSS: "/atom.xml"
   Email: "mailto:&#115;&#104;&#101;&#108;&#108;&#95;&#119;&#97;&#121;&#64;&#102;&#111;&#120;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;"
   #Email: "mailto:123@123.com"
@@ -209,7 +209,7 @@ friends:
   中土國民會全球資訊網: https://blog-netarmy.rhcloud.com
 
 #是否开启“关于我”。
-aboutme: 他即将迎来一个夹杂着沉淀物的夏天
+aboutme: 调和·变革
 #aboutme: false
 
 # Open link in a new tab | 是否在新窗口打开链接
