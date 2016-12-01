@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="河 的 第 三 条 岸">
 <meta property="og:description" content="最近在给公司重写一版用Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用GTK 重写界面和功能。之前接触的都是Qt，对GTK 了解不多。个人觉得跟Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的GTK 信号回调机制。
 事件和信号GTK 是一个基于事件驱动的框架，就是说GTK 程序会一直循环在gtk_main 函数中，直至一个事件发生，然后跳转到对应">
-<meta property="og:updated_time" content="2016-07-27T15:28:09.589Z">
+<meta property="og:updated_time" content="2016-08-30T13:40:19.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GTK事件及信号机制">
 <meta name="twitter:description" content="最近在给公司重写一版用Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用GTK 重写界面和功能。之前接触的都是Qt，对GTK 了解不多。个人觉得跟Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的GTK 信号回调机制。
@@ -261,7 +261,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">他即将迎来一个夹杂着沉淀物的夏天</div>
+                    <div id="js-aboutme">调和·变革</div>
                 </section>
                 
             </div>
@@ -432,7 +432,7 @@
 </tbody>
 </table>
 <h3 id="回调的调用顺序"><a href="#回调的调用顺序" class="headerlink" title="回调的调用顺序"></a>回调的调用顺序</h3><p>因为GTK 先捕获事件再转化为信号，所以直接反应事件的信号在其他信号之前被发射，所以同一个<code>GtkWidget</code> 上处理事件的回调总在其他信号回调之前被执行。</p>
-<p>所以上一节的最后一段代码片中，假设<code>buttonClickedHandler</code> 和<code>keyPressEventHandler</code>  分别被绑定到一个<code>GtkButton</code> 的<code>&quot;event&quot;</code> 和<code>&quot;clicked&quot;</code> 信号上，如果<code>keyPressEventHandler</code> 返回<code>TRUE</code>，那么<code>buttonClickedHandler</code> 将不会被调用。</p>
+<p>所以在“回调的形式”一节的代码片中，假设<code>buttonClickedHandler</code> 和<code>keyPressEventHandler</code>  分别被绑定到一个<code>GtkButton</code> 的<code>&quot;event&quot;</code> 和<code>&quot;clicked&quot;</code> 信号上，如果<code>keyPressEventHandler</code> 返回<code>TRUE</code>，那么<code>buttonClickedHandler</code> 将不会被调用。</p>
 
       
     </div>
@@ -444,7 +444,7 @@
         <p><span>本文标题:</span><a href="/2016/07/19/GTK事件及信号机制/">GTK事件及信号机制</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">愛と奇跡の物語</a></p>
         <p><span>发布时间:</span>2016-07-19, 20:37:56</p>
-        <p><span>最后更新:</span>2016-07-27, 23:28:09</p>
+        <p><span>最后更新:</span>2016-08-30, 21:40:19</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/07/19/GTK事件及信号机制/" title="GTK事件及信号机制">https://arondight.github.io/2016/07/19/GTK事件及信号机制/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/07/19/GTK事件及信号机制/　　作者: 愛と奇跡の物語" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
