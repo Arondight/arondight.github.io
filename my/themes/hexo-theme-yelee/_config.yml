@@ -191,25 +191,25 @@ tagcloud: true
 # Blogroll, Link exchange | 友情链接
 #friends: false
 friends:
-  3890929: https://isliberty.me
-  coolrc's blog: http://coolrc.top
   Farkasity's Blog: https://blog.farkasity.me
-  GlassGear: http://blog.winkidney.com
-  Kissbug8720's Blog: http://blog.ishell.me
-  Love live!: http://www.targetlocked.xyz
-  Menci: https://blog.menci.moe
-  Netcan: http://www.netcan666.com
-  NJLYF2011: http://www.njlyf2011.cn
-  Shy泠的博客: https://shyling.com
-  Sonico's Home: http://blog.supvesonico.moe
+  Ji Xinqi's Blog: https://jixinqi.me
+  Just4fun: http://coolrc.top
+  Menci's Blog: https://oi.men.ci
+  Netcan_Space: http://www.netcan666.com
+  NJLYF2011's Blog: http://www.njlyf2011.cn
+  Serenity: https://note.isliberty.me
+  Slass Gear: https://blog.winkidney.com
+  Sonico の Secret Garden: http://blog.supvesonico.moe
   xw_y_am's blog: http://web.xwyam.info/blog
   YANHAO WIKI: http://wiki.yanhao.site
-  Мвудаг/Этура Яннъ: https://etula.me
+  东东's Blog: https://blog.yasking.org
+  飞翔的心: http://blog.arisaematis.cn
+  泠的博客: https://shyling.com
   蔓舞寻樱的博客: https://emiria.io
-  中土國民會全球資訊網: https://blog-netarmy.rhcloud.com
+  御坂網路司令塔: https://misaka.genderqueer.gq
 
 #是否开启“关于我”。
-aboutme: 调和·变革
+aboutme: 认真而勇敢的生活
 #aboutme: false
 
 # Open link in a new tab | 是否在新窗口打开链接
