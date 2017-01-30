@@ -191,9 +191,8 @@ tagcloud: true
 # Blogroll, Link exchange | 友情链接
 #friends: false
 friends:
-  Farkasity's Blog: https://blog.farkasity.me
   Ji Xinqi's Blog: https://jixinqi.me
-  Just4fun: http://coolrc.top
+  Just4fun: http://coolrc.me
   Menci's Blog: https://oi.men.ci
   Netcan_Space: http://www.netcan666.com
   NJLYF2011's Blog: http://www.njlyf2011.cn
@@ -202,10 +201,12 @@ friends:
   Sonico の Secret Garden: http://blog.supvesonico.moe
   xw_y_am's blog: http://web.xwyam.info/blog
   YANHAO WIKI: http://wiki.yanhao.site
+  Zhustec's Blog: https://blog.zhustec.me
   东东's Blog: https://blog.yasking.org
   飞翔的心: http://blog.arisaematis.cn
   泠的博客: https://shyling.com
   蔓舞寻樱的博客: https://emiria.io
+  猿始森林: http://cnfczn.github.io
   御坂網路司令塔: https://misaka.genderqueer.gq
 
 #是否开启“关于我”。
