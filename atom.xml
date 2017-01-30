@@ -705,7 +705,7 @@
 <p>如果你使用<code>systemd-networkd</code>，你需要启用的服务则应当是<code>systemd-networkd-wait-online</code> 。</p>
 </blockquote>
 <p>然后设置该服务自动启动：</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">B </span>$ sudo systemctl enable autossh</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">B $ sudo systemctl <span class="built_in">enable</span> autossh</div></pre></td></tr></table></figure>
 <p>如果你愿意，在这之后可以立刻启动它：</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">B </span>$ sudo systemctl start autossh</div></pre></td></tr></table></figure>
 <p>然后你可以在<strong>A</strong> 上使用这条反向隧道穿透B 所在的NAT SSH 连接到B：</p>
