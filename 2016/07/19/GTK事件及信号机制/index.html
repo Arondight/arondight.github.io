@@ -10,15 +10,15 @@
 
 
 
-<meta name="description" content="最近在给公司重写一版用Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用GTK 重写界面和功能。之前接触的都是Qt，对GTK 了解不多。个人觉得跟Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的GTK 信号回调机制。 事件和信号GTK 是一个基于事件驱动的框架，就是说GTK 程序会一直循环在gtk_main 函数中，直至一个事件发生，然后跳转到对应">
+<meta name="description" content="最近在给公司重写一版用 Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用 GTK 重写界面和功能。之前接触的都是 Qt，对 GTK 了解不多。个人觉得跟 Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的 GTK 信号回调机制。 事件和信号GTK 是一个基于事件驱动的框架，就是说 GTK 程序会一直循环在 gtk_main 函数中，直至一个事件发生">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GTK事件及信号机制">
+<meta property="og:title" content="GTK 事件及信号机制">
 <meta property="og:url" content="https://arondight.github.io/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="河 的 第 三 条 岸">
-<meta property="og:description" content="最近在给公司重写一版用Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用GTK 重写界面和功能。之前接触的都是Qt，对GTK 了解不多。个人觉得跟Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的GTK 信号回调机制。 事件和信号GTK 是一个基于事件驱动的框架，就是说GTK 程序会一直循环在gtk_main 函数中，直至一个事件发生，然后跳转到对应">
+<meta property="og:description" content="最近在给公司重写一版用 Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用 GTK 重写界面和功能。之前接触的都是 Qt，对 GTK 了解不多。个人觉得跟 Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的 GTK 信号回调机制。 事件和信号GTK 是一个基于事件驱动的框架，就是说 GTK 程序会一直循环在 gtk_main 函数中，直至一个事件发生">
 <meta property="og:locale">
 <meta property="article:published_time" content="2016-07-19T12:37:56.000Z">
-<meta property="article:modified_time" content="2022-03-28T11:54:08.605Z">
+<meta property="article:modified_time" content="2022-03-28T13:49:01.480Z">
 <meta property="article:author" content="Qin Fandong">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="GDK">
@@ -60,7 +60,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>GTK事件及信号机制 | 河 的 第 三 条 岸</title>
+<title>GTK 事件及信号机制 | 河 的 第 三 条 岸</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -214,7 +214,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTK/" rel="tag">CTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Callback/" rel="tag">Callback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Event/" rel="tag">Event</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDK/" rel="tag">GDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPG/" rel="tag">GPG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICMP/" rel="tag">ICMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/" rel="tag">IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LibVirt/" rel="tag">LibVirt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QEMU/" rel="tag">QEMU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Singal/" rel="tag">Singal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/" rel="tag">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%A7%8B/" rel="tag">开始</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E5%B9%B4/" rel="tag">新年</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88%E5%B8%A7/" rel="tag">栈帧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E9%AA%8C%E5%92%8C/" rel="tag">校验和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%A2%E5%87%BA/" rel="tag">溢出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" rel="tag">网络协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%A7%E9%81%93/" rel="tag">隧道</a></li></ul>
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTK/" rel="tag">CTK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Callback/" rel="tag">Callback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Event/" rel="tag">Event</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDK/" rel="tag">GDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPG/" rel="tag">GPG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICMP/" rel="tag">ICMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP/" rel="tag">IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LibVirt/" rel="tag">LibVirt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QEMU/" rel="tag">QEMU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Singal/" rel="tag">Singal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/" rel="tag">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%A7%8B/" rel="tag">开始</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E5%B9%B4/" rel="tag">新年</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88%E5%B8%A7/" rel="tag">栈帧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%A1%E9%AA%8C%E5%92%8C/" rel="tag">校验和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%A2%E5%87%BA/" rel="tag">溢出</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" rel="tag">网络协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%A7%E9%81%93/" rel="tag">隧道</a></li></ul>
                     </div>
                 </section>
                 
@@ -322,7 +322,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      GTK事件及信号机制
+      GTK 事件及信号机制
     </h1>
   
 
@@ -347,53 +347,53 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>最近在给公司重写一版用Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用GTK 重写界面和功能。之前接触的都是Qt，对GTK 了解不多。个人觉得跟Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的GTK 信号回调机制。</p>
-<h2 id="事件和信号"><a href="#事件和信号" class="headerlink" title="事件和信号"></a>事件和信号</h2><p>GTK 是一个基于<strong>事件</strong>驱动的框架，就是说GTK 程序会一直循环在<code>gtk_main</code> 函数中，直至一个事件发生，然后跳转到对应的事件处理函数中，执行完毕后再次回到<code>gtk_main</code> 的循环。这听起来很符合逻辑，但是GTK 中除了事件外，还有一个概念是<strong>信号</strong>，特别是当你写几个GTK 程序后就会发现你处理的几乎都是信号。</p>
+        <p>最近在给公司重写一版用 Qt3 写的软件，界面比较老，功能也年久失修，商量了一下决定用 GTK 重写界面和功能。之前接触的都是 Qt，对 GTK 了解不多。个人觉得跟 Qt 的信号-槽机制相比，GTK 的的信号回调机制稍显不同。然后这篇文章就是自己理解的 GTK 信号回调机制。</p>
+<h2 id="事件和信号"><a href="#事件和信号" class="headerlink" title="事件和信号"></a>事件和信号</h2><p>GTK 是一个基于<strong>事件</strong>驱动的框架，就是说 GTK 程序会一直循环在 <code>gtk_main</code> 函数中，直至一个事件发生，然后跳转到对应的事件处理函数中，执行完毕后再次回到 <code>gtk_main</code> 的循环。这听起来很符合逻辑，但是 GTK 中除了事件外，还有一个概念是<strong>信号</strong>，特别是当你写几个 GTK 程序后就会发现你处理的几乎都是信号。</p>
 <p>典型的例如。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g_signal_connect (G_OBJECT (mainWindow), <span class="string">&quot;delete_event&quot;</span>, G_CALLBACK (gtk_main_quit), <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
 
-<p>那么<code>&quot;delete_event&quot;</code> 到底是事件还是信号——它被用于<code>g_signal_connect</code> 中，但是名字带有<code>event</code> 字样。</p>
+<p>那么 <code>&quot;delete_event&quot;</code> 到底是事件还是信号——它被用于 <code>g_signal_connect</code> 中，但是名字带有 <code>event</code> 字样。</p>
 <span id="more"></span>
 
-<p>在GTK 中，事件是X11 中发生的，GTK 通过GDK 将X11 中的<code>XEvent</code> 转化为<code>GdkEvent</code>，其类型<code>GdkEventType</code> 定义在头文件<code>gdk/gdkevents.h</code> 中。</p>
+<p>在 GTK 中，事件是 X11 中发生的，GTK 通过 GDK 将 X11 中的 <code>XEvent</code> 转化为 <code>GdkEvent</code>，其类型 <code>GdkEventType</code> 定义在头文件 <code>gdk/gdkevents.h</code> 中。</p>
 <blockquote>
-<p>GDK 是Xlib 的一个封装。</p>
+<p>GDK 是 Xlib 的一个封装。</p>
 </blockquote>
-<p>而信号与事件不同，是GTK 本身的概念。在GTK 中，一个事件发生之后，会通过函数<code>gtk_widget_event</code> 将事件转化为信号，并通过函数<code>g_signal_emit</code> 将信号发射出去，如果有回调和该信号绑定，那么这个回调<strong>有可能</strong>被执行。</p>
-<p>举例来说，当<code>GtkButton</code> 上发生了鼠标点击的动作时，默认地事件和信号的顺序如下。</p>
+<p>而信号与事件不同，是 GTK 本身的概念。在 GTK 中，一个事件发生之后，会通过函数 <code>gtk_widget_event</code> 将事件转化为信号，并通过函数 <code>g_signal_emit</code> 将信号发射出去，如果有回调和该信号绑定，那么这个回调<strong>有可能</strong>被执行。</p>
+<p>举例来说，当 <code>GtkButton</code> 上发生了鼠标点击的动作时，默认地事件和信号的顺序如下。</p>
 <ol>
-<li><code>GDK_BUTTON_PRESS</code> 事件产生 -&gt; 调用GDK 中针对该事件的回调</li>
-<li><code>&quot;button_press_event&quot;</code> 信号发射 -&gt; 调用GTK 中针对该信号的回调</li>
-<li><code>&quot;clicked&quot;</code> 信号发射 -&gt; 调用GTK 中针对该信号的回调</li>
+<li><code>GDK_BUTTON_PRESS</code> 事件产生 -&gt; 调用 GDK 中针对该事件的回调</li>
+<li><code>&quot;button_press_event&quot;</code> 信号发射 -&gt; 调用 GTK 中针对该信号的回调</li>
+<li><code>&quot;clicked&quot;</code> 信号发射 -&gt; 调用 GTK 中针对该信号的回调</li>
 </ol>
-<p>那么<code>&quot;delete_event&quot;</code> 到底是事件还是信号？它是一个信号，但是只有在事件<code>GDK_DELETE</code> 发生后才会被发射出去，所以它也代表一个事件。</p>
-<p>这也是GTK 一个稍微有点混乱的地方——<strong>事件的发生是通过信号的发射反应的</strong>。所以你如果想在GTK 中处理事件，你需要处理信号。</p>
-<h2 id="回调机制"><a href="#回调机制" class="headerlink" title="回调机制"></a>回调机制</h2><h3 id="回调的绑定"><a href="#回调的绑定" class="headerlink" title="回调的绑定"></a>回调的绑定</h3><p>和Qt 的信号-槽机制不同，GTK 中采用回调机制来处理信号。GTK 中为信号绑定回调的方式都通过同一个函数<code>g_signal_connect_data</code> 完成，其原形定义在头文件<code>gobject/gsignal.h</code>。</p>
+<p>那么 <code>&quot;delete_event&quot;</code> 到底是事件还是信号？它是一个信号，但是只有在事件 <code>GDK_DELETE</code> 发生后才会被发射出去，所以它也代表一个事件。</p>
+<p>这也是 GTK 一个稍微有点混乱的地方——<strong>事件的发生是通过信号的发射反应的</strong>。所以你如果想在 GTK 中处理事件，你需要处理信号。</p>
+<h2 id="回调机制"><a href="#回调机制" class="headerlink" title="回调机制"></a>回调机制</h2><h3 id="回调的绑定"><a href="#回调的绑定" class="headerlink" title="回调的绑定"></a>回调的绑定</h3><p>和 Qt 的信号-槽机制不同，GTK 中采用回调机制来处理信号。GTK 中为信号绑定回调的方式都通过同一个函数 <code>g_signal_connect_data</code> 完成，其原形定义在头文件 <code>gobject/gsignal.h</code> 。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulong <span class="title function_">g_signal_connect_data</span> <span class="params">(gpointer instance, <span class="type">const</span> gchar *detailed_signal,</span></span><br><span class="line"><span class="params">                              GCallback c_handler, gpointer data,</span></span><br><span class="line"><span class="params">                              GClosureNotify destroy_data, GConnectFlags connect_flags)</span>;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>因为信号处理在Glib 而非GTK 中，所以函数名以<code>g_</code> 而非<code>gtk_</code> 开头。</p>
+<p>因为信号处理在 Glib 而非 GTK 中，所以函数名以 <code>g_</code> 而非 <code>gtk_</code> 开头。</p>
 </blockquote>
-<p>但是更加常用的是在其上封装的三个宏，与<code>g_signal_connect_data</code> 定义在同一个头文件中。</p>
+<p>但是更加常用的是在其上封装的三个宏，与 <code>g_signal_connect_data</code> 定义在同一个头文件中。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> g_signal_connect(instance, detailed_signal, c_handler, data) \</span></span><br><span class="line"><span class="meta">  g_signal_connect_data ((instance), (detailed_signal), (c_handler), (data), NULL, (GConnectFlags) 0)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> g_signal_connect_after(instance, detailed_signal, c_handler, data) \</span></span><br><span class="line"><span class="meta">  g_signal_connect_data ((instance), (detailed_signal), (c_handler), (data), NULL, G_CONNECT_AFTER)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> g_signal_connect_swapped(instance, detailed_signal, c_handler, data) \</span></span><br><span class="line"><span class="meta">  g_signal_connect_data ((instance), (detailed_signal), (c_handler), (data), NULL, G_CONNECT_SWAPPED)</span></span><br></pre></td></tr></table></figure>
 
 <p>其中。</p>
 <ul>
 <li><code>g_signal_connect</code>： 为信号绑定一个回调函数，该回调将先于默认回调执行。</li>
-<li><code>g_signal_connect_after</code>： 和<code>g_singal_connect</code> 类似，但是该回调将在默认回调之后执行。</li>
+<li><code>g_signal_connect_after</code>： 和 <code>g_singal_connect</code> 类似，但是该回调将在默认回调之后执行。</li>
 <li><code>g_signal_connect_swapped</code>：回调先于默认回调执行，但是回调的参数位置应该和前两个绑定函数的回调参数位置交换。</li>
 </ul>
-<p><code>g_signal_connect_swapped</code> 中<code>swapped</code> 的效果如下。</p>
+<p><code>g_signal_connect_swapped</code> 中 <code>swapped</code> 的效果如下。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">handler</span> <span class="params">(GtkWidget *widget, gpointer data)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">handlerSwapped</span> <span class="params">(gpointer data, GtkWidget *widget)</span>;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>个人觉得<code>g_signal_connect_swapped</code> 最好少用，它只会把水搅浑。</p>
+<p>个人觉得 <code>g_signal_connect_swapped</code> 最好少用，它只会把水搅浑。</p>
 </blockquote>
-<h3 id="回调的形式"><a href="#回调的形式" class="headerlink" title="回调的形式"></a>回调的形式</h3><p>在Gtk 中，回调的形式有两种，在反应事件的信号回调中，handler 需要额外增加一个<code>GdkEvent *</code> 参数，用来传入发生的事件。</p>
-<p>这两种回调之间的区别如下（假设使用<code>g_signal_connect</code> 绑定）。</p>
+<h3 id="回调的形式"><a href="#回调的形式" class="headerlink" title="回调的形式"></a>回调的形式</h3><p>在 Gtk 中，回调的形式有两种，在反应事件的信号回调中，handler 需要额外增加一个 <code>GdkEvent *</code> 参数，用来传入发生的事件。</p>
+<p>这两种回调之间的区别如下（假设使用 <code>g_signal_connect</code> 绑定）。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">buttonClickedHandler</span> <span class="params">(GtkWidget *button, gpointer data)</span>;</span><br><span class="line">gboolean <span class="title function_">keyPressEventHandler</span> <span class="params">(GtkWidget *button, GdkEvent *event, gpointer data)</span>;</span><br></pre></td></tr></table></figure>
 
-<h3 id="回调的返回值"><a href="#回调的返回值" class="headerlink" title="回调的返回值"></a>回调的返回值</h3><p>除了增加了<code>GdkEvent *</code> 作为参数外，处理事件的回调函数多了一个<code>gboolean</code> 类型的返回值，这个返回值用于控制该事件处理过程是否继续。</p>
+<h3 id="回调的返回值"><a href="#回调的返回值" class="headerlink" title="回调的返回值"></a>回调的返回值</h3><p>除了增加了 <code>GdkEvent *</code> 作为参数外，处理事件的回调函数多了一个 <code>gboolean</code> 类型的返回值，这个返回值用于控制该事件处理过程是否继续。</p>
 <p>返回值的情况如下。</p>
 <table>
 <thead>
@@ -411,8 +411,8 @@
 <td>需要继续执行其他与该事件绑定的回调函数</td>
 </tr>
 </tbody></table>
-<h3 id="回调的调用顺序"><a href="#回调的调用顺序" class="headerlink" title="回调的调用顺序"></a>回调的调用顺序</h3><p>因为GTK 先捕获事件再转化为信号，所以直接反应事件的信号在其他信号之前被发射，所以同一个<code>GtkWidget</code> 上处理事件的回调总在其他信号回调之前被执行。</p>
-<p>所以“回调的形式”一节的代码片中，假设<code>buttonClickedHandler</code> 和<code>keyPressEventHandler</code>  分别被绑定到一个<code>GtkButton</code> 的<code>&quot;event&quot;</code> 和<code>&quot;clicked&quot;</code> 信号上，如果<code>keyPressEventHandler</code> 返回<code>TRUE</code>，那么<code>buttonClickedHandler</code> 将不会被调用。</p>
+<h3 id="回调的调用顺序"><a href="#回调的调用顺序" class="headerlink" title="回调的调用顺序"></a>回调的调用顺序</h3><p>因为 GTK 先捕获事件再转化为信号，所以直接反应事件的信号在其他信号之前被发射，所以同一个 <code>GtkWidget</code> 上处理事件的回调总在其他信号回调之前被执行。</p>
+<p>所以“回调的形式”一节的代码片中，假设 <code>buttonClickedHandler</code> 和 <code>keyPressEventHandler</code> 分别被绑定到一个 <code>GtkButton</code> 的 <code>&quot;event&quot;</code> 和 <code>&quot;clicked&quot;</code> 信号上，如果 <code>keyPressEventHandler</code> 返回 <code>TRUE</code> ，那么<code>buttonClickedHandler</code> 将不会被调用。</p>
 
       
     </div>
@@ -421,12 +421,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/">GTK事件及信号机制</a></p>
+        <p><span>本文标题:</span><a href="/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/">GTK 事件及信号机制</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页"></a></p>
         <p><span>发布时间:</span>2016-07-19, 20:37:56</p>
-        <p><span>最后更新:</span>2022-03-28, 19:54:08</p>
+        <p><span>最后更新:</span>2022-03-28, 21:49:01</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/" title="GTK事件及信号机制">https://arondight.github.io/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/</a>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/" title="GTK 事件及信号机制">https://arondight.github.io/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/</a>
             <span class="copy-path" data-clipboard-text="原文: https://arondight.github.io/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/　　作者: " title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -441,7 +441,7 @@
         
             <div id="article-nav-newer" class="article-nav-title">
                 <a href="/2016/12/25/%E4%B8%BALibVirt%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%9A%84API/">
-                    为LibVirt添加新的API
+                    为 LibVirt 添加新的 API
                 </a>
             </div>
         
@@ -491,7 +491,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/12/25/%E4%B8%BALibVirt%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%9A%84API/" title="上一篇: 为LibVirt添加新的API">
+            <a href="/2016/12/25/%E4%B8%BALibVirt%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%9A%84API/" title="上一篇: 为 LibVirt 添加新的 API">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -505,7 +505,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/25/%E4%B8%BALibVirt%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%9A%84API/">为LibVirt添加新的API</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/">GTK事件及信号机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/03/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84%E4%B8%96%E7%95%8C%E7%8C%AE%E4%B8%8A%E7%A5%9D%E7%A6%8F/">为美好的世界献上祝福</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/">使用GPG签名Git提交和标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/%E8%AE%A1%E7%AE%97IP%E3%80%81ICMP%E3%80%81TCP%E5%92%8CUDP%E5%8C%85%E7%9A%84%E6%A0%A1%E9%AA%8C%E5%92%8C/">计算IP、ICMP、TCP和UDP包的校验和</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">使用SSH反向隧道进行内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/08/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/">新年快乐</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/%E9%9A%8F%E4%BE%BF%E5%86%99%E4%B8%80%E7%82%B9%E4%B8%9C%E8%A5%BF/">随便写一点东西</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/25/%E4%B8%BALibVirt%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%9A%84API/">为 LibVirt 添加新的 API</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/GTK%E4%BA%8B%E4%BB%B6%E5%8F%8A%E4%BF%A1%E5%8F%B7%E6%9C%BA%E5%88%B6/">GTK 事件及信号机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/03/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84%E4%B8%96%E7%95%8C%E7%8C%AE%E4%B8%8A%E7%A5%9D%E7%A6%8F/">为美好的世界献上祝福</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/%E4%BD%BF%E7%94%A8GPG%E7%AD%BE%E5%90%8DGit%E6%8F%90%E4%BA%A4%E5%92%8C%E6%A0%87%E7%AD%BE/">使用 GPG 签名 Git 提交和标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/22/%E8%AE%A1%E7%AE%97IP%E3%80%81ICMP%E3%80%81TCP%E5%92%8CUDP%E5%8C%85%E7%9A%84%E6%A0%A1%E9%AA%8C%E5%92%8C/">计算 IP、ICMP、TCP 和 UDP 包的校验和</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/17/%E4%BD%BF%E7%94%A8SSH%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">使用 SSH 反向隧道进行内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/08/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/">新年快乐</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/%E9%9A%8F%E4%BE%BF%E5%86%99%E4%B8%80%E7%82%B9%E4%B8%9C%E8%A5%BF/">随便写一点东西</a></li></ul>
 
 
 
