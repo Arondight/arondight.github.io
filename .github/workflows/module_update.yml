@@ -17,7 +17,7 @@ jobs:
       - name: Install node modules
         run: npm install
       - name: Update Node.js modules
-        run: npm run update-modules
+        run: npm run ncu
       - name: Config git
         run: |
           git config user.name 'github-actions'
