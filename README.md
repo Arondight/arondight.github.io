@@ -1,57 +1,39 @@
 # arondight.github.io
 
-## ABOUT
+## About
 
-This is source of [arondight.github.io][ID_SITE].
+Source of [arondight.github.io](http://arondight.github.io).
 
-[ID_SITE]: http://arondight.github.io "A Blog About Me"
+## Dependencies
 
-## USAGE
+1. `bash`
+2. `git`
+3. `npm` and `npx`
+
+## Usage
 
 ### INIT
 
-```bash
+```sh
 git clone https://github.com/Arondight/arondight.github.io.git
 cd arondight.github.io
-./init.sh
+npm install
 ```
 
-Only do this at the very beginning.
+### Build and Serve
 
-### SERVE
+```sh
+npm run serve
+```
+
+> Then visit [localhost:4000](http://localhost:4000) in browser.
+
+### Push
 
 ```bash
-./serve.sh
+npm run deploy
 ```
-
-Then visit [127.0.0.1:4000](http://127.0.0.1:4000) in your web browser.
-
-### DEPLOY
-
-```bash
-./deploy.sh
-```
-
-### PUSH
-
-```bash
-./push.sh
-```
-
-## DEPENDENCIES
-
-1. bash
-* git
-* npm (also support [cnpm](https://github.com/cnpm/cnpm))
-* hexo
-
-## COPYRIGHT
-
-Copyright (c) 2016 秦凡东 (Qin Fandong)
 
 ## LICENSE
 
-Read [LICENSE][ID_LICENSE]
-
-[ID_LICENSE]: LICENSE "Read LICENSE"
-
+[MIT License][LICENSE].

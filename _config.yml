@@ -6,7 +6,7 @@
 title: 河 的 第 三 条 岸
 subtitle: 调和·变革
 description: 调和·变革
-author: I&ME
+author: Qin Fandong
 language: zh-Hans
 timezone: Asia/Shanghai
 
@@ -20,8 +20,6 @@ permalink_defaults:
 # sitemap
 sitemap:
   path: sitemap.xml
-baidusitemap:
-  path: baidusitemap.xml
 
 # Directory
 source_dir: source
@@ -75,6 +73,5 @@ theme: hexo-theme-yelee
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/Arondight/arondight.github.io.git
+  repository: git@github.com:Arondight/arondight.github.io.git
   branch: master
-
