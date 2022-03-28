@@ -1,5 +1,6 @@
 title: 关于
 date: 2016-02-17 15:09:40
+
 ---
 
 <style type="text/css">
@@ -19,13 +20,10 @@ date: 2016-02-17 15:09:40
 
 # <center>To All of You :)</center>
 
-2016 年冬
-
-[@I&ME](http://arondight.github.io)
+2016 年冬。
 
 ---
 
-* [20161201](/About.20161201)
+- [20161201](/About.20161201)
 
 <ul class="ds-recent-visitors" data-num-items="64" data-avatar-size="56"></ul>
-
