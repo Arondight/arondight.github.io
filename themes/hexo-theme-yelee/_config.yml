@@ -7,7 +7,6 @@ Yelee: "3.5"
 ## About Page: `hexo new page about`
 ## Tags Cloud Page: `hexo new page tags`
 menu:
-  主页: /
   博文: /archives
   日常: /categories/日常
   技术: /categories/技术
@@ -44,8 +43,8 @@ subnav:
   GitHub: "https://github.com/Arondight"
   CSDN: "http://blog.csdn.net/ispeller"
   bilibili: "http://space.bilibili.com/1750509"
-  LOFTER: "http://ispeller.lofter.com"
-  RSS: "/atom.xml"
+  LOFTER: "https://ispeller.lofter.com/"
+  #RSS: "/atom.xml"
   Email: "mailto:&#115;&#104;&#101;&#108;&#108;&#95;&#119;&#97;&#121;&#64;&#102;&#111;&#120;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;"
   #Email: "mailto:123@123.com"
   #新浪微博: "sina weibo"
