@@ -7,8 +7,9 @@
   },
   "scripts": {
     "format": "npx prettier --config ./.prettierrc.json -uw ./source/",
-    "serve": "npx hexo clean && npx hexo generate && npx hexo server",
-    "deploy": "npx hexo deploy"
+    "generate": "npx hexo clean && npx hexo generate",
+    "serve": "npm run generate && npx hexo server",
+    "deploy": "npm run generate && npx hexo deploy"
   },
   "dependencies": {
     "hexo": "6.1.0",
