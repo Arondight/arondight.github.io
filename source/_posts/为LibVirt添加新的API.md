@@ -7,7 +7,7 @@ tags: [ C, LibVirt, Linux, QEMU ]
 
 [LibVirt](http://libvirt.org) 是一套用于控制虚拟化的 API，除了提供了一套无关具体虚拟化细节的 API 之外，还提供了一个 daemon（`libvirtd`) 和一个控制台工具（`virsh`）。本文演示了如何在 LibVirt 中新加一个 API，并且在 `libvirtd` 和 `virsh` 中使用新的 API 完成新的功能。
 
-为了方便说明，在文章的示例中只演示了添加一个 API，如果要看完整的示例，可以查看项目[Arondight/libvirt-add-new-api-demo](https://github.com/Arondight/libvirt-add-new-api-demo)，这是一个相对完整的示例，项目中新 API 的说明以及 Patch 的使用可以参见其中的 `README.txt`。
+为了方便说明，在文章的示例中只演示了添加一个 API，如果要看完整的示例，可以查看项目 [Arondight/libvirt-add-new-api-demo](https://github.com/Arondight/libvirt-add-new-api-demo)，这是一个相对完整的示例，项目中新 API 的说明以及 Patch 的使用可以参见其中的 `README.txt`。
 
 <div class="github-widget" data-repo="Arondight/libvirt-add-new-api-demo"></div>
 
