@@ -1,9 +1,9 @@
 {
   "name": "arondight.github.io",
-  "version": "0.01",
+  "version": "1.0.0",
   "private": true,
   "hexo": {
-    "version": "6.1.0"
+    "version": "6.2.0"
   },
   "scripts": {
     "generate": "npx hexo clean && npx hexo generate",
@@ -26,10 +26,10 @@
     "hexo-renderer-ejs": "2.0.0",
     "hexo-renderer-marked": "5.0.0",
     "hexo-renderer-stylus": "2.1.0",
-    "hexo-server": "3.0.0",
-    "prettier": "2.7.1"
+    "hexo-server": "3.0.0"
   },
   "devDependencies": {
-    "npm-check-updates": "15.3.4"
+    "npm-check-updates": "15.3.4",
+    "prettier": "2.7.1"
   }
 }
