@@ -29,7 +29,7 @@
     "hexo-server": "3.0.0"
   },
   "devDependencies": {
-    "npm-check-updates": "16.14.4",
+    "npm-check-updates": "16.14.5",
     "prettier": "3.0.3"
   }
 }
