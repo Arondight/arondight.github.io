@@ -30,6 +30,6 @@
   },
   "devDependencies": {
     "npm-check-updates": "22.2.7",
-    "prettier": "3.8.4"
+    "prettier": "3.8.5"
   }
 }
